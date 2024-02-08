@@ -1,0 +1,13 @@
+npx sequelize model:create --name User --attributes name:text,email:text,password:text,avatar:text,isAdmin:boolean
+npx sequelize model:create --name Category --attributes title:text,img:text
+npx sequelize model:create --name Post --attributes user_id:integer,category_id:integer,title:text,description:text,isModerated:boolean,isAdult:boolean
+npx sequelize model:create --name Art --attributes post_id:integer,src:text,title:text
+npx sequelize model:create --name Like --attributes user_id:integer,post_id:integer
+npx sequelize model:create --name Comment --attributes user_id:integer,post_id:integer,text:text
+
+npx sequelize seed:create --name user
+npx sequelize seed:create --name category
+npx sequelize seed:create --name post
+npx sequelize seed:create --name art
+npx sequelize seed:create --name comment
+npx sequelize seed:create --name like
