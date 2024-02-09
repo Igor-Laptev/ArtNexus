@@ -9,6 +9,7 @@ npx sequelize model:create --name Comment --attributes user_id:integer,post_id:i
 npx sequelize seed:create --name user
 npx sequelize seed:create --name category
 npx sequelize seed:create --name post
+npx sequelize seed:create --name gallery
 npx sequelize seed:create --name art
 npx sequelize seed:create --name comment
 npx sequelize seed:create --name like
