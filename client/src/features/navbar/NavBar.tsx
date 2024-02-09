@@ -20,6 +20,15 @@ function NavBar(): JSX.Element {
           <a className="" href="#">
             Disabled
           </a>
+          <a className="" href="/sign-up">
+            Registration
+          </a>
+          <a className="" href="/sign-in">
+            Login
+          </a>
+          <a className="" href="/logout">
+            Logout
+          </a>
         </div>
       </nav>
       <Outlet />

@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
-import { type RootState, useAppDispath } from '../../redux/store';
+import { type RootState, useAppDispatch } from '../../redux/store';
 import { clearError, signUp } from './authSlice';
+import { useNavigate } from 'react-router-dom';
 
 const SignUp = (): JSX.Element => {
   const [name, setName] = useState('');
@@ -12,7 +13,8 @@ const SignUp = (): JSX.Element => {
 
   const error = useSelector((store: RootState) => store.auth.error);
 
-  const dispatch = useAppDispath();
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   return (
     <div>
@@ -31,6 +33,7 @@ const SignUp = (): JSX.Element => {
               isAdmin: false,
             }),
           ).catch(console.log);
+          navigate('/sign-in');
         }}
       >
         <input
@@ -56,7 +59,7 @@ const SignUp = (): JSX.Element => {
         />
         <input
           value={avatar}
-          placeholder="pic"
+          placeholder="Your Avatar"
           type="text"
           required
           onChange={(e) => {
@@ -90,3 +93,4 @@ const SignUp = (): JSX.Element => {
 };
 
 export default SignUp;
+////

@@ -25,8 +25,8 @@ function App(): JSX.Element {
         <Route path="/" element={<NavBar />}>
           <Route index element={<MainPage />} />
 
-          {/* <Route path="/sign-up" element={<SignUp />} />
-          <Route path="/sign-in" element={<SignIn />} /> */}
+          <Route path="/sign-up" element={<SignUp />} />
+          <Route path="/sign-in" element={<SignIn />} />
           {/* <Route path="/:postId" element={<PostPage />} /> */}
           <Route path="/favorites" element={<LikePage />} />
         </Route>

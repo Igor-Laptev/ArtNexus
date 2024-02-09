@@ -24,6 +24,7 @@ module.exports = (sequelize, DataTypes) => {
       },
       email: {
         type: DataTypes.TEXT,
+        unique:true,
         allowNull: false,
       },
       password: {
@@ -37,6 +38,7 @@ module.exports = (sequelize, DataTypes) => {
       },
       isAdmin: {
         type: DataTypes.BOOLEAN,
+        defaultValue: false,
         allowNull: false,
       },
       createdAt: {

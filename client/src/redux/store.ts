@@ -3,11 +3,13 @@ import { useDispatch } from 'react-redux';
 
 import categoriesSlice from '../features/categories/categoriesSlice';
 import postsSlice from '../features/arts/postsSlice';
+import authSlice from '../features/auth/authSlice';
 
 export const store = configureStore({
   reducer: {
     posts: postsSlice,
     categories: categoriesSlice,
+    auth: authSlice,
   },
 });
 
