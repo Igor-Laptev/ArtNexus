@@ -1,12 +1,13 @@
 'use strict';
 const { Model } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-  class Art extends Model {
-    static associate({ Gallery }) {
-      this.belongsTo(Gallery, { foreignKey: 'gallery_id' });
+  class Gallery extends Model {
+    static associate({ Post, Art }) {
+      this.belongsTo(Post, { foreignKey: 'post_id' });
+      this.hasMany(Art, { foreignKey: 'gallery_id' });
     }
   }
-  Art.init(
+  Gallery.init(
     {
       id: {
         allowNull: false,
@@ -14,19 +15,13 @@ module.exports = (sequelize, DataTypes) => {
         primaryKey: true,
         type: DataTypes.INTEGER,
       },
-      gallery_id: {
+      post_id: {
         type: DataTypes.INTEGER,
         references: {
-          model: 'Galleries',
+          model: 'Posts',
           key: 'id',
         },
         onDelete: 'cascade',
-      },
-      src: {
-        type: DataTypes.TEXT,
-      },
-      title: {
-        type: DataTypes.TEXT,
       },
       createdAt: {
         allowNull: false,
@@ -39,8 +34,8 @@ module.exports = (sequelize, DataTypes) => {
     },
     {
       sequelize,
-      modelName: 'Art',
+      modelName: 'Gallery',
     }
   );
-  return Art;
+  return Gallery;
 };
