@@ -4,9 +4,11 @@ import Categories from '../categories/Categories';
 
 function MainPage(): JSX.Element {
   return (
-    <div className="main-container">
-      {/* <div className="themes-container"></div>
-      <div className="categories-container"></div> */}
+
+    <>
+      {/* <div className="main-container">
+        <div className="themes-container"></div>
+        <div className="categories-container"></div> */}
       <div className="posts-container">
         <h1>Main Page</h1>
         <PostsList />
@@ -14,6 +16,7 @@ function MainPage(): JSX.Element {
       </div>
       {/* <div className="trends-container"></div> */}
     </div>
+
   );
 }
 

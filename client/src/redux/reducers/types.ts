@@ -5,7 +5,7 @@ import type { User } from '../../features/users/types';
 export type PostsState = {
   posts: Post[];
   error: string | undefined;
-  loading: boolean;
+//   loading: boolean;
 };
 
 export type AuthState = {
