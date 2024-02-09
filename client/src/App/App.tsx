@@ -12,6 +12,7 @@ import { loadCategories } from '../features/categories/categoriesSlice';
 import { loadPosts } from '../features/arts/postsSlice';
 import { useAppDispatch } from '../redux/store';
 
+
 function App(): JSX.Element {
   const dispatch = useAppDispatch();
   useEffect(() => {
@@ -24,13 +25,15 @@ function App(): JSX.Element {
   return (
     <div className="App">
       <Routes>
-        <Route path="/" element={<NavBar />}>
+        {/* <Route path="/" element={<NavBar />}>
           <Route index element={<MainPage />} />
-          <Route path="/sign-up" element={<SignUp />} />
+
+        <Route path="/sign-up" element={<SignUp />} />
           <Route path="/sign-in" element={<SignIn />} />
           {/* <Route path="/:postId" element={<PostPage />} /> */}
           <Route path="/favorites" element={<LikePage />} />
         </Route>
+
       </Routes>
     </div>
   );

@@ -1,3 +1,5 @@
+
+
 import type { Post, PostId } from '../../features/arts/types';
 import type{ Category } from '../../features/categories/types';
 import type { User } from '../../features/users/types';
@@ -13,6 +15,7 @@ export type AuthState = {
 };
 
 export type Action =
+
   | { type: 'posts/load'; payload: Post[] }
   | { type: 'posts/add'; payload: Post }
   | { type: 'posts/remove'; payload: PostId }
@@ -20,3 +23,4 @@ export type Action =
   | { type: 'auth/sign-up'; payload: User }
   | { type: 'auth/sign-in'; payload: User }
   | { type: 'auth/logout' };
+

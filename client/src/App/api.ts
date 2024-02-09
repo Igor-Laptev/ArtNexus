@@ -37,4 +37,5 @@ export const fetchPostRemove = async (id: PostId): Promise<PostId> => {
     throw new Error(data.message);
   }
   return data.postId;
+
 };
