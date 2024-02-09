@@ -1,9 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { useDispatch } from 'react-redux';
+import categoriesSlice from '../features/categories/categoriesSlice';
 
 export const store = configureStore({
   reducer: {
-    posts: postsSlice,
+    // posts: postsSlice,
     categories: categoriesSlice,
   },
 });

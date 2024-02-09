@@ -24,6 +24,7 @@ module.exports = {
   ignorePatterns: ['dist', '.eslintrc.cjs'],
   plugins: ['@typescript-eslint', 'react-refresh', 'react', 'react-hooks'],
   rules: {
+    "linebreak-style": 0,
     'default-param-last': 'off',
     'no-void': 'off',
     'no-param-reassign': 'off',

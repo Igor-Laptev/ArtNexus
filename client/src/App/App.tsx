@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './App.css';
 import { Route, Routes } from 'react-router-dom';
 import MainPage from '../features/main/MainPage';
@@ -7,8 +7,15 @@ import SignUp from '../features/auth/SignUp';
 import SignIn from '../features/auth/SignIn';
 import PostPage from '../features/arts/PostItem';
 import LikePage from '../features/likes/LikesPage';
+import { loadCategories } from '../features/categories/categoriesSlice';
+import { useAppDispatch } from '../redux/store';
 
 function App(): JSX.Element {
+  const dispatch = useAppDispatch();
+  useEffect(() => {
+    dispatch(loadCategories()).catch(console.log);
+  });
+
   return (
     <div className="App">
       <Routes>
