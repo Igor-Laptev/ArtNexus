@@ -14,6 +14,8 @@ export type Post = {
 };
 export type PostId = Post['id'];
 
+export type PostWithoutId = Omit<Post, 'id'>;
+
 export type Gallery = {
   id: number;
   post_id: PostId;
