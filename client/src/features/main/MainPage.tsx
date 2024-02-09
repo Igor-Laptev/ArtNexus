@@ -1,4 +1,5 @@
 import React from 'react';
+import PostsList from '../arts/PostsList';
 
 const MainPage = () => {
   return (
@@ -7,6 +8,7 @@ const MainPage = () => {
       <div className="categories-container"></div>
       <div className="posts-container">
         <h1>Main Page</h1>
+        <PostsList />
       </div>
       <div className="trends-container"></div>
     </div>

@@ -5,7 +5,7 @@ import MainPage from '../features/main/MainPage';
 import NavBar from '../features/navbar/NavBar';
 import SignUp from '../features/auth/SignUp';
 import SignIn from '../features/auth/SignIn';
-import PostPage from '../features/arts/PostPage';
+import PostPage from '../features/arts/PostItem';
 import LikePage from '../features/likes/LikesPage';
 
 function App(): JSX.Element {
