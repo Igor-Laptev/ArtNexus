@@ -6,7 +6,7 @@ router.post('/', async (req, res) => {
   try {
     // достаем body из объекта запроса req, из fetch запроса скрипта
     const { name, description, img } = req.body;
-    // записываем в базу с всеми колонками 
+    // записываем в базу с всеми колонками
     const art = await Art.create({
       name,
       description,
