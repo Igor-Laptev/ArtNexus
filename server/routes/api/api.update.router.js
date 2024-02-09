@@ -7,7 +7,7 @@ router.put('/:artId', async (req, res) => {
     const { name, description, img } = req.body;
     const [result] = await Art.update(
       { name, description, img },
-      { where: { id: artId } }
+      { where: { id: artId } },
     );
     if (result > 0) {
       res.json({ message: 'success' });
