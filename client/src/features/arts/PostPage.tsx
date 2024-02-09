@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { RootState } from '../../redux/store';
 
-const PostPage = (props) => {
+const PostPage = (props): JSX.Element => {
   const { id } = useParams();
   const posts = useSelector((store: RootState) => store.posts.posts);
   return (

@@ -2,7 +2,7 @@ import React from 'react';
 import type { Post } from './types';
 // import { useAppDispatch } from '../../redux/store';
 
-function PostItem({ post }: { post: Post }): JSX.Element {
+function PostPage({ post }: { post: Post }): JSX.Element {
   // const dispatch = useAppDispatch();
 
   return (
@@ -14,4 +14,4 @@ function PostItem({ post }: { post: Post }): JSX.Element {
   );
 }
 
-export default PostItem;
+export default PostPage;
