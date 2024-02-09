@@ -1,6 +1,6 @@
 import React from 'react';
 
-const SignIn = (props) => {
+const SignIn = (): JSX.Element => {
   return <div></div>;
 };
 
