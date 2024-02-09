@@ -10,7 +10,7 @@ function MainPage(): JSX.Element {
         <div className="categories-container"></div> */}
       <div className="posts-container">
         <h1>Main Page</h1>
-        {/* <PostsList /> */}
+        <PostsList />
         <Categories />
       </div>
       {/* <div className="trends-container"></div> */}
