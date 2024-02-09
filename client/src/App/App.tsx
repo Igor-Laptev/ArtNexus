@@ -16,10 +16,8 @@ import { useAppDispatch } from '../redux/store';
 function App(): JSX.Element {
   const dispatch = useAppDispatch();
   useEffect(() => {
-
-    dispatch(loadCategories()).catch(console.log);
-  });
     dispatch(loadPosts()).catch(console.log);
+    dispatch(loadCategories()).catch(console.log);
   }, []);
 
   return (
