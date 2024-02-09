@@ -3,10 +3,10 @@
 const { Model } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class Post extends Model {
-    static associate({ User, Category, Art, Comment, Like }) {
+    static associate({ User, Category, Comment, Like, Gallery }) {
       this.belongsTo(User, { foreignKey: 'user_id' });
       this.belongsTo(Category, { foreignKey: 'category_id' });
-      this.hasMany(Art, { foreignKey: 'post_id' });
+      this.hasOne(Gallery, { foreignKey: 'post_id' });
       this.hasMany(Comment, { foreignKey: 'post_id' });
       this.hasMany(Like, { foreignKey: 'post_id' });
     }
