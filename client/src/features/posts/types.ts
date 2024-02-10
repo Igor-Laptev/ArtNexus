@@ -1,3 +1,4 @@
+import { Category } from '../categories/types';
 import type { UserId } from '../users/types';
 
 export type Post = {
@@ -11,6 +12,7 @@ export type Post = {
   Likes: Like[];
   Comments: Comment[];
   Gallery: Gallery;
+  Category: Category
 };
 export type PostId = Post['id'];
 
