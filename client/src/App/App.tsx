@@ -9,7 +9,7 @@ import SignIn from '../features/auth/SignIn';
 import LikePage from '../features/likes/LikesPage';
 
 import { loadCategories } from '../features/categories/categoriesSlice';
-import { loadPosts } from '../features/arts/postsSlice';
+import { loadPosts } from '../features/posts/postsSlice';
 import { useAppDispatch } from '../redux/store';
 
 function App(): JSX.Element {

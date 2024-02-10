@@ -1,6 +1,6 @@
 // fetch-запросы
 /* eslint-disable import/prefer-default-export */
-import type { Post, PostId, PostWithoutId } from '../features/arts/types';
+import type { Post, PostId, PostWithoutId } from '../features/posts/types';
 
 export const fetchLoadPosts = async (): Promise<Post[]> => {
   const res = await fetch('/api/posts');
@@ -9,7 +9,7 @@ export const fetchLoadPosts = async (): Promise<Post[]> => {
     message: string;
   };
   console.log(data.posts);
-  
+
   return data.posts;
 };
 
@@ -37,5 +37,4 @@ export const fetchPostRemove = async (id: PostId): Promise<PostId> => {
     throw new Error(data.message);
   }
   return data.postId;
-
 };

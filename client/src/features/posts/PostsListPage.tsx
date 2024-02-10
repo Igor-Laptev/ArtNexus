@@ -1,5 +1,6 @@
 import { useSelector } from 'react-redux';
 import { type RootState } from '../../redux/store';
+import './styles.css';
 import PostItem from './PostItem';
 
 function PostsList(): JSX.Element {
@@ -8,7 +9,7 @@ function PostsList(): JSX.Element {
   return (
     <>
       <h1>Posts List</h1>
-      <div>
+      <div className="all-post-container">
         {posts.map((post) => (
           <PostItem key={post.id} post={post} />
         ))}

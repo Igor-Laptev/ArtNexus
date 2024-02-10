@@ -1,5 +1,5 @@
 import React from 'react';
-import PostsList from '../arts/PostsList';
+import PostsList from '../posts/PostsListPage';
 import Categories from '../categories/Categories';
 
 function MainPage(): JSX.Element {

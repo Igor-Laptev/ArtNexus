@@ -1,4 +1,4 @@
-import type { Post } from '../arts/types';
+import type { Post } from '../posts/types';
 
 export type Category = {
   id: number;

@@ -3,11 +3,12 @@ import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { RootState } from '../../redux/store';
 
+
 const PostPage = (props): JSX.Element => {
-  const { id } = useParams();
+  // const { id } = useParams();
   const posts = useSelector((store: RootState) => store.posts.posts);
   return (
-    <div>
+    <div className=''>
       {posts.map((post) => (
         console.log(post);
         
