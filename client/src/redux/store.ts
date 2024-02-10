@@ -2,7 +2,7 @@ import { configureStore } from '@reduxjs/toolkit';
 import { useDispatch } from 'react-redux';
 
 import categoriesSlice from '../features/categories/categoriesSlice';
-import postsSlice from '../features/arts/postsSlice';
+import postsSlice from '../features/posts/postsSlice';
 import authSlice from '../features/auth/authSlice';
 
 export const store = configureStore({
