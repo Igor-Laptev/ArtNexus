@@ -1,0 +1,35 @@
+.img {
+    width: 30px;
+    height: 30px;
+}
+.slide-container {
+    display: flex;
+    color: white;
+}
+.slide-img {
+    width:100%;
+    height: 100%;
+}
+
+.swiper {
+    width: 500px;
+    height: 100px;
+  }
+  
+  .swiper-slide {
+    text-align: center;
+    font-size: 18px;
+    
+  
+  
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .swiper-slide img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }

@@ -5,6 +5,7 @@ import { CSSTransition } from 'react-transition-group';
 import type { Post } from './types';
 import './styles.css';
 import './tooltipStyles.css';
+import { current } from '@reduxjs/toolkit';
 // import { useAppDispatch } from '../../redux/store';
 
 function PostPage({ post }: { post: Post }): JSX.Element {
@@ -38,8 +39,8 @@ function PostPage({ post }: { post: Post }): JSX.Element {
               height: '100%',
             }}
           >
-            <div>{post.title}</div>
-            <div>{post.description}</div>
+            <div className="post-text">{post.title}</div>
+            <div className="post-text">{post.description}</div>
           </div>
         )}
         {!showToolTip && (
