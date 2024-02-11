@@ -1,6 +1,7 @@
 import React from 'react';
 import PostsList from '../posts/PostsListPage';
 import Categories from '../categories/Categories';
+import './styles.css';
 
 function MainPage(): JSX.Element {
   return (
@@ -10,8 +11,8 @@ function MainPage(): JSX.Element {
         <div className="categories-container"></div> */}
       <div className="posts-container">
         <h1>Main Page</h1>
-        <PostsList />
         <Categories />
+        <PostsList />
       </div>
       {/* <div className="trends-container"></div> */}
     </>
