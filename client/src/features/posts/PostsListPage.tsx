@@ -5,6 +5,7 @@ import PostItem from './PostItem';
 
 function PostsList(): JSX.Element {
   const posts = useSelector((store: RootState) => store.posts.posts);
+  console.log(posts);
 
   return (
     <>

@@ -1,0 +1,59 @@
+@font-face {
+    font-family: 'intro';
+    src: url('../../../../server//public/fonts/Intro.otf');
+}
+@font-face {
+    font-family: 'inter';
+    src: url('../../../public/Inter-Bold.ttf');
+}
+.links {
+    display: flex;
+    width: 100%;
+    justify-content:space-between;
+    
+}
+.nav__link {
+    text-decoration: none;
+    font-family: 'inter', sans-serif;
+    font-weight: 300;
+    font-feature-settings: normal;
+font-kerning: auto;
+/* font-optical-sizing auto; */
+font-size: 16px;
+font-stretch: 100%;
+font-style: normal;
+font-variant-alternates: normal;;
+font-variant-caps: normal;
+font-variant-east-asian: normal;
+font-variant-ligatures: normal;
+font-variant-numeric: normal;
+font-variant-position: normal;
+font-variation-settings: normal;
+font-weight: 400;
+letter-spacing: 0.24px;
+line-height: 24px;
+text-align: center;
+text-indent: 0px;
+text-shadow: none;
+text-size-adjust: 100%;
+text-transform: none;
+word-spacing: 0px;
+
+}
+.left-buttons {
+    display: flex;
+    width: 16rem;
+    justify-content:space-between;
+}
+.right-buttons {
+    width: 16rem;
+    display: flex;
+    justify-content:space-between;
+}
+.navbar {
+    height: 30px;
+    width: 100%;
+    display: flex;
+    justify-content:space-between;
+}
+
