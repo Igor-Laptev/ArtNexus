@@ -2,6 +2,8 @@ const router = require('express').Router();
 const bcrypt = require('bcrypt');
 const { User } = require('../../db/models');
 const generateTokens = require('../../utils/authUtils');
+const cookieConfig = require('../../middleware/cookiesConfig');
+const jwtConfig = require('../../middleware/configJWT');
 
 router.post('/registration', async (req, res) => {
   try {
@@ -55,7 +57,7 @@ router.post('/login', async (req, res) => {
               name: user.name,
             },
           });
-          console.log('generateTokens:', generateTokens);
+          console.log('accessToken:', accessToken);
           return res
             .cookie(cookieConfig.access, accessToken, {
               maxAge: cookieConfig.access.maxAgeAccess,
@@ -73,8 +75,25 @@ router.post('/login', async (req, res) => {
     }
     return res.json({ message: 'Fill in all the fields!' });
   } catch ({ message }) {
+    console.log(message);
     res.status(500).json({ message });
   }
+});
+
+router.get('/check', async (req, res) => {
+  console.log(res.locals.user);
+  if (res.locals.user) {
+    const user = await User.findOne({ where: { id: res.locals.user.id } });
+    console.log('user:', user);
+    res.json({ user });
+    return;
+  }
+  res.json({});
+});
+
+router.get('/logout', (req, res) => {
+  res.clearCookie(jwtConfig.access.type).clearCookie(jwtConfig.refresh.type);
+  res.json({ message: 'success' });
 });
 
 module.exports = router;

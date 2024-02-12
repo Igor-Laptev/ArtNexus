@@ -2,10 +2,12 @@
 const jwt = require('jsonwebtoken');
 const jwtConfig = require('../middleware/configJWT');
 
-const generateTokens = (user) => {
+const generateTokens = ({user}) => {
+  console.log(user);
   if (!user.id || !user.email) {
     throw new Error('Invalid user data for token generation');
   }
+  
 
   const payload = {
     id: user.id,

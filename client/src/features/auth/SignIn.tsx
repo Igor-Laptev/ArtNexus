@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { RootState, useAppDispatch } from '../../redux/store';
 import { signIn } from './authSlice';
-// import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
 const SignIn = (): JSX.Element => {
@@ -11,7 +11,7 @@ const SignIn = (): JSX.Element => {
   const error = useSelector((store: RootState) => store.auth.error);
 
   const dispatch = useAppDispatch();
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
 
   return (
     <div>
@@ -24,9 +24,11 @@ const SignIn = (): JSX.Element => {
             signIn({
               email,
               password,
+              name: '',
+              isAdmin: false,
             }),
           ).catch(console.log);
-          // navigate('/');
+          navigate('/');
         }}
       >
         <input
@@ -55,4 +57,3 @@ const SignIn = (): JSX.Element => {
 };
 
 export default SignIn;
-

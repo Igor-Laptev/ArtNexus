@@ -1,19 +1,26 @@
 import React from 'react';
 import './navbar.css';
 
-import { NavLink, Outlet } from 'react-router-dom';
+import { NavLink, Outlet, useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../../redux/store';
+import { logOut } from '../auth/authSlice';
 
 function NavBar(): JSX.Element {
+  const user = useSelector((store: RootState) => store.auth.auth);
+  console.log('user:', user);
+
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
   return (
     <>
       <nav className="navbar">
         <div className="links">
           <div className="left-buttons">
-            <li className="nav__item">
-              <NavLink className="nav__link" to="/">
-                Explore
-              </NavLink>
-            </li>
+            <NavLink className="nav__link" to="/">
+              Explore
+            </NavLink>
             <NavLink className="nav__link" to="/">
               Избранное
             </NavLink>
@@ -21,17 +28,31 @@ function NavBar(): JSX.Element {
               Профиль
             </NavLink>
           </div>
-          <div className="right-buttons">
-            <NavLink className="nav__link" to="/">
-              Зарегистрироваться
-            </NavLink>
-            <NavLink className="nav__link" to="/">
-              Войти
-            </NavLink>
-            <NavLink className="nav__link" to="/">
-              Выйти
-            </NavLink>
-          </div>
+          {user?.name? (
+            <>
+              <li className="nav__item">Hello, {user.name}!</li>
+              <li
+                onClick={() => {
+                  dispatch(logOut()).catch(console.log);
+                  navigate('/');
+                }}
+                className="nav__item"
+              >
+                <NavLink className="nav__link" to="/logout">
+                  Выйти
+                </NavLink>
+              </li>
+            </>
+          ) : (
+            <div className="right-buttons">
+              <NavLink className="nav__link" to="/sign-up">
+                Зарегистрироваться
+              </NavLink>
+              <NavLink className="nav__link" to="/sign-in">
+                Войти
+              </NavLink>
+            </div>
+          )}
         </div>
       </nav>
       <Outlet />

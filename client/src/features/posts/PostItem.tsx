@@ -1,11 +1,8 @@
-
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
-import React, { useEffect, useState } from 'react';
 import { Transition } from 'react-transition-group';
 import { CSSTransition } from 'react-transition-group';
-
 
 import type { Post } from './types';
 import './styles.css';
@@ -16,17 +13,16 @@ import { current } from '@reduxjs/toolkit';
 function PostPage({ post }: { post: Post }): JSX.Element {
   // const dispatch = useAppDispatch();
 
-<!--   const formattedDate = new Date(post.createdAt);
-  const dateString = formattedDate.toLocaleDateString('ru-RU', {
-    day: '2-digit',
-    month: '2-digit',
-    year: 'numeric',
-  });
-  const timeString = formattedDate.toLocaleTimeString('ru-RU', {
-    hour: '2-digit',
-    minute: '2-digit',
-  }); -->
-
+  // const formattedDate = new Date(post.createdAt);
+  // const dateString = formattedDate.toLocaleDateString('ru-RU', {
+  //   day: '2-digit',
+  //   month: '2-digit',
+  //   year: 'numeric',
+  // });
+  // const timeString = formattedDate.toLocaleTimeString('ru-RU', {
+  //   hour: '2-digit',
+  //   minute: '2-digit',
+  // });
 
   const firstArt = post.Gallery.Arts[0].src;
   // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
@@ -75,9 +71,7 @@ function PostPage({ post }: { post: Post }): JSX.Element {
           ></div>
         )}
       </div>
-
     </div>
-   
   );
 }
 
