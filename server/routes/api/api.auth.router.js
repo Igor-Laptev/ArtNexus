@@ -24,17 +24,19 @@ router.post('/registration', async (req, res) => {
           password: await bcrypt.hash(password, 10),
         });
         res.status(201).json({ reg: true, user });
-        console.log('reg:true', reg);
       } else {
         res
           .status(409)
           .json({ message: `This user: ${email}, is already registered!` });
+        return;
       }
     } else {
       res.status(405).json({ message: 'Fill in all the fields!' });
+      return;
     }
   } catch ({ message }) {
     res.status(500).json({ message: 'Internal server error' });
+    return;
   }
 });
 
@@ -84,7 +86,6 @@ router.post('/login', async (req, res) => {
 });
 
 router.get('/check', async (req, res) => {
-
   console.log('res.locals.user:', res.locals.user);
   if (res.locals.user) {
     const user = await User.findOne({ where: { id: res.locals.user.id } });
@@ -92,7 +93,6 @@ router.get('/check', async (req, res) => {
     return;
   }
   return res.json({ message: 'User not found!' });
-
 });
 
 router.get('/logout', (req, res) => {

@@ -51,6 +51,11 @@ module.exports = {
           createdAt: new Date(),
           updatedAt: new Date(),
         },
+        {
+          post_id: 10,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
       ],
       {}
     );

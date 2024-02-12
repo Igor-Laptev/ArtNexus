@@ -10,7 +10,7 @@ import { removePost } from './postsSlice';
 import { RootState, useAppDispatch } from '../../redux/store';
 import { useSelector } from 'react-redux';
 // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-function PostPage({ post }: { post: Post }): JSX.Element {
+function PostItem({ post }: { post: Post }): JSX.Element {
   // const dispatch = useAppDispatch();
 
   //  const formattedDate = new Date(post.createdAt);
@@ -27,6 +27,7 @@ function PostPage({ post }: { post: Post }): JSX.Element {
   // const user = useSelector((store: RootState) => store.)
 
   const firstArt = post.Gallery.Arts[0].src;
+  const user = useSelector((store: RootState) => store.auth.auth);
   const dispatch = useAppDispatch();
   const [showToolTip, setShowToolTip] = useState(false);
   const onMouseEnterHandler = () => {
@@ -77,11 +78,18 @@ function PostPage({ post }: { post: Post }): JSX.Element {
           </div>
         </div>
       </Link>
-      {/* {}<button onClick={() => dispatch(removePost(post.id))} type="button">
-        удалить
-      </button> */}
+      {user && user.isAdmin && (
+        <>
+          <button onClick={() => dispatch(removePost(post.id))} type="button">
+            удалить
+          </button>
+          <button onClick={() => dispatch(updatePost(post.id))} type="button">
+            Ok
+          </button>
+        </>
+      )}
     </>
   );
 }
 
-export default PostPage;
+export default PostItem;
