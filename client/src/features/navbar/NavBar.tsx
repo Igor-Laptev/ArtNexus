@@ -22,10 +22,10 @@ function NavBar(): JSX.Element {
             </NavLink>
           </div>
           <div className="right-buttons">
-            <NavLink className="nav__link" to="/">
+            <NavLink className="nav__link" to="/sign-up">
               Зарегистрироваться
             </NavLink>
-            <NavLink className="nav__link" to="/">
+            <NavLink className="nav__link" to="/sign-in">
               Войти
             </NavLink>
             <NavLink className="nav__link" to="/">

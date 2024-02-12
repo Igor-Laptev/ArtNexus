@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const bcrypt = require('bcrypt');
 const { User } = require('../../db/models');
-const generateTokens = require('../../utils/authUtils');
+const generateTokens = require('../../utils/authUtils.js');
 
 router.post('/registration', async (req, res) => {
   try {
