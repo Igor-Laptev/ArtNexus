@@ -10,7 +10,6 @@ import 'swiper/css/navigation';
 
 function Categories(): JSX.Element {
   const categories = useSelector((store: RootState) => store.categories.categories);
-  console.log(categories);
 
   return (
     <>

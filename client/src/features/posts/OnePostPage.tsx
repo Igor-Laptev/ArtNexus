@@ -15,7 +15,6 @@ function OnePostPage(): JSX.Element {
   const post = useSelector((store: RootState) => store.posts.posts).find(
     (pst) => pst.id === +postId,
   );
-  console.log(post);
 
   const navigate = useNavigate();
   return (
