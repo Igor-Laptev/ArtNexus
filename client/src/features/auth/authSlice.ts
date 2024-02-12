@@ -7,23 +7,25 @@ const initialState: AuthState = {
   error: undefined,
 };
 
+export const checkUser = createAsyncThunk('auth/check', () => fetchCheckUser());
 export const signUp = createAsyncThunk('auth/sign-up', (user: UserSignUp) => fetchSignUp(user));
 
 export const signIn = createAsyncThunk(
   'api/sign-in',
-  async (user: UserSignIn, { rejectWithValue }) => {
-    try {
-      const response = await fetchSignIn(user);
-      console.log('signIn response:', response); // Логирование успешного ответа
-      return response;
-    } catch (error) {
-      console.error('signIn error:', error); // Логирование ошибки
-      return rejectWithValue(error instanceof Error ? error.message : 'An unknown error occurred');
-    }
-  }
+  (user: UserSignIn) => fetchSignIn(user),
+
+  // async (user: UserSignIn, { rejectWithValue }) => {
+  //   try {
+  //     const response = await fetchSignIn(user);
+  //     console.log('signIn response:', response); // Логирование успешного ответа
+  //     return response;
+  //   } catch (error) {
+  //     console.error('signIn error:', error); // Логирование ошибки
+  //     return rejectWithValue(error instanceof Error ? error.message : 'An unknown error occurred');
+  //   }
+  // }
 );
 
-export const checkUser = createAsyncThunk('auth/check', () => fetchCheckUser());
 
 export const logOut = createAsyncThunk('auth/logout', () => fetchLogOut());
 
@@ -37,6 +39,12 @@ const authSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
+      .addCase(checkUser.fulfilled, (state, action) => {
+        state.auth = action.payload;
+      })
+      .addCase(checkUser.rejected, (state, action) => {
+        state.error = action.error.message;
+      })
       .addCase(signUp.fulfilled, (state, action) => {
         state.auth = action.payload;
       })
@@ -50,12 +58,7 @@ const authSlice = createSlice({
         console.error('SignIn failed:', action.error.message); // Логирование ошибки
         state.error = action.error.message;
       })
-      .addCase(checkUser.fulfilled, (state, action) => {
-        state.auth = action.payload;
-      })
-      .addCase(checkUser.rejected, (state, action) => {
-        state.error = action.error.message;
-      })
+
       .addCase(logOut.fulfilled, (state) => {
         state.auth = undefined;
       })

@@ -2,6 +2,17 @@
 
 import { User, UserSignIn, UserSignUp } from '../features/auth/type';
 
+export const fetchCheckUser = async (): Promise<User> => {
+  const res = await fetch('api/auth/check');
+  console.log(res);
+
+  const data: { user: User } = (await res.json()) as {
+    user: User;
+  };
+  console.log('data:', data);
+  return data.user;
+};
+
 export const fetchSignUp = async (user: UserSignUp): Promise<User> => {
   const res = await fetch('api/auth/registration', {
     method: 'POST',
@@ -52,22 +63,11 @@ export const fetchSignIn = async (user: UserSignIn): Promise<User> => {
   }
 };
 
-export const fetchCheckUser = async (): Promise<User> => {
-  const res = await fetch('api/auth/check');
-  console.log('res:', res.json());
-
-  const data: { user: User } = (await res.json()) as {
-    user: User;
-  };
-  console.log('data:', data);
-  return data.user;
-};
-
 export const fetchLogOut = async (): Promise<void> => {
   const res = await fetch('/api/auth/logout');
-  const data = ({ message: string } = (await res.json()) as {
+  const data = (await res.json()) as {
     message: string;
-  });
+  };
   if (data.message !== 'success') {
     throw new Error(data.message);
   }

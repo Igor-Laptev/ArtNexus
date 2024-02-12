@@ -5,7 +5,6 @@ const generateTokens = require('../../utils/authUtils');
 const cookieConfig = require('../../middleware/cookiesConfig');
 const jwtConfig = require('../../middleware/configJWT');
 
-
 router.post('/registration', async (req, res) => {
   try {
     const { name, email, avatar, password, rpassword } = req.body;
@@ -48,7 +47,7 @@ router.post('/login', async (req, res) => {
       // console.log('user:', user);
       if (user) {
         const validate = await bcrypt.compare(password, user.password);
-        console.log('validate:', validate);
+        // console.log('validate:', validate);
 
         if (validate) {
           const { accessToken, refreshToken } = generateTokens({
@@ -58,8 +57,8 @@ router.post('/login', async (req, res) => {
               name: user.name,
             },
           });
-          console.log('accessToken:', accessToken);
-          return res
+
+          res
             .cookie(cookieConfig.access, accessToken, {
               maxAge: cookieConfig.access.maxAgeAccess,
               httpOnly: cookieConfig.httpOnly,
@@ -68,28 +67,29 @@ router.post('/login', async (req, res) => {
               maxAge: cookieConfig.refresh.maxAgeRefresh,
               httpOnly: cookieConfig.httpOnly,
             })
-            .json({ login: true });
+            .json({ login: true, user });
+          return;
         }
-        return res.json({ message: 'Wrong login/password!' });
+        res.json({ message: 'Wrong login/password!' });
+        return;
       }
-      return res.json({ message: 'User not found!' });
+      res.json({ message: 'User not found!' });
+      return;
     }
-    return res.json({ message: 'Fill in all the fields!' });
+    res.json({ message: 'Fill in all the fields!' });
   } catch ({ message }) {
-    console.log(message);
     res.status(500).json({ message });
   }
 });
 
 router.get('/check', async (req, res) => {
-  console.log(res.locals.user);
+  console.log('res.locals.user:', res.locals.user);
   if (res.locals.user) {
     const user = await User.findOne({ where: { id: res.locals.user.id } });
-    console.log('user:', user);
     res.json({ user });
     return;
   }
-  res.json({});
+  return res.json({ message: 'User not found!' });
 });
 
 router.get('/logout', (req, res) => {

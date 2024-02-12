@@ -1,3 +1,4 @@
+require('dotenv').config();
 const jwt = require('jsonwebtoken');
 const generateTokens = require('../utils/authUtils');
 const configJWT = require('./configJWT');
@@ -7,10 +8,11 @@ function verifyRefreshToken(req, res, next) {
     // достаем refresh токен
     const { refresh } = req.cookies;
     // проверяем refresh token по секретному слову
-    const { user } = jwt.verify(refresh, 'R');
+    const user = jwt.verify(refresh, 'R');
     // генерируем новую пару токенов
+    // console.log(user, '-------');
     const { accessToken, refreshToken } = generateTokens({
-      user: { id: user.id, img: user.img, name: user.name },
+      user: { id: user.id, email: user.email, name: user.name },
     });
     // дополняем объект ответа userом
     res.locals.user = user;
@@ -36,11 +38,13 @@ function verifyAccessToken(req, res, next) {
     // достаем access куку из запроса
     const { access } = req.cookies;
     // проверяем по секретному слову доступ к access и достаем usera
-    const { user } = jwt.verify(access, 'A');
+    const user = jwt.verify(access, 'A');
+    console.log(user, '42');
     // дополняем объект ответа userом
     res.locals.user = user;
     next();
   } catch (error) {
+    console.log(error.message, '<<<');
     // пробуем проверить refresh токен
     verifyRefreshToken(req, res, next);
   }

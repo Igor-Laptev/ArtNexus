@@ -12,15 +12,14 @@ import { loadCategories } from '../features/categories/categoriesSlice';
 import { loadPosts } from '../features/posts/postsSlice';
 import { useAppDispatch } from '../redux/store';
 import OnePostPage from '../features/posts/OnePostPage';
-
-
-
+import { checkUser } from '../features/auth/authSlice';
 
 function App(): JSX.Element {
   const dispatch = useAppDispatch();
   useEffect(() => {
     dispatch(loadPosts()).catch(console.log);
     dispatch(loadCategories()).catch(console.log);
+    dispatch(checkUser()).catch(console.log);
   }, []);
 
   return (
@@ -41,4 +40,3 @@ function App(): JSX.Element {
 }
 
 export default App;
-
