@@ -2,6 +2,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import type { RootState } from '../../redux/store';
+import Comments from '../comments/Comments';
 
 function OnePostPage(): JSX.Element {
   const { postId } = useParams();
@@ -36,6 +37,7 @@ function OnePostPage(): JSX.Element {
           </div>
         ))}
         <button type="button" onClick={() => navigate(-1)}>Back</button>
+        {post && <Comments post={post}/>}
     </div>
   );
 }

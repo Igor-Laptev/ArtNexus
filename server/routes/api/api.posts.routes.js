@@ -28,7 +28,11 @@ router.get('/', async (req, res) => {
     const posts = await Post.findAll({
       include: [
         { model: User },
-        { model: Comment },
+        {
+          model: Comment,
+          include: [{ model: User }],
+          order: [['createdAt', 'DESC']],
+        },
         { model: Like },
         { model: Category },
         { model: Gallery, include: [{ model: Art }] },
@@ -48,7 +52,7 @@ router.get('/:id', async (req, res) => {
     const post = await Post.findByPk(id, {
       include: [
         { model: User },
-        { model: Comment },
+        { model: Comment, include: [{ model: User }] },
         { model: Like },
         { model: Category },
         { model: Gallery, include: [{ model: Art }] },

@@ -1,5 +1,4 @@
 
-import React from 'react';
 import { Link } from 'react-router-dom';
 
 import React, { useEffect, useState } from 'react';
@@ -16,16 +15,16 @@ import { current } from '@reduxjs/toolkit';
 function PostPage({ post }: { post: Post }): JSX.Element {
   // const dispatch = useAppDispatch();
 
-<!--   const formattedDate = new Date(post.createdAt);
-  const dateString = formattedDate.toLocaleDateString('ru-RU', {
-    day: '2-digit',
-    month: '2-digit',
-    year: 'numeric',
-  });
-  const timeString = formattedDate.toLocaleTimeString('ru-RU', {
-    hour: '2-digit',
-    minute: '2-digit',
-  }); -->
+  // const formattedDate = new Date(post.createdAt);
+  // const dateString = formattedDate.toLocaleDateString('ru-RU', {
+  //   day: '2-digit',
+  //   month: '2-digit',
+  //   year: 'numeric',
+  // });
+  // const timeString = formattedDate.toLocaleTimeString('ru-RU', {
+  //   hour: '2-digit',
+  //   minute: '2-digit',
+  // }); 
 
 
   const firstArt = post.Gallery.Arts[0].src;
@@ -39,7 +38,7 @@ function PostPage({ post }: { post: Post }): JSX.Element {
     setShowToolTip(false);
   };
   return (
-    <div
+  <Link to = {`/posts/${post.id}`}> <div
       className="post-container"
       onMouseEnter={onMouseEnterHandler}
       onMouseLeave={onMouseLeaveHandler}
@@ -76,7 +75,8 @@ function PostPage({ post }: { post: Post }): JSX.Element {
         )}
       </div>
 
-    </div>
+    </div></Link>
+   
    
   );
 }
