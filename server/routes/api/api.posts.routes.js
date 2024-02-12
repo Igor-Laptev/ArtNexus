@@ -93,7 +93,7 @@ router.post('/', upload.array('files'), async (req, res) => {
     const art = await Art.bulkCreate(
       req.files.map((file) => ({
         post_id: newPost.id,
-        src: file.originalname,
+        src: `/img/${file.originalname}`,
         gallery_id: gallery.id,
       }))
     );

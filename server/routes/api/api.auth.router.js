@@ -12,13 +12,13 @@ router.post('/registration', async (req, res) => {
       return;
     }
 
-    if (name && email && avatar && password && rpassword) {
+    if (name && email && password && rpassword) {
       const user = await User.findOne({ where: { email } });
       if (!user) {
         await User.create({
           name,
           email,
-          avatar,
+          avatar: '/avatars/admin.jpeg',
           isAdmin: false,
           password: await bcrypt.hash(password, 10),
         });

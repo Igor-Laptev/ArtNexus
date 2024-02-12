@@ -1,5 +1,4 @@
 'use strict';
-
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
@@ -8,7 +7,7 @@ module.exports = {
       [
         {
           title: '3D',
-          img: 'https://cdnb.artstation.com/p/assets/images/images/000/992/149/4k/frederic-daoust-mewtwo.jpg?1443929221',
+          img: '/img/668479.jpg',
           createdAt: new Date(),
           updatedAt: new Date(),
         },
