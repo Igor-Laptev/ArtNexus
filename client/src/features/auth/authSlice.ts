@@ -26,6 +26,7 @@ export const signIn = createAsyncThunk(
   // }
 );
 
+
 export const logOut = createAsyncThunk('auth/logout', () => fetchLogOut());
 
 const authSlice = createSlice({
