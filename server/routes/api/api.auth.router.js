@@ -47,7 +47,7 @@ router.post('/login', async (req, res) => {
       // console.log('user:', user);
       if (user) {
         const validate = await bcrypt.compare(password, user.password);
-        console.log('validate:', validate);
+        // console.log('validate:', validate);
 
         if (validate) {
           const { accessToken, refreshToken } = generateTokens({
@@ -57,8 +57,8 @@ router.post('/login', async (req, res) => {
               name: user.name,
             },
           });
-          console.log('accessToken:', accessToken);
-          return res
+
+          res
             .cookie(cookieConfig.access, accessToken, {
               maxAge: cookieConfig.access.maxAgeAccess,
               httpOnly: cookieConfig.httpOnly,
@@ -68,24 +68,31 @@ router.post('/login', async (req, res) => {
               httpOnly: cookieConfig.httpOnly,
             })
             .json({ login: true, user });
+
+          return;
         }
-        return res.json({ message: 'Wrong login/password!' });
+        res.json({ message: 'Wrong login/password!' });
+        return;
       }
-      return res.json({ message: 'User not found!' });
+      res.json({ message: 'User not found!' });
+      return;
     }
-    return res.json({ message: 'Fill in all the fields!' });
+    res.json({ message: 'Fill in all the fields!' });
   } catch ({ message }) {
-    console.log(message);
     res.status(500).json({ message });
   }
 });
 
 router.get('/check', async (req, res) => {
+
+  console.log('res.locals.user:', res.locals.user);
   if (res.locals.user) {
     const user = await User.findOne({ where: { id: res.locals.user.id } });
-    console.log(user);
-    res.json(user);
+    res.json({ user });
+    return;
   }
+  return res.json({ message: 'User not found!' });
+
 });
 
 router.get('/logout', (req, res) => {

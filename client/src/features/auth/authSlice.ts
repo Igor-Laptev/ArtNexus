@@ -7,9 +7,15 @@ const initialState: AuthState = {
   error: undefined,
 };
 
+export const checkUser = createAsyncThunk('auth/check', () => fetchCheckUser());
 export const signUp = createAsyncThunk('auth/sign-up', (user: UserSignUp) => fetchSignUp(user));
 
-export const signIn = createAsyncThunk('api/sign-in', (user:UserSignIn)=> fetchSignIn(user))
+
+export const signIn = createAsyncThunk(
+  'api/sign-in',
+  (user: UserSignIn) => fetchSignIn(user),
+
+
   // async (user: UserSignIn, { rejectWithValue }) => {
   //   try {
   //     const response = await fetchSignIn(user);
@@ -20,9 +26,9 @@ export const signIn = createAsyncThunk('api/sign-in', (user:UserSignIn)=> fetchS
   //     return rejectWithValue(error instanceof Error ? error.message : 'An unknown error occurred');
   //   }
   // }
+
 // );
 
-export const checkUser = createAsyncThunk('auth/check', () => fetchCheckUser());
 
 export const logOut = createAsyncThunk('auth/logout', () => fetchLogOut());
 
@@ -36,6 +42,12 @@ const authSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
+      .addCase(checkUser.fulfilled, (state, action) => {
+        state.auth = action.payload;
+      })
+      .addCase(checkUser.rejected, (state, action) => {
+        state.error = action.error.message;
+      })
       .addCase(signUp.fulfilled, (state, action) => {
         state.auth = action.payload;
       })
@@ -47,12 +59,6 @@ const authSlice = createSlice({
       })
       .addCase(signIn.rejected, (state, action) => {
         console.error('SignIn failed:', action.error.message); // Логирование ошибки
-        state.error = action.error.message;
-      })
-      .addCase(checkUser.fulfilled, (state, action) => {
-        state.auth = action.payload
-      })
-      .addCase(checkUser.rejected, (state, action) => {
         state.error = action.error.message;
       })
       .addCase(logOut.fulfilled, (state) => {

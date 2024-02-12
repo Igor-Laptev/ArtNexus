@@ -20,6 +20,7 @@ function App(): JSX.Element {
     dispatch(checkUser()).catch(console.log);
     dispatch(loadPosts()).catch(console.log);
     dispatch(loadCategories()).catch(console.log);
+    dispatch(checkUser()).catch(console.log);
   }, []);
   const user = useSelector((store: RootState) => store.auth.auth);
   console.log(user);

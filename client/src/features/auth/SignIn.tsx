@@ -24,8 +24,6 @@ const SignIn = (): JSX.Element => {
             signIn({
               email,
               password,
-              name: '',
-              isAdmin: false,
             }),
           ).catch(console.log);
           navigate('/');
