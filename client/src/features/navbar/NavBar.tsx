@@ -18,9 +18,11 @@ function NavBar(): JSX.Element {
       <nav className="navbar">
         <div className="links">
           <div className="left-buttons">
-            <NavLink className="nav__link" to="/">
-              Explore
-            </NavLink>
+            <li className="nav__item">
+              <NavLink className="nav__link" to="/">
+                Explore
+              </NavLink>
+            </li>
             <NavLink className="nav__link" to="/">
               Избранное
             </NavLink>
@@ -28,31 +30,26 @@ function NavBar(): JSX.Element {
               Профиль
             </NavLink>
           </div>
-          {user?.name? (
-            <>
-              <li className="nav__item">Hello, {user.name}!</li>
-              <li
-                onClick={() => {
-                  dispatch(logOut()).catch(console.log);
-                  navigate('/');
-                }}
-                className="nav__item"
-              >
-                <NavLink className="nav__link" to="/logout">
-                  Выйти
-                </NavLink>
-              </li>
-            </>
-          ) : (
-            <div className="right-buttons">
-              <NavLink className="nav__link" to="/sign-up">
-                Зарегистрироваться
+          <li>Hello, {user?.name}!</li>
+          <div className="right-buttons">
+            <NavLink className="nav__link" to="/sign-up">
+              Зарегистрироваться
+            </NavLink>
+            <NavLink className="nav__link" to="/sign-in">
+              Войти
+            </NavLink>
+            <li
+              onClick={() => {
+                dispatch(logOut()).catch(console.log);
+                navigate('/');
+              }}
+              className="nav__item"
+            >
+              <NavLink className="nav__link" to="/logout">
+                Выйти
               </NavLink>
-              <NavLink className="nav__link" to="/sign-in">
-                Войти
-              </NavLink>
-            </div>
-          )}
+            </li>
+          </div>
         </div>
       </nav>
       <Outlet />
