@@ -1,8 +1,7 @@
 const router = require('express').Router();
 const bcrypt = require('bcrypt');
- const { User } = require('../../db/models');
-// const generateTokens = require('../../utils/authUtils');
-// const configJWT = require('../../middleware/configJWT');
+const { User } = require('../../db/models');
+const generateTokens = require('../../utils/authUtils');
 
 router.post('/registration', async (req, res) => {
   try {
@@ -12,23 +11,67 @@ router.post('/registration', async (req, res) => {
       return;
     }
 
-    if (name && email && password && rpassword) {
+    if (name && email && avatar && password && rpassword) {
       const user = await User.findOne({ where: { email } });
       if (!user) {
         await User.create({
           name,
           email,
-          avatar: '/avatars/admin.jpeg',
+          avatar,
           isAdmin: false,
           password: await bcrypt.hash(password, 10),
         });
-        res.json({ reg: true });
+        res.status(201).json({ reg: true });
+        console.log('reg:true', reg);
       } else {
-        res.json({ message: `This user: ${email}, is already registered!` });
+        res
+          .status(409)
+          .json({ message: `This user: ${email}, is already registered!` });
       }
     } else {
-      res.json({ message: 'Fill in all the fields!' });
+      res.status(405).json({ message: 'Fill in all the fields!' });
     }
+  } catch ({ message }) {
+    res.status(500).json({ message: 'Internal server error' });
+  }
+});
+
+router.post('/login', async (req, res) => {
+  try {
+    const { email, password } = req.body;
+    // console.log('req.body:', req.body);
+    if (email && password) {
+      const user = await User.findOne({ where: { email } });
+      // console.log('user:', user);
+      if (user) {
+        const validate = await bcrypt.compare(password, user.password);
+        console.log('validate:', validate);
+
+        if (validate) {
+          const { accessToken, refreshToken } = generateTokens({
+            user: {
+              id: user.id,
+              email: user.email,
+              name: user.name,
+            },
+          });
+          console.log('generateTokens:', generateTokens);
+          return res
+            .cookie(cookieConfig.access, accessToken, {
+              maxAge: cookieConfig.access.maxAgeAccess,
+              httpOnly: cookieConfig.httpOnly,
+            })
+            .cookie(cookieConfig.refresh, refreshToken, {
+              maxAge: cookieConfig.refresh.maxAgeRefresh,
+              httpOnly: cookieConfig.httpOnly,
+            })
+            .json({ login: true });
+        }
+        return res.json({ message: 'Wrong login/password!' });
+      }
+      return res.json({ message: 'User not found!' });
+    }
+    return res.json({ message: 'Fill in all the fields!' });
   } catch ({ message }) {
     res.status(500).json({ message });
   }

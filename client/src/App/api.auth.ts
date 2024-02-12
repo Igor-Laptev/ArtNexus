@@ -18,20 +18,38 @@ export const fetchSignUp = async (user: UserSignUp): Promise<User> => {
     message: string;
     user: User;
   };
+  console.log('data:', data);
+
   return data.user;
 };
 
 export const fetchSignIn = async (user: UserSignIn): Promise<User> => {
-  const res = await fetch('/api/auth/autorization', {
-    method: 'POST',
-    headers: { 'content-type': 'application/json' },
-    body: JSON.stringify(user),
-  });
-  const data: { message: string; user: User } = (await res.json()) as {
-    message: string;
-    user: User;
-  };
-  return data.user;
+  try {
+    const res = await fetch('/api/auth/login', {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify(user),
+      // credentials: 'include', // Добавляем для отправки и приема кук
+    });
+
+    if (!res.ok) {
+      // Проверка успешности HTTP-запроса
+      throw new Error(`Server responded with ${res.status}: ${res.statusText}`);
+    }
+
+    const data: { message: string; user: User } = await res.json();
+
+    // Дополнительная проверка на наличие пользователя в ответе
+    if (!data || !data.user) {
+      throw new Error('No user data returned from the server');
+    }
+
+    console.log('data:', data);
+    return data.user;
+  } catch (error) {
+    console.error('Error during sign in:', error);
+    throw error; // Переброс ошибки для дальнейшей обработки
+  }
 };
 
 export const fetchCheckUser = async (): Promise<User> => {
