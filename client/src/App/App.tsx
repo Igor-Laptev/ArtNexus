@@ -11,6 +11,10 @@ import LikePage from '../features/likes/LikesPage';
 import { loadCategories } from '../features/categories/categoriesSlice';
 import { loadPosts } from '../features/posts/postsSlice';
 import { useAppDispatch } from '../redux/store';
+import OnePostPage from '../features/posts/OnePostPage';
+
+
+
 
 function App(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -29,6 +33,7 @@ function App(): JSX.Element {
           <Route path="/sign-in" element={<SignIn />} />
           {/* <Route path="/:postId" element={<PostPage />} /> */}
           <Route path="/favorites" element={<LikePage />} />
+          <Route path="/posts/:postId" element={<OnePostPage />} />
         </Route>
       </Routes>
     </div>

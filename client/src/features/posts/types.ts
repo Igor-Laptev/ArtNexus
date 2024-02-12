@@ -1,3 +1,5 @@
+import { Art } from '../arts/type';
+import { Category } from '../categories/types';
 import type { UserId } from '../users/types';
 
 export type Post = {
@@ -11,6 +13,8 @@ export type Post = {
   Likes: Like[];
   Comments: Comment[];
   Gallery: Gallery;
+  Category: Category
+  createdAt: string;
 };
 export type PostId = Post['id'];
 
@@ -19,6 +23,7 @@ export type PostWithoutId = Omit<Post, 'id'>;
 export type Gallery = {
   id: number;
   post_id: PostId;
+  Arts: Art[];
 };
 
 export type GalleryId = Gallery['id'];

@@ -1,3 +1,15 @@
+const multer = require('multer');
+
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, 'public/img');
+  },
+  filename: function (req, file, cb) {
+    cb(null, file.originalname);
+  },
+});
+const upload = multer({ storage });
+
 const router = require('express').Router();
 const {
   Post,
@@ -64,9 +76,9 @@ router.delete('/:id', async (req, res) => {
 
 // СОЗДАНИЕ ПОСТА
 
-router.post('/', async (req, res) => {
+router.post('/', upload.array('files'), async (req, res) => {
   try {
-    const user_id = res.locals.user.id;
+    const user_id = 1;
     const { description, title, category_id } = req.body;
     const newPost = await Post.create({
       user_id,
@@ -74,6 +86,18 @@ router.post('/', async (req, res) => {
       title,
       category_id,
     });
+
+    const gallery = await Gallery.create({
+      post_id: newPost.id,
+    });
+    const art = await Art.bulkCreate(
+      req.files.map((file) => ({
+        post_id: newPost.id,
+        src: `/img/${file.originalname}`,
+        gallery_id: gallery.id,
+      }))
+    );
+
     const post = await Post.findByPk(newPost.id, {
       include: [
         { model: User },

@@ -11,7 +11,7 @@ const initialState: PostsState = {
 
 export const loadPosts = createAsyncThunk('posts/load', () => fetchLoadPosts());
 
-export const addPost = createAsyncThunk('posts/add', (post: PostWithoutId) => fetchAddPost(post));
+export const addPost = createAsyncThunk('posts/add', (formData:FormData) => fetchAddPost(formData));
 
 export const removePost = createAsyncThunk('posts/remove', (postId: PostId) =>
   fetchPostRemove(postId),

@@ -1,7 +1,9 @@
 import React from 'react';
 import PostsList from '../posts/PostsListPage';
 import Categories from '../categories/Categories';
+import AddPostForm from '../posts/AddPostForm';
 import './styles.css';
+
 
 function MainPage(): JSX.Element {
   return (
@@ -12,7 +14,11 @@ function MainPage(): JSX.Element {
       <div className="posts-container">
         <h1>Main Page</h1>
         <Categories />
+
+      <AddPostForm/>
+
         <PostsList />
+
       </div>
       {/* <div className="trends-container"></div> */}
     </>

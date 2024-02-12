@@ -13,13 +13,10 @@ export const fetchLoadPosts = async (): Promise<Post[]> => {
   return data.posts;
 };
 
-export const fetchAddPost = async (post: PostWithoutId): Promise<Post> => {
+export const fetchAddPost = async (formData:FormData): Promise<Post> => {
   const res = await fetch('/api/posts', {
     method: 'POST',
-    headers: {
-      'Content-type': 'application/json',
-    },
-    body: JSON.stringify(post),
+    body: formData,
   });
   const data: { post: Post } = (await res.json()) as { post: Post };
   return data.post;
@@ -38,3 +35,5 @@ export const fetchPostRemove = async (id: PostId): Promise<PostId> => {
   }
   return data.postId;
 };
+
+
