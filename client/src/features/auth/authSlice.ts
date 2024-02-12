@@ -10,9 +10,11 @@ const initialState: AuthState = {
 export const checkUser = createAsyncThunk('auth/check', () => fetchCheckUser());
 export const signUp = createAsyncThunk('auth/sign-up', (user: UserSignUp) => fetchSignUp(user));
 
+
 export const signIn = createAsyncThunk(
   'api/sign-in',
   (user: UserSignIn) => fetchSignIn(user),
+
 
   // async (user: UserSignIn, { rejectWithValue }) => {
   //   try {
@@ -24,7 +26,8 @@ export const signIn = createAsyncThunk(
   //     return rejectWithValue(error instanceof Error ? error.message : 'An unknown error occurred');
   //   }
   // }
-);
+
+// );
 
 
 export const logOut = createAsyncThunk('auth/logout', () => fetchLogOut());
@@ -58,7 +61,6 @@ const authSlice = createSlice({
         console.error('SignIn failed:', action.error.message); // Логирование ошибки
         state.error = action.error.message;
       })
-
       .addCase(logOut.fulfilled, (state) => {
         state.auth = undefined;
       })

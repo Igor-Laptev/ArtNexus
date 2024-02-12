@@ -1,9 +1,10 @@
 const { User } = require('../db/models');
+
 async function getUser(req, res, next) {
   if (res.locals.user) {
     const user = await User.findOne({
       where: { id: res.locals.user.id },
-      attributes: ['name', 'avatar', 'id'],
+      attributes: ['email', 'name', 'avatar', 'id'],
     });
     console.log('res.locals.user:', res.locals.user);
     res.locals.user = user;
