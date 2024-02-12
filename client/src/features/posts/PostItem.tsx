@@ -12,7 +12,6 @@ import { useSelector } from 'react-redux';
 // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
 function PostItem({ post }: { post: Post }): JSX.Element {
   // const dispatch = useAppDispatch();
-
   //  const formattedDate = new Date(post.createdAt);
   // const dateString = formattedDate.toLocaleDateString('ru-RU', {
   //   day: '2-digit',

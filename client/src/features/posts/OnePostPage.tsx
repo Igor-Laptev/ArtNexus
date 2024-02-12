@@ -4,9 +4,11 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination, Scrollbar, A11y, EffectCube, Mousewheel } from 'swiper/modules';
 import type { RootState } from '../../redux/store';
+import Comments from '../comments/Comments';
 import './onePostStyles.css';
 import 'swiper/css';
 import 'swiper/css/navigation';
+
 
 function OnePostPage(): JSX.Element {
   const { postId } = useParams();
@@ -18,7 +20,7 @@ function OnePostPage(): JSX.Element {
   return (
     <div className="">
       <h2>{post?.title}</h2>
-      <p>{post?.description}</p>
+      <p>{post?.description}</p>       
 
       <Swiper
         className="post-swiper"
@@ -47,6 +49,8 @@ function OnePostPage(): JSX.Element {
       <button type="button" onClick={() => navigate(-1)}>
         Back
       </button>
+      {post && <Comments post={post}/>}
+
     </div>
   );
 }
