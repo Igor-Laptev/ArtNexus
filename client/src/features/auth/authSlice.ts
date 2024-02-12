@@ -9,19 +9,18 @@ const initialState: AuthState = {
 
 export const signUp = createAsyncThunk('auth/sign-up', (user: UserSignUp) => fetchSignUp(user));
 
-export const signIn = createAsyncThunk(
-  'api/sign-in',
-  async (user: UserSignIn, { rejectWithValue }) => {
-    try {
-      const response = await fetchSignIn(user);
-      console.log('signIn response:', response); // Логирование успешного ответа
-      return response;
-    } catch (error) {
-      console.error('signIn error:', error); // Логирование ошибки
-      return rejectWithValue(error instanceof Error ? error.message : 'An unknown error occurred');
-    }
-  }
-);
+export const signIn = createAsyncThunk('api/sign-in', (user:UserSignIn)=> fetchSignIn(user))
+  // async (user: UserSignIn, { rejectWithValue }) => {
+  //   try {
+  //     const response = await fetchSignIn(user);
+  //     console.log('signIn response:', response); // Логирование успешного ответа
+  //     return response;
+  //   } catch (error) {
+  //     console.error('signIn error:', error); // Логирование ошибки
+  //     return rejectWithValue(error instanceof Error ? error.message : 'An unknown error occurred');
+  //   }
+  // }
+// );
 
 export const checkUser = createAsyncThunk('auth/check', () => fetchCheckUser());
 
@@ -51,7 +50,7 @@ const authSlice = createSlice({
         state.error = action.error.message;
       })
       .addCase(checkUser.fulfilled, (state, action) => {
-        state.auth = action.payload;
+        state.auth = action.payload
       })
       .addCase(checkUser.rejected, (state, action) => {
         state.error = action.error.message;
