@@ -2,6 +2,17 @@
 
 import { User, UserSignIn, UserSignUp } from '../features/auth/type';
 
+export const fetchCheckUser = async (): Promise<User> => {
+  const res = await fetch('api/auth/check');
+  console.log(res);
+
+  const data: { user: User } = (await res.json()) as {
+    user: User;
+  };
+  console.log('data:', data);
+  return data.user;
+};
+
 export const fetchSignUp = async (user: UserSignUp): Promise<User> => {
   const res = await fetch('api/auth/registration', {
     method: 'POST',
@@ -18,7 +29,6 @@ export const fetchSignUp = async (user: UserSignUp): Promise<User> => {
     message: string;
     user: User;
   };
-  console.log('data:', data);
 
   return data.user;
 };
@@ -32,7 +42,7 @@ export const fetchSignIn = async (user: UserSignIn): Promise<User> => {
       // credentials: 'include', // Добавляем для отправки и приема кук
     });
 
-    if (!res.ok) {
+    if (!res) {
       // Проверка успешности HTTP-запроса
       throw new Error(`Server responded with ${res.status}: ${res.statusText}`);
     }
@@ -44,7 +54,7 @@ export const fetchSignIn = async (user: UserSignIn): Promise<User> => {
       throw new Error('No user data returned from the server');
     }
 
-    console.log('data:', data);
+    console.log('data:', data.user);
     return data.user;
   } catch (error) {
     console.error('Error during sign in:', error);
@@ -52,19 +62,11 @@ export const fetchSignIn = async (user: UserSignIn): Promise<User> => {
   }
 };
 
-export const fetchCheckUser = async (): Promise<User> => {
-  const res = await fetch('api/auth/check');
-  const data: { user: User } = (await res.json()) as {
-    user: User;
-  };
-  return data.user;
-};
-
 export const fetchLogOut = async (): Promise<void> => {
   const res = await fetch('/api/auth/logout');
-  const data = ({ message: string } = (await res.json()) as {
+  const data = (await res.json()) as {
     message: string;
-  });
+  };
   if (data.message !== 'success') {
     throw new Error(data.message);
   }

@@ -1,7 +1,10 @@
 const router = require('express').Router();
 const bcrypt = require('bcrypt');
 const { User } = require('../../db/models');
-const generateTokens = require('../../utils/authUtils.js');
+const generateTokens = require('../../utils/authUtils');
+const cookieConfig = require('../../middleware/cookiesConfig');
+const jwtConfig = require('../../middleware/configJWT');
+
 
 router.post('/registration', async (req, res) => {
   try {
@@ -21,7 +24,7 @@ router.post('/registration', async (req, res) => {
           isAdmin: false,
           password: await bcrypt.hash(password, 10),
         });
-        res.status(201).json({ reg: true });
+        res.status(201).json({ reg: true, user });
         console.log('reg:true', reg);
       } else {
         res
@@ -45,7 +48,7 @@ router.post('/login', async (req, res) => {
       // console.log('user:', user);
       if (user) {
         const validate = await bcrypt.compare(password, user.password);
-        console.log('validate:', validate);
+        // console.log('validate:', validate);
 
         if (validate) {
           const { accessToken, refreshToken } = generateTokens({
@@ -55,8 +58,8 @@ router.post('/login', async (req, res) => {
               name: user.name,
             },
           });
-          console.log('generateTokens:', generateTokens);
-          return res
+
+          res
             .cookie(cookieConfig.access, accessToken, {
               maxAge: cookieConfig.access.maxAgeAccess,
               httpOnly: cookieConfig.httpOnly,
@@ -65,16 +68,37 @@ router.post('/login', async (req, res) => {
               maxAge: cookieConfig.refresh.maxAgeRefresh,
               httpOnly: cookieConfig.httpOnly,
             })
-            .json({ login: true });
+            .json({ login: true, user });
+
+          return;
         }
-        return res.json({ message: 'Wrong login/password!' });
+        res.json({ message: 'Wrong login/password!' });
+        return;
       }
-      return res.json({ message: 'User not found!' });
+      res.json({ message: 'User not found!' });
+      return;
     }
-    return res.json({ message: 'Fill in all the fields!' });
+    res.json({ message: 'Fill in all the fields!' });
   } catch ({ message }) {
     res.status(500).json({ message });
   }
+});
+
+router.get('/check', async (req, res) => {
+
+  console.log('res.locals.user:', res.locals.user);
+  if (res.locals.user) {
+    const user = await User.findOne({ where: { id: res.locals.user.id } });
+    res.json({ user });
+    return;
+  }
+  return res.json({ message: 'User not found!' });
+
+});
+
+router.get('/logout', (req, res) => {
+  res.clearCookie(jwtConfig.access.type).clearCookie(jwtConfig.refresh.type);
+  res.json({ message: 'success' });
 });
 
 module.exports = router;

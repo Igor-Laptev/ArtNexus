@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import type { PostsState } from '../../redux/reducers/types';
-import { fetchAddPost, fetchLoadPosts, fetchPostRemove } from '../../App/api';
+import { fetchAddPost, fetchLoadPosts, fetchPostRemove } from '../../App/api.posts';
 import type { PostId, PostWithoutId, Post } from './types';
 import fetchCreateComment from '../../App/api.comment';
 
