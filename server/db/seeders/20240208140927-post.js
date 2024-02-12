@@ -96,6 +96,16 @@ module.exports = {
           createdAt: new Date(),
           updatedAt: new Date(),
         },
+        {
+          user_id: 2,
+          category_id: 3,
+          title: 'Пост 3 тема 3',
+          description: '123',
+          isModerated: false,
+          isAdult: false,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
       ],
       {}
     );

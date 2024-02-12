@@ -11,12 +11,13 @@ const {
 
 //  ДОБАВЛЕНИЕ КОММЕНТАРИЯ
 
-router.post('/:id', async (req, res) => {
-  const user_id = res.locals.user.id;
+router.post('/', async (req, res) => {
+  const user_id = 1
   const { text, post_id } = req.body;
+  console.log(text, post_id);
   const newComment = await Comment.create({ user_id, text, post_id });
   const comment = await Comment.findByPk(newComment.id, {
-    include: [{ model: User }, { model: Post }],
+    include: [{ model: User }],
   });
   res.status(201).json({ comment, message: 'success' });
 });

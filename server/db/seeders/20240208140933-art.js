@@ -83,6 +83,13 @@ module.exports = {
           createdAt: new Date(),
           updatedAt: new Date(),
         },
+        {
+          gallery_id: 10,
+          src: 'https://cdnb.artstation.com/p/assets/images/images/042/154/213/4k/david-baylis-img-0055.jpg?1633709236',
+          title: 'Auto art3',
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
       ],
       {}
     );

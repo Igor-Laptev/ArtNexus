@@ -13,3 +13,9 @@ body {
     /* font-family: 'inter'; */
     
 }
+.author {
+    display: flex;
+}
+.postInfo {
+    display: flex;
+}

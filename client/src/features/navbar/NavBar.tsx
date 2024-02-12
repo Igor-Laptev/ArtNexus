@@ -8,7 +8,6 @@ import { logOut } from '../auth/authSlice';
 
 function NavBar(): JSX.Element {
   const user = useSelector((store: RootState) => store.auth.auth);
-  console.log('user:', user);
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -19,7 +18,9 @@ function NavBar(): JSX.Element {
         <div className="links">
           <div className="left-buttons">
             <li className="nav__item">
-              <NavLink className="nav__link" to="/"></NavLink>
+              <NavLink className="nav__link" to="/moderator">
+                Модерация
+              </NavLink>
             </li>
             <li className="nav__item">
               <NavLink className="nav__link" to="/">
@@ -27,7 +28,7 @@ function NavBar(): JSX.Element {
               </NavLink>
             </li>
           </div>
-
+          <li style={{ color: 'white' }}>Hello, {user?.name}!</li>
           <div className="right-buttons">
             <nav>
               {!user ? (
