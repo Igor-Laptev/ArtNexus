@@ -5,7 +5,6 @@ const generateTokens = require('../../utils/authUtils');
 const cookieConfig = require('../../middleware/cookiesConfig');
 const jwtConfig = require('../../middleware/configJWT');
 
-
 router.post('/registration', async (req, res) => {
   try {
     const { name, email, avatar, password, rpassword } = req.body;
@@ -24,7 +23,7 @@ router.post('/registration', async (req, res) => {
           isAdmin: false,
           password: await bcrypt.hash(password, 10),
         });
-        res.status(201).json({ reg: true });
+        res.status(201).json({ reg: true, user });
         console.log('reg:true', reg);
       } else {
         res
@@ -68,7 +67,7 @@ router.post('/login', async (req, res) => {
               maxAge: cookieConfig.refresh.maxAgeRefresh,
               httpOnly: cookieConfig.httpOnly,
             })
-            .json({ login: true });
+            .json({ login: true, user });
         }
         return res.json({ message: 'Wrong login/password!' });
       }
@@ -82,14 +81,11 @@ router.post('/login', async (req, res) => {
 });
 
 router.get('/check', async (req, res) => {
-  console.log(res.locals.user);
   if (res.locals.user) {
     const user = await User.findOne({ where: { id: res.locals.user.id } });
-    console.log('user:', user);
-    res.json({ user });
-    return;
+    console.log(user);
+    res.json(user);
   }
-  res.json({});
 });
 
 router.get('/logout', (req, res) => {

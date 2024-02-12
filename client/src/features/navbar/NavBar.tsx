@@ -19,6 +19,9 @@ function NavBar(): JSX.Element {
         <div className="links">
           <div className="left-buttons">
             <li className="nav__item">
+              <NavLink className="nav__link" to="/"></NavLink>
+            </li>
+            <li className="nav__item">
               <NavLink className="nav__link" to="/">
                 Explore
               </NavLink>

@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { type RootState, useAppDispatch } from '../../redux/store';
 import { clearError, signUp } from './authSlice';
-import { useNavigate } from 'react-router-dom';
 
-const SignUp = (): JSX.Element => {
+function SignUp(): JSX.Element {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [avatar, setAvatar] = useState('');
@@ -90,7 +90,6 @@ const SignUp = (): JSX.Element => {
       </form>
     </div>
   );
-};
+}
 
 export default SignUp;
-////
