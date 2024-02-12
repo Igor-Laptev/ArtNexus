@@ -23,6 +23,20 @@ module.exports = {
         {
           gallery_id: 3,
           src: 'https://cdnb.artstation.com/p/assets/images/images/000/275/117/large/darklordgallery22.jpg?1443930189',
+          title: '3D art1',
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          gallery_id: 3,
+          src: 'https://cdna.artstation.com/p/assets/images/images/000/275/118/4k/555.jpg?1443930200',
+          title: '3D art2',
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          gallery_id: 3,
+          src: 'https://cdnb.artstation.com/p/assets/images/images/000/275/119/large/122.jpg?1443930205',
           title: '3D art3',
           createdAt: new Date(),
           updatedAt: new Date(),

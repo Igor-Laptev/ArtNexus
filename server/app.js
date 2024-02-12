@@ -4,7 +4,7 @@ const app = express();
 const path = require('path');
 // const cookieParser = require('cookie-parser');
 // require('dotenv').config();
-app.use(express.static(path.join(__dirname, '..', 'public')));
+app.use(express.static(path.join(__dirname, './public')));
 const mainRouter = require('./routes/main.routes');
 // const { verifyAccessToken } = require('./middleware/verifyJWT');
 
