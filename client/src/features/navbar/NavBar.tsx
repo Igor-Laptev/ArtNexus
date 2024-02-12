@@ -26,32 +26,44 @@ function NavBar(): JSX.Element {
                 Explore
               </NavLink>
             </li>
-            <NavLink className="nav__link" to="/">
-              Избранное
-            </NavLink>
-            <NavLink className="nav__link" to="/">
-              Профиль
-            </NavLink>
           </div>
-          <li>Hello, {user?.name}!</li>
+
           <div className="right-buttons">
-            <NavLink className="nav__link" to="/sign-up">
-              Зарегистрироваться
-            </NavLink>
-            <NavLink className="nav__link" to="/sign-in">
-              Войти
-            </NavLink>
-            <li
-              onClick={() => {
-                dispatch(logOut()).catch(console.log);
-                navigate('/');
-              }}
-              className="nav__item"
-            >
-              <NavLink className="nav__link" to="/logout">
-                Выйти
-              </NavLink>
-            </li>
+            <nav>
+              {!user ? (
+                <>
+                  <NavLink className="nav__link" to="/sign-up">
+                    Зарегистрироваться
+                  </NavLink>
+                  <NavLink className="nav__link" to="/sign-in">
+                    Войти
+                  </NavLink>
+                </>
+              ) : (
+                user && (
+                  <>
+                    <li>Hello, {user?.name}!</li>
+
+                    <NavLink className="nav__link" to="/">
+                      Избранное
+                    </NavLink>
+                    <NavLink className="nav__link" to="/">
+                      Профиль
+                    </NavLink>
+                    <li
+                      onClick={() => {
+                        dispatch(logOut()).catch(console.log);
+                        navigate('/');
+                      }}
+                      className="nav__item"
+                    ></li>
+                    <NavLink className="nav__link" to="/logout">
+                      Выйти
+                    </NavLink>
+                  </>
+                )
+              )}
+            </nav>
           </div>
         </div>
       </nav>
