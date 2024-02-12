@@ -1,16 +1,22 @@
 import React, { useState } from 'react';
-import { useAppDispatch } from '../../redux/store';
+import { RootState, useAppDispatch } from '../../redux/store';
 import { signIn } from './authSlice';
+// import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 const SignIn = (): JSX.Element => {
   const [email, setEmail] = useState('');
-  const [password, setPasssword] = useState('');
+  const [password, setPassword] = useState('');
+
+  const error = useSelector((store: RootState) => store.auth.error);
 
   const dispatch = useAppDispatch();
+  // const navigate = useNavigate();
 
   return (
     <div>
       <h1>Autorization</h1>
+      {error && <h1 style={{ color: 'red', textTransform: 'uppercase' }}>{error}</h1>}
       <form
         onSubmit={(e) => {
           e.preventDefault();
@@ -20,6 +26,7 @@ const SignIn = (): JSX.Element => {
               password,
             }),
           ).catch(console.log);
+          // navigate('/');
         }}
       >
         <input
@@ -38,7 +45,7 @@ const SignIn = (): JSX.Element => {
           autoComplete="off"
           type="password"
           onChange={(e) => {
-            setPasssword(e.target.value);
+            setPassword(e.target.value);
           }}
         />
         <button type="submit">Login</button>
@@ -48,4 +55,4 @@ const SignIn = (): JSX.Element => {
 };
 
 export default SignIn;
-/////
+

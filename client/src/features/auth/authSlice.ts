@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { AuthState, UserSignIn, UserSignUp } from './type';
 import { fetchCheckUser, fetchLogOut, fetchSignIn, fetchSignUp } from '../../App/api.auth';
+import { AuthState, UserSignIn, UserSignUp } from './type';
 
 const initialState: AuthState = {
   auth: undefined,
@@ -9,7 +9,19 @@ const initialState: AuthState = {
 
 export const signUp = createAsyncThunk('auth/sign-up', (user: UserSignUp) => fetchSignUp(user));
 
-export const signIn = createAsyncThunk('auth/login', (user: UserSignIn) => fetchSignIn(user));
+export const signIn = createAsyncThunk(
+  'api/sign-in',
+  async (user: UserSignIn, { rejectWithValue }) => {
+    try {
+      const response = await fetchSignIn(user);
+      console.log('signIn response:', response); // Логирование успешного ответа
+      return response;
+    } catch (error) {
+      console.error('signIn error:', error); // Логирование ошибки
+      return rejectWithValue(error instanceof Error ? error.message : 'An unknown error occurred');
+    }
+  }
+);
 
 export const checkUser = createAsyncThunk('auth/check', () => fetchCheckUser());
 
@@ -35,6 +47,7 @@ const authSlice = createSlice({
         state.auth = action.payload;
       })
       .addCase(signIn.rejected, (state, action) => {
+        console.error('SignIn failed:', action.error.message); // Логирование ошибки
         state.error = action.error.message;
       })
       .addCase(checkUser.fulfilled, (state, action) => {
@@ -54,4 +67,3 @@ const authSlice = createSlice({
 
 export const { clearError } = authSlice.actions;
 export default authSlice.reducer;
-//////
