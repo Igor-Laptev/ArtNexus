@@ -5,6 +5,7 @@ const generateTokens = require('../../utils/authUtils');
 const cookieConfig = require('../../middleware/cookiesConfig');
 const jwtConfig = require('../../middleware/configJWT');
 
+
 router.post('/registration', async (req, res) => {
   try {
     const { name, email, avatar, password, rpassword } = req.body;

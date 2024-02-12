@@ -3,8 +3,9 @@ const express = require('express');
 
 const app = express();
 const path = require('path');
-const cookieParser = require('cookie-parser');
-app.use(express.static(path.join(__dirname, '..', 'public')));
+ const cookieParser = require('cookie-parser');
+app.use(express.static(path.join(__dirname, './public')));
+
 const mainRouter = require('./routes/main.routes');
 const { verifyAccessToken } = require('./middleware/verifyJWT');
 

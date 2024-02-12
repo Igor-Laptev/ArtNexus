@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
 
+import { Link } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
 import { Transition } from 'react-transition-group';
 import { CSSTransition } from 'react-transition-group';
 
@@ -9,11 +9,12 @@ import './styles.css';
 import './tooltipStyles.css';
 import { current } from '@reduxjs/toolkit';
 // import { useAppDispatch } from '../../redux/store';
-
+// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
 function PostPage({ post }: { post: Post }): JSX.Element {
   // const dispatch = useAppDispatch();
 
-  // const formattedDate = new Date(post.createdAt);
+
+  //  const formattedDate = new Date(post.createdAt);
   // const dateString = formattedDate.toLocaleDateString('ru-RU', {
   //   day: '2-digit',
   //   month: '2-digit',
@@ -25,7 +26,7 @@ function PostPage({ post }: { post: Post }): JSX.Element {
   // });
 
   const firstArt = post.Gallery.Arts[0].src;
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+
   const [showToolTip, setShowToolTip] = useState(false);
   const onMouseEnterHandler = () => {
     setShowToolTip(true);
@@ -35,43 +36,47 @@ function PostPage({ post }: { post: Post }): JSX.Element {
     setShowToolTip(false);
   };
   return (
-    <div
-      className="post-container"
-      onMouseEnter={onMouseEnterHandler}
-      onMouseLeave={onMouseLeaveHandler}
-    >
-      <div className="post-content item-box">
-        {showToolTip && (
-          <div
-            className="tooltip"
-            style={{
-              backgroundImage: `url(${firstArt})`,
-              backgroundRepeat: 'no-repeat',
-              backgroundSize: 'contain',
-              backgroundSize: 'cover',
-              width: '100%',
-              height: '100%',
-            }}
-          >
-            <div className="post-text">{post.title}</div>
-            <div className="post-text">{post.description}</div>
-          </div>
-        )}
-        {!showToolTip && (
-          <div
-            className="cover"
-            style={{
-              backgroundImage: `url(${firstArt})`,
-              backgroundRepeat: 'no-repeat',
-              backgroundSize: 'contain',
-              backgroundSize: 'cover',
-              width: '100%',
-              height: '100%',
-            }}
-          ></div>
-        )}
+    <Link to={`posts/${post.id}`}>
+      <div
+        className="post-container"
+        onMouseEnter={onMouseEnterHandler}
+        onMouseLeave={onMouseLeaveHandler}
+      >
+        <div className="post-content item-box">
+          {showToolTip && (
+            <div
+              className="tooltip"
+              style={{
+                backgroundImage: `url(${firstArt})`,
+                backgroundRepeat: 'no-repeat',
+                backgroundSize: 'contain',
+                backgroundSize: 'cover',
+                width: '100%',
+                height: '100%',
+              }}
+            >
+              <div className="post-text">{post.title}</div>
+              <div className="post-text">{post.description}</div>
+            </div>
+          )}
+          {!showToolTip && (
+            <div
+              className="cover"
+              style={{
+                backgroundImage: `url(${firstArt})`,
+                backgroundRepeat: 'no-repeat',
+                backgroundSize: 'contain',
+                backgroundSize: 'cover',
+                width: '100%',
+                height: '100%',
+              }}
+            ></div>
+          )}
+        </div>
       </div>
-    </div>
+
+    </Link>
+
   );
 }
 
