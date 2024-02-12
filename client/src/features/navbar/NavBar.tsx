@@ -1,9 +1,18 @@
 import React from 'react';
 import './navbar.css';
 
-import { NavLink, Outlet } from 'react-router-dom';
+import { NavLink, Outlet, useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../../redux/store';
+import { logOut } from '../auth/authSlice';
 
 function NavBar(): JSX.Element {
+  const user = useSelector((store: RootState) => store.auth.auth);
+  console.log('user:', user);
+
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
   return (
     <>
       <nav className="navbar">
@@ -21,6 +30,7 @@ function NavBar(): JSX.Element {
               Профиль
             </NavLink>
           </div>
+          <li>Hello, {user?.name}!</li>
           <div className="right-buttons">
             <NavLink className="nav__link" to="/sign-up">
               Зарегистрироваться
@@ -28,9 +38,17 @@ function NavBar(): JSX.Element {
             <NavLink className="nav__link" to="/sign-in">
               Войти
             </NavLink>
-            <NavLink className="nav__link" to="/">
-              Выйти
-            </NavLink>
+            <li
+              onClick={() => {
+                dispatch(logOut()).catch(console.log);
+                navigate('/');
+              }}
+              className="nav__item"
+            >
+              <NavLink className="nav__link" to="/logout">
+                Выйти
+              </NavLink>
+            </li>
           </div>
         </div>
       </nav>

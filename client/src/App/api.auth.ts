@@ -54,9 +54,12 @@ export const fetchSignIn = async (user: UserSignIn): Promise<User> => {
 
 export const fetchCheckUser = async (): Promise<User> => {
   const res = await fetch('api/auth/check');
+  console.log('res:', res.json());
+
   const data: { user: User } = (await res.json()) as {
     user: User;
   };
+  console.log('data:', data);
   return data.user;
 };
 

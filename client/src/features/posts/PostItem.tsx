@@ -1,3 +1,4 @@
+
 import { Link } from 'react-router-dom';
 import React, { useEffect, useState } from 'react';
 import { Transition } from 'react-transition-group';
@@ -11,6 +12,7 @@ import { current } from '@reduxjs/toolkit';
 // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
 function PostPage({ post }: { post: Post }): JSX.Element {
   // const dispatch = useAppDispatch();
+
 
   //  const formattedDate = new Date(post.createdAt);
   // const dateString = formattedDate.toLocaleDateString('ru-RU', {
@@ -72,7 +74,9 @@ function PostPage({ post }: { post: Post }): JSX.Element {
           )}
         </div>
       </div>
+
     </Link>
+
   );
 }
 
