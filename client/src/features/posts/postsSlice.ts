@@ -61,14 +61,13 @@ const postsSlice = createSlice({
       })
       .addCase(moderatePost.fulfilled, (state, action) => {
         console.log(state);
-        
+
         if (action.payload.message === 'success') {
           state.posts = state.posts.map(
             (post) => post.id === action.payload.id && { ...post, isModerated: true },
           );
         }
         console.log(state.posts);
-        
       })
       .addCase(moderatePost.rejected, (state, action) => {
         state.error = action.error.message;

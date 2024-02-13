@@ -1,14 +1,11 @@
 import { Link } from 'react-router-dom';
-import React, { useEffect, useState } from 'react';
-import { Transition } from 'react-transition-group';
-import { CSSTransition } from 'react-transition-group';
-
+import { useSelector } from 'react-redux';
+import React, { useState } from 'react';
 import type { Post } from './types';
 import './styles.css';
 import './tooltipStyles.css';
 import { moderatePost, removePost } from './postsSlice';
-import { RootState, useAppDispatch } from '../../redux/store';
-import { useSelector } from 'react-redux';
+import { type RootState, useAppDispatch } from '../../redux/store';
 // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
 function PostItem({ post }: { post: Post }): JSX.Element {
   // const dispatch = useAppDispatch();

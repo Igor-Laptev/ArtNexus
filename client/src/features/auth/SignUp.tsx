@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import Button from 'react-bootstrap/Button';
-import Modal from 'react-bootstrap/Modal';
+// import 'bootstrap/dist/css/bootstrap.min.css';
+// import Button from 'react-bootstrap/Button';
+// import Modal from 'react-bootstrap/Modal';
 
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
