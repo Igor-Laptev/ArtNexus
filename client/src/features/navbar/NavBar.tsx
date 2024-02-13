@@ -1,16 +1,19 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './navbar.css';
-
 import { Link, NavLink, Outlet, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import type{ RootState } from '../../redux/store';
 import { logOut } from '../auth/authSlice';
+import SignUp from '../auth/SignUp';
 
 function NavBar(): JSX.Element {
   const user = useSelector((store: RootState) => store.auth.auth);
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
+  const [showReg, setShowReg] = useState(false);
+  const [showLog, setShowLog] = useState(false);
 
   return (
     <>
@@ -33,9 +36,11 @@ function NavBar(): JSX.Element {
             <nav>
               {!user ? (
                 <>
-                  <NavLink className="nav__link" to="/sign-up">
+                  <button onClick={() => setShowReg(true)} className="nav__link">
+                    {' '}
+                    {showReg && <SignUp />}
                     Зарегистрироваться
-                  </NavLink>
+                  </button>
                   <NavLink className="nav__link" to="/sign-in">
                     Войти
                   </NavLink>
@@ -57,6 +62,7 @@ function NavBar(): JSX.Element {
                         dispatch(logOut()).catch(console.log);
                         navigate('/');
                       }}
+
                       className="nav__link"
                       to="/"
                     >

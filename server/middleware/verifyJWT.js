@@ -39,6 +39,7 @@ function verifyAccessToken(req, res, next) {
     // проверяем по секретному слову доступ к access и достаем usera
     const user = jwt.verify(access, 'A');
     // дополняем объект ответа userом
+    console.log('user:', user);
     res.locals.user = user;
     next();
   } catch (error) {
