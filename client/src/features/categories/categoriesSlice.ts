@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import fetchLoadCategories from '../../App/api.categories';
+import fetchLoadCategories from '../../App/api/api.categories';
 import type { CategoriesState } from './types';
 
 const initialState: CategoriesState = {
