@@ -14,6 +14,7 @@ import { loadPosts } from '../features/posts/postsSlice';
 import OnePostPage from '../features/posts/OnePostPage';
 import { checkUser } from '../features/auth/authSlice';
 import ModeratorPage from '../features/admin/ModeratorPage';
+import UserPage from '../features/users/UserPage';
 
 function App(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -34,6 +35,7 @@ function App(): JSX.Element {
           {/* <Route path="/:postId" element={<PostPage />} /> */}
           <Route path="/favorites" element={<LikePage />} />
           <Route path="/posts/:postId" element={<OnePostPage />} />
+          <Route path="/users/:userId" element={<UserPage />} />
         </Route>
       </Routes>
     </div>

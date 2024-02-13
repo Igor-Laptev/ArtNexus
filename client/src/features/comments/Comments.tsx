@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { useAppDispatch } from '../../redux/store';
 import type { Post } from '../posts/types';
 import CommentEl from './CommentEl';
@@ -12,9 +13,9 @@ function Comments({ post }: { post: Post }): JSX.Element {
       <div className="postInfo">
         <div className="user">
           <div>
-            <img src={post.User.avatar} alt="" style={{ width: '50px' }} />
+          <Link to={`/users/${post.User.id}`}><img src={post.User.avatar} alt="" style={{ width: '50px' }} /></Link>
           </div>
-          <p style={{ color: 'white' }}>{post.User.name}</p>
+          <Link to={`/users/${post.User.id}`}><p style={{ color: 'white' }}>{post.User.name}</p></Link>
         </div>
         <div className="info">
           <div >

@@ -1,9 +1,9 @@
 import React from 'react';
 import './navbar.css';
 
-import { NavLink, Outlet, useNavigate } from 'react-router-dom';
+import { Link, NavLink, Outlet, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../../redux/store';
+import type{ RootState } from '../../redux/store';
 import { logOut } from '../auth/authSlice';
 
 function NavBar(): JSX.Element {
@@ -34,7 +34,7 @@ function NavBar(): JSX.Element {
               Профиль
             </NavLink>
           </div>
-          <li style={{ color: 'white' }}>Hello, {user?.name}!</li>
+          <li style={{ color: 'white' }}>Hello, <Link to={`/users/${user?.id}`}>{user?.name}</Link>!</li>
           <div className="right-buttons">
             <NavLink className="nav__link" to="/sign-up">
               Зарегистрироваться
