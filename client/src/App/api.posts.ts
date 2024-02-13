@@ -8,12 +8,11 @@ export const fetchLoadPosts = async (): Promise<Post[]> => {
     posts: Post[];
     message: string;
   };
-  console.log(data.posts);
 
   return data.posts;
 };
 
-export const fetchAddPost = async (formData:FormData): Promise<Post> => {
+export const fetchAddPost = async (formData: FormData): Promise<Post> => {
   const res = await fetch('/api/posts', {
     method: 'POST',
     body: formData,
@@ -36,4 +35,17 @@ export const fetchPostRemove = async (id: PostId): Promise<PostId> => {
   return data.postId;
 };
 
+export const fetchModeratePost = async (
+  id: PostId,
+): Promise<{ message: string; id: PostId; post: Post }> => {
+  const res = await fetch(`/api/posts/${id}`, {
+    method: 'PUT',
+  });
+  const data: { id: PostId; post: Post; message: string } = (await res.json()) as {
+    id: PostId;
+    post: Post;
+    message: string;
+  };
 
+  return data.post;
+};

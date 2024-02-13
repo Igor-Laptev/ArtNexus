@@ -4,12 +4,10 @@ import { User, UserSignIn, UserSignUp } from '../features/auth/type';
 
 export const fetchCheckUser = async (): Promise<User> => {
   const res = await fetch('api/auth/check');
-  console.log(res);
 
   const data: { user: User } = (await res.json()) as {
     user: User;
   };
-  console.log('data:', data);
   return data.user;
 };
 
@@ -54,7 +52,6 @@ export const fetchSignIn = async (user: UserSignIn): Promise<User> => {
       throw new Error('No user data returned from the server');
     }
 
-    console.log('data:', data.user);
     return data.user;
   } catch (error) {
     console.error('Error during sign in:', error);

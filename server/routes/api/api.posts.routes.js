@@ -28,7 +28,11 @@ router.get('/', async (req, res) => {
     const posts = await Post.findAll({
       include: [
         { model: User },
-        { model: Comment },
+        {
+          model: Comment,
+          include: [{ model: User }],
+          order: [['createdAt', 'DESC']],
+        },
         { model: Like },
         { model: Category },
         { model: Gallery, include: [{ model: Art }] },
@@ -48,7 +52,7 @@ router.get('/:id', async (req, res) => {
     const post = await Post.findByPk(id, {
       include: [
         { model: User },
-        { model: Comment },
+        { model: Comment, include: [{ model: User }] },
         { model: Like },
         { model: Category },
         { model: Gallery, include: [{ model: Art }] },
@@ -115,13 +119,13 @@ router.post('/', upload.array('files'), async (req, res) => {
 
 // МОДЕРАЦИЯ ПОСТА (isModerated)
 
-router.put('/:id/moderate', async (req, res) => {
+router.put('/:id', async (req, res) => {
   try {
     const { id } = req.params;
-    const { isModerated } = req.body;
-    const changed = await Post.update({ isModerated }, { where: { id } });
+    const changed = await Post.update({ isModerated: true }, { where: { id } });
+    const post = await Post.findOne({ where: { id } });
     if (changed > 0) {
-      res.status(200).json({ message: 'success' });
+      res.status(200).json({ message: 'success', id, post });
     } else {
       res.status(500).json({ message: 'произошла ошибка при изменении' });
     }

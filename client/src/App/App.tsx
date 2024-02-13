@@ -13,6 +13,8 @@ import { loadCategories } from '../features/categories/categoriesSlice';
 import { loadPosts } from '../features/posts/postsSlice';
 import OnePostPage from '../features/posts/OnePostPage';
 import { checkUser } from '../features/auth/authSlice';
+import ModeratorPage from '../features/admin/ModeratorPage';
+import UserPage from '../features/users/UserPage';
 
 function App(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -20,22 +22,20 @@ function App(): JSX.Element {
     dispatch(checkUser()).catch(console.log);
     dispatch(loadPosts()).catch(console.log);
     dispatch(loadCategories()).catch(console.log);
-    dispatch(checkUser()).catch(console.log);
   }, []);
-  const user = useSelector((store: RootState) => store.auth.auth);
-  console.log(user);
 
   return (
     <div className="App">
       <Routes>
         <Route path="/" element={<NavBar />}>
           <Route index element={<MainPage />} />
-
+          <Route path="/moderator" element={<ModeratorPage />} />
           <Route path="/sign-up" element={<SignUp />} />
           <Route path="/sign-in" element={<SignIn />} />
           {/* <Route path="/:postId" element={<PostPage />} /> */}
           <Route path="/favorites" element={<LikePage />} />
           <Route path="/posts/:postId" element={<OnePostPage />} />
+          <Route path="/users/:userId" element={<UserPage />} />
         </Route>
       </Routes>
     </div>

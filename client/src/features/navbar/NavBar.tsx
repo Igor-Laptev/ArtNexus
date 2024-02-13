@@ -1,16 +1,13 @@
 import React, { useState } from 'react';
 import './navbar.css';
-
-
-import { NavLink, Outlet, useNavigate } from 'react-router-dom';
+import { Link, NavLink, Outlet, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../../redux/store';
+import type{ RootState } from '../../redux/store';
 import { logOut } from '../auth/authSlice';
 import SignUp from '../auth/SignUp';
 
 function NavBar(): JSX.Element {
   const user = useSelector((store: RootState) => store.auth.auth);
-  console.log('user:', user);
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -24,7 +21,9 @@ function NavBar(): JSX.Element {
         <div className="links">
           <div className="left-buttons">
             <li className="nav__item">
-              <NavLink className="nav__link" to="/"></NavLink>
+              <NavLink className="nav__link" to="/moderator">
+                Модерация
+              </NavLink>
             </li>
             <li className="nav__item">
               <NavLink className="nav__link" to="/">
@@ -32,7 +31,7 @@ function NavBar(): JSX.Element {
               </NavLink>
             </li>
           </div>
-
+          <li style={{ color: 'white' }}>Hello, <Link to={`/users/${user?.id}`}>{user?.name}</Link>!</li>
           <div className="right-buttons">
             <nav>
               {!user ? (
@@ -57,14 +56,16 @@ function NavBar(): JSX.Element {
                     <NavLink className="nav__link" to="/">
                       Профиль
                     </NavLink>
-                    <li
+                    <li className="nav__item"></li>
+                    <NavLink
                       onClick={() => {
                         dispatch(logOut()).catch(console.log);
                         navigate('/');
                       }}
-                      className="nav__item"
-                    ></li>
-                    <NavLink className="nav__link" to="/">
+
+                      className="nav__link"
+                      to="/"
+                    >
                       Выйти
                     </NavLink>
                   </>

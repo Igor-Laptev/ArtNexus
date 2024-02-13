@@ -3,8 +3,6 @@ import type { Category } from './types';
 import './styles.css';
 
 function CategoryEl({ category }: { category: Category }): JSX.Element {
-  console.log(category);
-
   return (
     <div className="category">
       {category.title}

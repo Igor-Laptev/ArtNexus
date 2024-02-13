@@ -8,7 +8,7 @@ function verifyRefreshToken(req, res, next) {
     // достаем refresh токен
     const { refresh } = req.cookies;
     // проверяем refresh token по секретному слову
-    const user = jwt.verify(refresh, process.env.REFRESH_TOKEN_SECRET);
+    const user = jwt.verify(refresh, 'R');
     // генерируем новую пару токенов
     const { accessToken, refreshToken } = generateTokens({
       user: { id: user.id, email: user.email, name: user.name },
@@ -37,7 +37,7 @@ function verifyAccessToken(req, res, next) {
     // достаем access куку из запроса
     const { access } = req.cookies;
     // проверяем по секретному слову доступ к access и достаем usera
-    const user = jwt.verify(access, process.env.ACCESS_TOKEN_SECRET);
+    const user = jwt.verify(access, 'A');
     // дополняем объект ответа userом
     console.log('user:', user);
     res.locals.user = user;

@@ -6,12 +6,12 @@ import PostItem from './PostItem';
 
 function PostsList(): JSX.Element {
   const posts = useSelector((store: RootState) => store.posts.posts);
-
+  const Moderated = posts.filter((post) => post.isModerated === true);
   return (
     <>
       <h2>Все публикации</h2>
       <div className="all-post-container">
-        {posts.map((post) => (
+        {Moderated.map((post) => (
           <PostItem key={post.id} post={post} />
         ))}
       </div>
