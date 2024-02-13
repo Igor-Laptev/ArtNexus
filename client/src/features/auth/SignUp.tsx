@@ -1,121 +1,147 @@
 import React, { useState } from 'react';
-// import 'bootstrap/dist/css/bootstrap.min.css';
-// import Button from 'react-bootstrap/Button';
-// import Modal from 'react-bootstrap/Modal';
+import ReactModal from 'react-modal';
+
+import './auth.css';
 
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { type RootState, useAppDispatch } from '../../redux/store';
+import { RootState, useAppDispatch } from '../../redux/store';
 import { clearError, signUp } from './authSlice';
 
-function SignUp(): JSX.Element {
+function SignUp({
+  handleModalReg,
+  handleModalLog,
+  show,
+}: {
+  show: boolean;
+  handleModalReg: (value: boolean) => void;
+  handleModalLog: (value: boolean) => void;
+}): JSX.Element {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [avatar, setAvatar] = useState('');
-  const [password, setPasssword] = useState('');
-  const [rpassword, setRpasssword] = useState('');
+  const [password, setPassword] = useState('');
+  const [rpassword, setRpassword] = useState('');
 
   const error = useSelector((store: RootState) => store.auth.error);
 
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
-  const [show, setShow] = useState(false);
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
-
   return (
-    <div>
-      <Button variant="primary" onClick={handleShow}>
-        Registration
-      </Button>
-
-      <Modal show={show} onHide={handleClose} backdrop="static" keyboard={false}>
-        <Modal.Header closeButton>
-          <Modal.Title>Modal title</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-        <form
-        onSubmit={(e) => {
-          e.preventDefault();
-          dispatch(
-            signUp({
-              name,
-              email,
-              avatar,
-              password,
-              rpassword,
-              isAdmin: false,
-            }),
-          ).catch(console.log);
-          navigate('/sign-in');
-        }}
-      >
-        <input
-          value={name}
-          placeholder="Enter your name"
-          required
-          autoComplete="off"
-          pattern="\S(.*\S)?"
-          type="text"
-          onChange={(e) => {
-            setName(e.target.value);
-            dispatch(clearError());
-          }}
-        />
-        <input
-          value={email}
-          placeholder="Enter email"
-          type="email"
-          required
-          onChange={(e) => {
-            setEmail(e.target.value);
-          }}
-        />
-        <input
-          value={avatar}
-          placeholder="Your Avatar"
-          type="text"
-          required
-          onChange={(e) => {
-            setAvatar(e.target.value);
-          }}
-        />
-        <input
-          value={password}
-          placeholder="Enter password"
-          required
-          autoComplete="off"
-          type="password"
-          onChange={(e) => {
-            setPasssword(e.target.value);
-          }}
-        />
-        <input
-          value={rpassword}
-          placeholder="Enter password"
-          required
-          autoComplete="off"
-          type="password"
-          onChange={(e) => {
-            setRpasssword(e.target.value);
-          }}
-        />
-        <button type="submit">Registration</button>
-      </form>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
-            Close
-          </Button>
-          <Button variant="primary">Understood</Button>
-        </Modal.Footer>
-      </Modal>
-
-      <h1>Registration</h1>
+    <ReactModal
+      isOpen={show}
+      onRequestClose={() => handleModalReg(false)}
+      contentLabel="Sign Up Modal"
+    >
+      <div className="modal-dialog">
+        <div className="modal-content">
+          <div className="modal-body">
+            <form
+              onSubmit={(e) => {
+                e.preventDefault();
+                dispatch(
+                  signUp({
+                    name,
+                    email,
+                    avatar,
+                    password,
+                    rpassword,
+                    isAdmin: false,
+                  }),
+                )
+                  .then(() => {
+                    handleModalReg(false); // Закрыть модальное окно регистрации
+                    handleModalLog(true);
+                    navigate('/sign-in'); // Открыть модальное окно авторизации
+                  })
+                  .catch(console.log),
+                  navigate('/sign-in');
+              }}
+            >
+              <div className="form-group">
+                <input
+                  className="form-control"
+                  value={name}
+                  placeholder="Enter your name"
+                  required
+                  autoComplete="off"
+                  pattern="\S(.*\S)?"
+                  type="text"
+                  onChange={(e) => {
+                    setName(e.target.value);
+                    dispatch(clearError());
+                  }}
+                />
+              </div>
+              <div className="form-group">
+                <input
+                  className="form-control"
+                  value={email}
+                  placeholder="Enter email"
+                  type="email"
+                  required
+                  onChange={(e) => {
+                    setEmail(e.target.value);
+                  }}
+                />
+              </div>
+              <div className="form-group">
+                <input
+                  className="form-control"
+                  value={avatar}
+                  placeholder="Your Avatar"
+                  type="text"
+                  required
+                  onChange={(e) => {
+                    setAvatar(e.target.value);
+                  }}
+                />
+              </div>
+              <div className="form-group">
+                <input
+                  className="form-control"
+                  value={password}
+                  placeholder="Enter password"
+                  required
+                  autoComplete="off"
+                  type="password"
+                  onChange={(e) => {
+                    setPassword(e.target.value);
+                  }}
+                />
+              </div>
+              <div className="form-group">
+                <input
+                  className="form-control"
+                  value={rpassword}
+                  placeholder="Repeat password"
+                  required
+                  autoComplete="off"
+                  type="password"
+                  onChange={(e) => {
+                    setRpassword(e.target.value);
+                  }}
+                />
+              </div>
+              <button type="submit" className="btn btn-success">
+                Register
+              </button>
+            </form>
+          </div>
+          <div className="modal-footer">
+            <button
+              type="button"
+              className="btn btn-secondary"
+              onClick={() => handleModalReg(false)}
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      </div>
       {error && <h1 style={{ color: 'red', textTransform: 'uppercase' }}>{error}</h1>}
-     
-    </div>
+    </ReactModal>
   );
 }
 
