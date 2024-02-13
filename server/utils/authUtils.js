@@ -20,10 +20,10 @@ const generateTokens = ({ user }) => {
   // }
 
   return {
-    accessToken: jwt.sign(payload, 'A', {
+    accessToken: jwt.sign(payload, process.env.ACCESS_TOKEN_SECRET, {
       expiresIn: jwtConfig.access.expiresIn,
     }),
-    refreshToken: jwt.sign(payload, 'R', {
+    refreshToken: jwt.sign(payload, process.env.REFRESH_TOKEN_SECRET, {
       expiresIn: jwtConfig.refresh.expiresIn,
     }),
   };

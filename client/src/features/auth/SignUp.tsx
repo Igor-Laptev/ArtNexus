@@ -1,4 +1,8 @@
 import React, { useState } from 'react';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import Button from 'react-bootstrap/Button';
+import Modal from 'react-bootstrap/Modal';
+
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { type RootState, useAppDispatch } from '../../redux/store';
@@ -16,11 +20,22 @@ function SignUp(): JSX.Element {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
   return (
     <div>
-      <h1>Registration</h1>
-      {error && <h1 style={{ color: 'red', textTransform: 'uppercase' }}>{error}</h1>}
-      <form
+      <Button variant="primary" onClick={handleShow}>
+        Registration
+      </Button>
+
+      <Modal show={show} onHide={handleClose} backdrop="static" keyboard={false}>
+        <Modal.Header closeButton>
+          <Modal.Title>Modal title</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+        <form
         onSubmit={(e) => {
           e.preventDefault();
           dispatch(
@@ -88,6 +103,18 @@ function SignUp(): JSX.Element {
         />
         <button type="submit">Registration</button>
       </form>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}>
+            Close
+          </Button>
+          <Button variant="primary">Understood</Button>
+        </Modal.Footer>
+      </Modal>
+
+      <h1>Registration</h1>
+      {error && <h1 style={{ color: 'red', textTransform: 'uppercase' }}>{error}</h1>}
+     
     </div>
   );
 }
