@@ -33,9 +33,11 @@ module.exports = {
       },
       isModerated: {
         type: Sequelize.BOOLEAN,
+        defaultValue: false,
       },
       isAdult: {
         type: Sequelize.BOOLEAN,
+        defaultValue: false,
       },
       createdAt: {
         allowNull: false,

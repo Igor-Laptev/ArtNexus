@@ -1,6 +1,6 @@
 // fetch-запросы
 
-import { User, UserSignIn, UserSignUp } from '../features/auth/type';
+import type { User, UserSignIn, UserSignUp } from '../../features/auth/type';
 
 export const fetchCheckUser = async (): Promise<User> => {
   const res = await fetch('api/auth/check');
@@ -45,7 +45,10 @@ export const fetchSignIn = async (user: UserSignIn): Promise<User> => {
       throw new Error(`Server responded with ${res.status}: ${res.statusText}`);
     }
 
-    const data: { message: string; user: User } = await res.json();
+    const data: { message: string; user: User } = (await res.json()) as {
+      message: string;
+      user: User;
+    };
 
     // Дополнительная проверка на наличие пользователя в ответе
     if (!data || !data.user) {

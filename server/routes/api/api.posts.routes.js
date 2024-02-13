@@ -82,7 +82,7 @@ router.delete('/:id', async (req, res) => {
 
 router.post('/', upload.array('files'), async (req, res) => {
   try {
-    const user_id = 1;
+    const user_id = res.locals.user.id;
     const { description, title, category_id } = req.body;
     const newPost = await Post.create({
       user_id,

@@ -5,9 +5,9 @@ import {
   fetchLoadPosts,
   fetchModeratePost,
   fetchPostRemove,
-} from '../../App/api.posts';
+} from '../../App/api/api.posts';
 import type { PostId, PostWithoutId, Post } from './types';
-import fetchCreateComment from '../../App/api.comment';
+import fetchCreateComment from '../../App/api/api.comment';
 
 const initialState: PostsState = {
   posts: [],
@@ -24,6 +24,7 @@ export const addPost = createAsyncThunk('posts/add', (formData: FormData) =>
 export const removePost = createAsyncThunk('posts/remove', (postId: PostId) =>
   fetchPostRemove(postId),
 );
+
 
 export const addComment = createAsyncThunk(
   'comment/add',
@@ -64,7 +65,7 @@ const postsSlice = createSlice({
 
         if (action.payload.message === 'success') {
           state.posts = state.posts.map(
-            (post) => post.id === action.payload.id && { ...post, isModerated: true },
+            (post) => post.id === +action.payload.id ? { ...post, isModerated: true } : post,
           );
         }
         console.log(state.posts);
