@@ -51,14 +51,15 @@ function NavBar(): JSX.Element {
                     <NavLink className="nav__link" to="/">
                       Профиль
                     </NavLink>
-                    <li
+                    <li className="nav__item"></li>
+                    <NavLink
                       onClick={() => {
                         dispatch(logOut()).catch(console.log);
                         navigate('/');
                       }}
-                      className="nav__item"
-                    ></li>
-                    <NavLink className="nav__link" to="/logout">
+                      className="nav__link"
+                      to="/"
+                    >
                       Выйти
                     </NavLink>
                   </>
