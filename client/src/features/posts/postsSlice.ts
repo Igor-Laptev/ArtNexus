@@ -1,6 +1,11 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import type { PostsState } from '../../redux/reducers/types';
-import { fetchAddPost, fetchLoadPosts, fetchPostRemove } from '../../App/api.posts';
+import {
+  fetchAddPost,
+  fetchLoadPosts,
+  fetchModeratePost,
+  fetchPostRemove,
+} from '../../App/api.posts';
 import type { PostId, PostWithoutId, Post } from './types';
 import fetchCreateComment from '../../App/api.comment';
 
@@ -12,12 +17,23 @@ const initialState: PostsState = {
 
 export const loadPosts = createAsyncThunk('posts/load', () => fetchLoadPosts());
 
-export const addPost = createAsyncThunk('posts/add', (formData:FormData) => fetchAddPost(formData));
+export const addPost = createAsyncThunk('posts/add', (formData: FormData) =>
+  fetchAddPost(formData),
+);
 
 export const removePost = createAsyncThunk('posts/remove', (postId: PostId) =>
-  fetchPostRemove(postId));
+  fetchPostRemove(postId),
+);
 
-  export const addComment = createAsyncThunk('comment/add', async ({ text, post_id }: { text: string, post_id: PostId }) => fetchCreateComment({text,post_id}))
+export const addComment = createAsyncThunk(
+  'comment/add',
+  async ({ text, post_id }: { text: string; post_id: PostId }) =>
+    fetchCreateComment({ text, post_id }),
+);
+
+export const moderatePost = createAsyncThunk('posts/moderate', (postId: PostId) =>
+  fetchModeratePost(postId),
+);
 
 const postsSlice = createSlice({
   name: 'posts',
@@ -43,10 +59,24 @@ const postsSlice = createSlice({
       .addCase(removePost.rejected, (state, action) => {
         state.error = action.error.message;
       })
-
-
+      .addCase(moderatePost.fulfilled, (state, action) => {
+        console.log(state);
+        
+        if (action.payload.message === 'success') {
+          state.posts = state.posts.map(
+            (post) => post.id === action.payload.id && { ...post, isModerated: true },
+          );
+        }
+        console.log(state.posts);
+        
+      })
+      .addCase(moderatePost.rejected, (state, action) => {
+        state.error = action.error.message;
+      })
       .addCase(addComment.fulfilled, (state, action) => {
-        state.posts.find(post=>post.id===action.payload.post_id).Comments.push(action.payload)
+        state.posts
+          .find((post) => post.id === action.payload.post_id)
+          .Comments.push(action.payload);
       })
       .addCase(addComment.rejected, (state, action) => {
         state.error = action.error.message;

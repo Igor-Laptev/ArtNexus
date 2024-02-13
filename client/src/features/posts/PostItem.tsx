@@ -6,7 +6,7 @@ import { CSSTransition } from 'react-transition-group';
 import type { Post } from './types';
 import './styles.css';
 import './tooltipStyles.css';
-import { removePost } from './postsSlice';
+import { moderatePost, removePost } from './postsSlice';
 import { RootState, useAppDispatch } from '../../redux/store';
 import { useSelector } from 'react-redux';
 // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
@@ -79,10 +79,10 @@ function PostItem({ post }: { post: Post }): JSX.Element {
       </Link>
       {user && user.isAdmin && (
         <>
-          <button onClick={() => dispatch(removePost(post.id))} type="button">
+          <button onClick={() => dispatch(removePost(post.id)).catch(console.log)} type="button">
             удалить
           </button>
-          <button onClick={() => dispatch(updatePost(post.id))} type="button">
+          <button onClick={() => dispatch(moderatePost(post.id)).catch(console.log)} type="button">
             Ok
           </button>
         </>

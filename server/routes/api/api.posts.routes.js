@@ -119,15 +119,13 @@ router.post('/', upload.array('files'), async (req, res) => {
 
 // МОДЕРАЦИЯ ПОСТА (isModerated)
 
-router.put('/moderate', async (req, res) => {
+router.put('/:id', async (req, res) => {
   try {
-    const { id } = req.body;
-    const changed = await Post.update(
-      { isModerated: true },
-      { where: { id: id } }
-    );
+    const { id } = req.params;
+    const changed = await Post.update({ isModerated: true }, { where: { id } });
+    const post = await Post.findOne({ where: { id } });
     if (changed > 0) {
-      res.status(200).json({ message: 'success' });
+      res.status(200).json({ message: 'success', id, post });
     } else {
       res.status(500).json({ message: 'произошла ошибка при изменении' });
     }

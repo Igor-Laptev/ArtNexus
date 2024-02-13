@@ -6,6 +6,10 @@
     font-family: 'inter';
     src: url('../../../public/Inter-Bold.ttf');
 }
+.navbar {
+    position: absolute;
+    margin-top: 20px;
+}
 .links {
     display: flex;
     width: 100%;
