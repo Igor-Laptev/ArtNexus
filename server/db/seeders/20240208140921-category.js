@@ -7,24 +7,24 @@ module.exports = {
       [
         {
           title: '3D',
-          img: '/img/668479.jpg',
+          img: '/categories/3d.jpg',
           createdAt: new Date(),
           updatedAt: new Date(),
         },
         {
           title: 'Abstract',
-          img: 'https://cdnb.artstation.com/p/assets/images/images/072/383/801/large/artist-archana-mishra-mathematics-01.jpg?1707239823',
+          img: '/categories/abstraction.jpeg',
           createdAt: new Date(),
           updatedAt: new Date(),
         },
         {
           title: 'Automotive',
-          img: 'https://cdna.artstation.com/p/assets/images/images/072/428/248/large/wiktor-urbanczyk-01.jpg?1707331277',
+          img: '/categories/auto.jpg',
           createdAt: new Date(),
           updatedAt: new Date(),
         },
       ],
-      {}
+      {},
     );
   },
 

@@ -1,12 +1,10 @@
 import React, { useState } from 'react';
 import ReactModal from 'react-modal';
-
 import './auth.css';
-
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { RootState, useAppDispatch } from '../../redux/store';
-import { clearError, signIn } from './authSlice';
+import { type RootState, useAppDispatch } from '../../redux/store';
+import { signIn } from './authSlice';
 
 function SignIn({
   handleModalLog,

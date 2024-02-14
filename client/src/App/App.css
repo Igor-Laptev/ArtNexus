@@ -16,6 +16,22 @@ body {
 .author {
     display: flex;
 }
+
+
+
+.access {
+   position: absolute;
+    margin: 20px;
+ padding: 20px;
+    flex-direction: column;
+background-color: aliceblue;
+z-index: 3;
+}
+
+
 .postInfo {
     display: flex;
 }
+.adminisration {
+    display: flex;
+flex-direction: column;}

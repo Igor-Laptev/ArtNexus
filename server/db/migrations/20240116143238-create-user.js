@@ -25,7 +25,7 @@ module.exports = {
       avatar: {
         type: Sequelize.TEXT,
         defaultValue:
-          'https://w7.pngwing.com/pngs/841/727/png-transparent-computer-icons-user-profile-synonyms-and-antonyms-android-android-computer-wallpaper-monochrome-sphere.png',
+          '/avatars/user.png',
       },
       isAdmin: {
         type: Sequelize.BOOLEAN,

@@ -39,9 +39,11 @@ export const fetchSignIn = async (user: UserSignIn): Promise<User> => {
       body: JSON.stringify(user),
     });
 
+
     if (!res) {
       throw new Error(`Server responded with ${res.status}: ${res.statusText}`);
     }
+
 
     const data: { message: string; user: User } = (await res.json()) as {
       message: string;

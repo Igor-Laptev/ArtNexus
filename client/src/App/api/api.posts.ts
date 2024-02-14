@@ -1,6 +1,6 @@
 // fetch-запросы
 /* eslint-disable import/prefer-default-export */
-import type { Post, PostId, PostWithoutId } from '../../features/posts/types';
+import type { Post, PostId } from '../../features/posts/types';
 
 export const fetchLoadPosts = async (): Promise<Post[]> => {
   const res = await fetch('/api/posts');
