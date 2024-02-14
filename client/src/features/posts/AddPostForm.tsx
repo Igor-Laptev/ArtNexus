@@ -3,27 +3,25 @@ import { useSelector } from 'react-redux';
 import { useAppDispatch, type RootState } from '../../redux/store';
 import { addPost } from './postsSlice';
 
-
-
 function AddPostForm(): JSX.Element {
   const categories = useSelector((store: RootState) => store.categories.categories);
-const dispatch = useAppDispatch();
+  const dispatch = useAppDispatch();
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [category, setCategory] = useState('');
   const [img, setImg] = useState<FileList | null>(null);
 
-  const categoryId = (categories.map((cat) => cat.title).indexOf(category) + 1);
+  const categoryId = categories.map((cat) => cat.title).indexOf(category) + 1;
 
-  function handleSubmit (e: React.FormEvent) : void {
+  function handleSubmit(e: React.FormEvent): void {
     e.preventDefault();
-if(!title || !description || !category || !img) return;
+    if (!title || !description || !category || !img) return;
     const formData = new FormData();
     formData.append('title', title);
     formData.append('description', description);
     formData.append('category_id', categoryId);
     if (img) {
-      for (let i = 0; i < img.length; i+=1) {
+      for (let i = 0; i < img.length; i += 1) {
         formData.append('files', img[i]);
       }
     }
@@ -32,14 +30,14 @@ if(!title || !description || !category || !img) return;
     setDescription('');
     setCategory('');
     setImg(null);
-
-  };
+  }
 
   return (
     <div>
-      <form onSubmit={handleSubmit}>
+      <form className="add-form" onSubmit={handleSubmit}>
         <label htmlFor="title">Title</label>
         <input
+          className="form-control"
           type="text"
           id="title"
           value={title}
@@ -48,6 +46,7 @@ if(!title || !description || !category || !img) return;
         />
         <label htmlFor="description">Description</label>
         <input
+          className="form-control"
           type="text"
           id="description"
           value={description}
@@ -56,6 +55,7 @@ if(!title || !description || !category || !img) return;
         />
         <label htmlFor="category">Category</label>
         <input
+          className="form-control"
           type="text"
           list="categories"
           id="category"
@@ -69,13 +69,11 @@ if(!title || !description || !category || !img) return;
           ))}
         </datalist>
         <label htmlFor="src">img</label>
-        <input multiple type="file" id="src" name="src" onChange={(e) => setImg(e.target.files)} />
-        <button type="submit">Submit</button>
+        <input className='modal-button' multiple type="file" id="src" name="src" onChange={(e) => setImg(e.target.files)} />
+        <button className='modal-button' type="submit">Submit</button>
       </form>
     </div>
   );
 }
 
-
 export default AddPostForm;
-

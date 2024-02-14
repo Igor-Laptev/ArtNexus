@@ -32,6 +32,8 @@ function SignUp({
     <ReactModal
       style={{
         overlay: {
+          position: 'absolute',
+          zIndex: 1000,
           backgroundColor: 'rgba(54, 54, 54, 0.679)',
         },
       }}
@@ -43,7 +45,6 @@ function SignUp({
       <div className="modal-dialog animate__animated animate__fadeInDownBig">
         <div className="modal-content">
           <div className="modal-body">
-            
             <form
               className="modal-form"
               onSubmit={(e) => {
@@ -61,10 +62,10 @@ function SignUp({
                   .then(() => {
                     handleModalReg(false); // Закрыть модальное окно регистрации
                     handleModalLog(true);
-                    navigate('/sign-in'); // Открыть модальное окно авторизации
+                    navigate('/'); // Открыть модальное окно авторизации
                   })
                   .catch(console.log),
-                  navigate('/sign-in');
+                  navigate('/');
               }}
             >
               <div className="form-group">

@@ -1,21 +1,21 @@
 body {
-    background-color: black;
-    font-family: 'inter', sans-serif;
+  background-color: black;
+  font-family: 'inter', sans-serif;
 }
 @font-face {
-    font-family: 'inter';
-    src: url('../../../public/Inter-Bold.ttf');
+  font-family: 'inter';
+  src: url('../../../public/Inter-Bold.ttf');
 }
 .App {
-    display: flex;
-    flex-direction: column;
-   
-    /* font-family: 'inter'; */
-    
+  display: flex;
+  flex-direction: column;
+  width: 1900px;
+  height: auto;
+  /* font-family: 'inter'; */
 }
 .author {
-    display: flex;
+  display: flex;
 }
 .postInfo {
-    display: flex;
+  display: flex;
 }
