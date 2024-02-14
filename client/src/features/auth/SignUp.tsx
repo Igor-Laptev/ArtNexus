@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
 import ReactModal from 'react-modal';
+
+import 'animate.css';
+
 import './auth.css';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
@@ -28,14 +31,22 @@ function SignUp({
 
   return (
     <ReactModal
+      style={{
+        overlay: {
+          backgroundColor: 'rgba(54, 54, 54, 0.679)',
+        },
+      }}
+      className="modalback"
       isOpen={show}
       onRequestClose={() => handleModalReg(false)}
       contentLabel="Sign Up Modal"
     >
-      <div className="modal-dialog">
+      <div className="modal-dialog animate__animated animate__fadeInDownBig">
         <div className="modal-content">
           <div className="modal-body">
+            
             <form
+              className="modal-form"
               onSubmit={(e) => {
                 e.preventDefault();
                 dispatch(
@@ -122,20 +133,19 @@ function SignUp({
                   }}
                 />
               </div>
-              <button type="submit" className="btn btn-success">
+              <button type="submit" className="btn btn-success modal-button ">
                 Register
+              </button>
+              <button
+                type="button"
+                className="btn btn-secondary modal-button "
+                onClick={() => handleModalReg(false)}
+              >
+                Close
               </button>
             </form>
           </div>
-          <div className="modal-footer">
-            <button
-              type="button"
-              className="btn btn-secondary"
-              onClick={() => handleModalReg(false)}
-            >
-              Close
-            </button>
-          </div>
+          <div className="modal-footer animate__animated animate__heartBeat "></div>
         </div>
       </div>
       {error && <h1 style={{ color: 'red', textTransform: 'uppercase' }}>{error}</h1>}

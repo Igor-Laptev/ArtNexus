@@ -10,7 +10,7 @@ function MainPage(): JSX.Element {
         <div className="themes-container"></div>
         <div className="categories-container"></div> */}
       <div className="posts-container">
-        <h1>Main Page</h1>
+        <h1></h1>
         <Categories />
 
         {/* <AddPostForm/> */}

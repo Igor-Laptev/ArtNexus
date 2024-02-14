@@ -11,6 +11,7 @@ import OnePostPage from '../features/posts/OnePostPage';
 import { checkUser } from '../features/auth/authSlice';
 import ModeratorPage from '../features/admin/ModeratorPage';
 import UserPage from '../features/users/UserPage';
+import ReactModal from 'react-modal';
 
 function App(): JSX.Element {
   const dispatch = useAppDispatch();
