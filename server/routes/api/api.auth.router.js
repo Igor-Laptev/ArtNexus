@@ -5,6 +5,19 @@ const generateTokens = require('../../utils/authUtils');
 const cookieConfig = require('../../middleware/cookiesConfig');
 const jwtConfig = require('../../middleware/configJWT');
 
+
+const multer = require('multer');
+
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, 'public/avatars');
+  },
+  filename: function (req, file, cb) {
+    cb(null, file.originalname);
+  },
+});
+const upload = multer({ storage });
+
 router.post('/registration', async (req, res) => {
   try {
     const { name, email, avatar, password, rpassword } = req.body;
@@ -87,7 +100,7 @@ router.post('/login', async (req, res) => {
 });
 
 router.get('/check', async (req, res) => {
-  console.log('res.locals.user:', res.locals.user);
+  // console.log('res.locals.user:', res.locals.user);
   if (res.locals.user) {
     const user = await User.findOne({ where: { id: res.locals.user.id } });
     res.json({ user });
@@ -100,5 +113,27 @@ router.get('/logout', (req, res) => {
   res.clearCookie(jwtConfig.access.type).clearCookie(jwtConfig.refresh.type);
   res.json({ message: 'success' });
 });
+
+
+router.put('/avatar', upload.array('avatar'), async (req, res) => {
+  try {
+    const id = res.locals.user.id;
+    console.log('id:', id);
+    const avatar = req.files[0];
+    console.log(avatar.originalname);
+    const changed = await User.update({ avatar: `/avatars/${avatar.originalname}` }, { where: { id } });
+    console.log(`/avatars/${avatar.originalname}`);
+    if (changed > 0) {
+      res.status(200).json({ id, avatar: `/avatars/${avatar.originalname}` });
+    } else {
+      res.status(500).json({ message: 'произошла ошибка при изменении' });
+    }
+  } catch (error) {
+    res.status(500).json({ message: 'произошла ошибка при изменении' });
+  }
+});
+
+
+
 
 module.exports = router;

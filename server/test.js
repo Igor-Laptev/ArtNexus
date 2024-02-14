@@ -17,4 +17,4 @@ let arr = [1, 2, 3, 4];
 
 let obj2 = { ...obj };
 
-console.log(obj2);
+// console.log(obj2);

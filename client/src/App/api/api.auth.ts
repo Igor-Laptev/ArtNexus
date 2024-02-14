@@ -1,6 +1,7 @@
 // fetch-запросы
 
 import type { User, UserSignIn, UserSignUp } from '../../features/auth/type';
+import type{ UserId } from '../../features/users/types';
 
 export const fetchCheckUser = async (): Promise<User> => {
   const res = await fetch('api/auth/check');
@@ -68,3 +69,14 @@ export const fetchLogOut = async (): Promise<void> => {
     throw new Error(data.message);
   }
 };
+
+
+export const fetchLoadAvatar =async(formData: FormData):Promise<{avatar:string;id:UserId;}> =>{
+
+  const res = await fetch('/api/auth/avatar', {
+    method: 'PUT',
+    body: formData,
+  })
+  const data:{avatar:string;id:UserId;} = (await res.json()) as {avatar:string; id:UserId;}
+  return data
+}

@@ -34,3 +34,23 @@ z-index: 3;
 .adminisration {
     display: flex;
 flex-direction: column;}
+
+
+.addPostForm {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    z-index: 5;
+    left:40%;
+    background-color: aliceblue;
+    padding: 20px;
+  align-items:center;
+  justify-content: center;
+  }
+  .avatarAddForm{
+    position: absolute;
+    z-index: 4;
+    left:40%;
+    background-color: aliceblue;
+    padding: 20px;
+  }
