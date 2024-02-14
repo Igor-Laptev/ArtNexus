@@ -6,17 +6,26 @@ import PostItem from '../posts/PostItem';
 function LikePage(): JSX.Element {
   const posts = useSelector((store: RootState) => store.posts.posts);
   const user = useSelector((store: RootState) => store.auth.auth);
-  console.log(user);
-  console.log(posts);
+  console.log('user в системе', user);
+  // console.log(posts);
 
-  const likedPosts = posts.filter(
-    (post) => post.Likes.length > 0 && post.Likes.map((like) => user && user.id === like.user_id),
+  // const likedPosts = posts.filter(
+  //   (post) =>
+  //     post.Likes.length > 0 && post.Likes.filter((like) => user && user.id === like.user_id),
+  // );
+
+  const likedPosts = posts && posts.filter((post) => post.Likes.length);
+
+  const userLikedPosts = likedPosts.filter((post) =>
+    post.Likes.some((like) => like.user_id === user?.id),
   );
-  console.log(likedPosts);
+
+  // const l = posts.filter((post) => )
+  console.log('liked posts', userLikedPosts);
 
   return (
     <div>
-      {likedPosts.map((post) => (
+      {userLikedPosts.map((post) => (
         <PostItem key={post.id} post={post} />
       ))}
     </div>
