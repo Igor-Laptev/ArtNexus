@@ -6,6 +6,9 @@ import './styles.css';
 
 
 function MainPage(): JSX.Element {
+
+
+
   return (
     <>
       {/* <div className="main-container">
@@ -15,7 +18,7 @@ function MainPage(): JSX.Element {
         <h1>Main Page</h1>
         <Categories />
 
-      <AddPostForm/>
+      {/* <AddPostForm/> */}
 
         <PostsList />
 

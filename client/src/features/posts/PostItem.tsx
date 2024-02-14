@@ -26,11 +26,11 @@ function PostItem({ post }: { post: Post }): JSX.Element {
   const user = useSelector((store: RootState) => store.auth.auth);
   const dispatch = useAppDispatch();
   const [showToolTip, setShowToolTip] = useState(false);
-  const onMouseEnterHandler = () => {
+  const onMouseEnterHandler = (): void => {
     setShowToolTip(true);
   };
 
-  const onMouseLeaveHandler = () => {
+  const onMouseLeaveHandler = (): void => {
     setShowToolTip(false);
   };
   return (
@@ -78,14 +78,18 @@ function PostItem({ post }: { post: Post }): JSX.Element {
         Нравится
       </button>
       {user && user.isAdmin && (
-        <>
-          <button onClick={() => dispatch(removePost(post.id)).catch(console.log)} type="button">
-            удалить
+        <div className="adminisration">
+         
+          <button onClick={() => dispatch(moderatePost(post.id)).catch(console.log)} type="button">
+            post✅
           </button>
           <button onClick={() => dispatch(moderatePost(post.id)).catch(console.log)} type="button">
-            Ok
+            18+🔞
+          </button> 
+          <button onClick={() => dispatch(removePost(post.id)).catch(console.log)} type="button">
+            REMOVE❌
           </button>
-        </>
+        </div>
       )}
     </>
   );

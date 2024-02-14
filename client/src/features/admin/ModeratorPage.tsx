@@ -9,8 +9,20 @@ function ModeratorPage(): JSX.Element {
 
   return (
     <div>
-      {notModerated.map((post) => (
-        <PostItem key={post.id} post={post} />
+      {posts.map((post) => (
+       <><PostItem key={post.id} post={post} /> {user && user.isAdmin && (
+        <div className="adminisration">
+          <button onClick={() => dispatch(removePost(post.id)).catch(console.log)} type="button">
+            удалить
+          </button>
+          <button onClick={() => dispatch(moderatePost(post.id)).catch(console.log)} type="button">
+            post
+          </button>
+          <button onClick={() => dispatch(moderatePost(post.id)).catch(console.log)} type="button">
+            18+
+          </button>
+        </div>
+      )}</> 
       ))}
     </div>
   );

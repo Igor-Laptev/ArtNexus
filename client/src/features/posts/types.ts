@@ -18,6 +18,8 @@ export type Post = {
   User: User
 };
 export type PostId = Post['id'];
+export type PostIsAdult = Post['isAdult'];
+export type PostIsModerated = Post['isModerated'];
 
 export type PostWithoutId = Omit<Post, 'id'>;
 

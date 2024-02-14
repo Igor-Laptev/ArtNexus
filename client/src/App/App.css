@@ -19,3 +19,6 @@ body {
 .postInfo {
     display: flex;
 }
+.adminisration {
+    display: flex;
+flex-direction: column;}
