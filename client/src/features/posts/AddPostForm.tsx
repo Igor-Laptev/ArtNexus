@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import { useAppDispatch, type RootState } from '../../redux/store';
 import { addPost } from './postsSlice';
 
-function AddPostForm( {setAddpost}:{setAddpost: (access: boolean) => void }): JSX.Element {
+function AddPostForm({ setAddpost }: { setAddpost: (access: boolean) => void }): JSX.Element {
   const categories = useSelector((store: RootState) => store.categories.categories);
   const dispatch = useAppDispatch();
   const [title, setTitle] = useState('');
@@ -33,62 +33,73 @@ function AddPostForm( {setAddpost}:{setAddpost: (access: boolean) => void }): JS
   }
 
   return (
-
     <div className="addPostForm">
+      <div>
+        {' '}
+        <button onClick={() => setAddpost(false)} type="button">
+          ✖
+        </button>
+      </div>
 
-<div> <button onClick={() => setAddpost(false)} type='button'>✖</button></div>
-     
+      <div>
+        <form className="add-form" onSubmit={handleSubmit}>
+          <div>
+            <label htmlFor="title">Title</label>
 
+            <input
+              className="form-control"
+              type="text"
+              id="title"
+              value={title}
+              placeholder="Title"
+              onChange={(e) => setTitle(e.target.value)}
+            />
+          </div>
 
+          <div>
+            <input
+              className="form-control"
+              type="text"
+              id="description"
+              value={description}
+              placeholder="Description"
+              onChange={(e) => setDescription(e.target.value)}
+            />
+          </div>
 
-    <div>
-      <form className="add-form" onSubmit={handleSubmit}>
-        <label htmlFor="title">Title</label>
+          <div>
+            <input
+              className="form-control"
+              type="text"
+              list="categories"
+              id="category"
+              name="category"
+              placeholder="Category"
+              onChange={(e) => setCategory(e.target.value)}
+            />
+          </div>
 
-        <input
-          className="form-control"
-          type="text"
-          id="title"
-          value={title}
-          placeholder="Title"
-          onChange={(e) => setTitle(e.target.value)}
-        /></div>
-       
-
-<div> 
-        <input
-          className="form-control"
-          type="text"
-          id="description"
-          value={description}
-          placeholder="Description"
-          onChange={(e) => setDescription(e.target.value)}
-        /></div>
-       
-
-<div> 
-        <input
-          className="form-control"
-          type="text"
-          list="categories"
-          id="category"
-          name="category"
-          placeholder="Category"
-          onChange={(e) => setCategory(e.target.value)}
-        /></div>
-       
-
-<div><datalist id="categories">
-          {categories.map((category) => (
-            <option key={category.id} value={category.title} />
-          ))}
-
-        </datalist>
-        <label htmlFor="src">img</label>
-        <input className='modal-button' multiple type="file" id="src" name="src" onChange={(e) => setImg(e.target.files)} />
-        <button className='modal-button' type="submit">Submit</button>
-      </form>
-
+          <div>
+            <datalist id="categories">
+              {categories.map((category) => (
+                <option key={category.id} value={category.title} />
+              ))}
+            </datalist>
+          </div>
+          <label htmlFor="src">img</label>
+          <input
+            className="modal-button"
+            multiple
+            type="file"
+            id="src"
+            name="src"
+            onChange={(e) => setImg(e.target.files)}
+          />
+          <button className="modal-button" type="submit">
+            Submit
+          </button>
+        </form>
+      </div>
     </div>
   );
 }
