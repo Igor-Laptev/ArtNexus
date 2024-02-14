@@ -65,10 +65,10 @@ function NavBar(): JSX.Element {
                 user && (
                   <>
                     <li>Hello, {user?.name}!</li>
-                    <NavLink className="nav__link" to="/">
+                    <NavLink className="nav__link" to="/likes">
                       Избранное
                     </NavLink>
-                    <NavLink className="nav__link" to="/">
+                    <NavLink className="nav__link" to={`/users/${user?.id}`}>
                       Профиль
                     </NavLink>
                     <NavLink
@@ -90,8 +90,9 @@ function NavBar(): JSX.Element {
       </nav>
       <Outlet />
 
-      {showReg && <SignUp show={showReg} handleModalReg={handleModalReg} handleModalLog={handleModalLog} />
-}
+      {showReg && (
+        <SignUp show={showReg} handleModalReg={handleModalReg} handleModalLog={handleModalLog} />
+      )}
       {showLog && <SignIn show={showLog} handleModalLog={handleModalLog} />}
     </>
   );

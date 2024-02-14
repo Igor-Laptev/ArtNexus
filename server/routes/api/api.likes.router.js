@@ -3,11 +3,13 @@ const { Like } = require('../../db/models');
 
 router.post('/', async (req, res) => {
   try {
-    const { id } = req.params;
+    const { postId } = req.body;
+    console.log(postId);
     const like = await Like.create({
       user_id: res.locals.user.id,
-      post_id: id,
+      post_id: postId,
     });
+    res.json(like);
   } catch ({ message }) {
     res.json({ message: 'unable to like' });
   }

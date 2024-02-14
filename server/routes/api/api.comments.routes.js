@@ -12,7 +12,7 @@ const {
 //  ДОБАВЛЕНИЕ КОММЕНТАРИЯ
 
 router.post('/', async (req, res) => {
-  const user_id = 1
+  const user_id = res.locals.user.id;
   const { text, post_id } = req.body;
   console.log(text, post_id);
   const newComment = await Comment.create({ user_id, text, post_id });
