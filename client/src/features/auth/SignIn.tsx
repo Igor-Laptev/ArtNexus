@@ -6,7 +6,7 @@ import './auth.css';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { RootState, useAppDispatch } from '../../redux/store';
-import { clearError, signIn } from './authSlice';
+
 
 function SignIn({
   handleModalLog,

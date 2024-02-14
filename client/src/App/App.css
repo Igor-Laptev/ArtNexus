@@ -9,9 +9,8 @@ body {
 .App {
   display: flex;
   flex-direction: column;
-  width: 1900px;
+
   height: auto;
-  /* font-family: 'inter'; */
 }
 .author {
   display: flex;
