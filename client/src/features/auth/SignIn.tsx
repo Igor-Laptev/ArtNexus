@@ -3,8 +3,10 @@ import ReactModal from 'react-modal';
 import './auth.css';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+
 import { type RootState, useAppDispatch } from '../../redux/store';
 import { signIn } from './authSlice';
+
 
 function SignIn({
   handleModalLog,
@@ -23,14 +25,24 @@ function SignIn({
 
   return (
     <ReactModal
+      style={{
+        overlay: {
+          backgroundColor: 'rgba(54, 54, 54, 0.679)',
+        },
+      }}
+      className="modalback"
       isOpen={show}
       onRequestClose={() => handleModalLog(false)}
       contentLabel="Sign In Modal"
     >
-      <div className="modal-dialog">
+      <div className="modal-dialog animate__animated animate__fadeInDownBig">
         <div className="modal-content">
           <div className="modal-body">
+
+            {error && <h1 style={{ color: 'red', textTransform: 'uppercase' }}>{error}</h1>}
+
             <form
+              className="modal-form"
               onSubmit={(e) => {
                 e.preventDefault();
                 dispatch(
@@ -40,8 +52,15 @@ function SignIn({
                   }),
                 )
                   .then(() => {
-                    handleModalLog(false); // Закрыть модальное окно авторизации
-                    navigate('/'); // Перенаправление на главную страницу
+                    if (error) {
+                      handleModalLog(true);
+
+                      navigate('/');
+
+                    } else {
+                      handleModalLog(false);
+                      navigate('/');
+                    }
                   })
                   .catch(console.log);
               }}
@@ -71,23 +90,22 @@ function SignIn({
                   }}
                 />
               </div>
-              <button type="submit" className="btn btn-success">
+              <button type="submit" className="btn btn-success modal-button">
                 Sign In
+              </button>
+              <button
+                type="button"
+                className="btn btn-secondary modal-button"
+                onClick={() => handleModalLog(false)}
+
+              >
+                Close
               </button>
             </form>
           </div>
-          <div className="modal-footer">
-            <button
-              type="button"
-              className="btn btn-secondary"
-              onClick={() => handleModalLog(false)}
-            >
-              Close
-            </button>
-          </div>
+          <div className="modal-footer"></div>
         </div>
       </div>
-      {error && <h1 style={{ color: 'red', textTransform: 'uppercase' }}>{error}</h1>}
     </ReactModal>
   );
 }

@@ -5,6 +5,7 @@ const generateTokens = require('../../utils/authUtils');
 const cookieConfig = require('../../middleware/cookiesConfig');
 const jwtConfig = require('../../middleware/configJWT');
 
+
 const multer = require('multer');
 
 const storage = multer.diskStorage({
@@ -61,6 +62,7 @@ router.post('/login', async (req, res) => {
       // console.log('user:', user);
       if (user) {
         const validate = await bcrypt.compare(password, user.password);
+        // await bcrypt.compare(password, user.password);
         // console.log('validate:', validate);
 
         if (validate) {

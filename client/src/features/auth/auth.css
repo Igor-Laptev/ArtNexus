@@ -1,103 +1,197 @@
 /* SignUpStyles.css */
-.button-primary {
-  color: #fff;
-  background-color: #007bff;
-  border-color: #007bff;
-  padding: 0.375rem 0.75rem;
-  border-radius: 0.25rem;
-  font-size: 1rem;
-  line-height: 1.5;
-  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-}
-
-.button-primary:hover {
-  background-color: #0069d9;
-  border-color: #0062cc;
-}
-
+@import url('https://fonts.googleapis.com/css?family=Raleway');
+.button-primary,
 .button-secondary {
-  color: #fff;
-  background-color: #6c757d;
-  border-color: #6c757d;
-  padding: 0.375rem 0.75rem;
-  border-radius: 0.25rem;
-  font-size: 1rem;
-  line-height: 1.5;
-  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  position: relative;
+  overflow: hidden; /* Для отображения анимированных фонов */
+  z-index: 1;
 }
 
-.button-secondary:hover {
-  background-color: #5a6268;
-  border-color: #545b62;
-}
-
-.modal {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background-color: #fff;
-  padding: 20px;
-  border-radius: 0.3rem;
-  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.5);
-  width: 90%;
-  max-width: 500px;
-  z-index: 1050;
-  display: none; /* You need to toggle this in your React component */
-}
-
-.modal-header,
-.modal-footer {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.modal-title {
-  margin: 0;
-  line-height: 1.5;
-}
-
-.modal-body {
-  margin-top: 1rem;
-  margin-bottom: 1rem;
-}
-
-.input-text {
-  width: 100%;
-  padding: 0.375rem 0.75rem;
-  margin-bottom: 1rem;
-  border: 1px solid #ced4da;
-  border-radius: 0.25rem;
-  font-size: 1rem;
-}
-
-.show {
-  display: block;
-}
-
-@keyframes fadeInDown {
-  from {
-    opacity: 0;
-    transform: translateY(-10%);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.modal-show {
-  display: flex;
-  position: fixed;
-  z-index: 1050;
+.button-primary::after,
+.button-secondary::after {
+  content: '';
+  position: absolute;
   left: 0;
   top: 0;
   width: 100%;
   height: 100%;
-  align-items: center;
-  justify-content: center;
-  background-color: rgba(0,0,0,0.5);
-  animation: fadeInDown 0.5s ease-out;
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  border-radius: 0.25rem; /* Соответствует border-radius кнопки */
 }
 
+.button-primary::after {
+  background: linear-gradient(to right, #0056b3, #0069d9); /* Градиент для primary */
+}
+
+.button-secondary::after {
+  background: linear-gradient(to right, #545b62, #5a6268); /* Градиент для secondary */
+}
+
+.button-primary:hover::after,
+.button-secondary:hover::after {
+  opacity: 1;
+}
+
+/* Теперь стили для анимации наведения изменены, чтобы показывать анимированный фон */
+.button-primary:hover {
+  color: #fff; /* Убедитесь, что текст остается видимым */
+  background-color: transparent;
+  border-color: #007bff; /* Сохраняем цвет границы */
+}
+
+.button-secondary:hover {
+  color: #fff; /* Убедитесь, что текст остается видимым */
+  background-color: transparent; /* Показать анимированный фон */
+  border-color: #6c757d; /* Сохраняем цвет границы */
+}
+
+button {
+  font-family: 'Raleway', serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.modalback {
+  background-color: rgba(54, 54, 54, 0.679);
+
+  /* z-index: 1100 !important; */
+}
+
+.modal-dialog {
+  position: absolute;
+  top: 25%;
+  left: 35%;
+  max-width: 640px;
+  background-color: #202024;
+  /* padding: 20px; */
+  border-radius: 16px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  /* display: flex; */
+  /* flex-direction: column; */
+  /* transform: translate(-50%, -50%); */
+}
+
+.modal-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: #e6e6ea;
+  width: 600px;
+  height: 430px;
+  padding: 20px;
+  border-radius: 16px;
+}
+
+.modal-header {
+  margin-bottom: 20px;
+}
+
+.modal-footer {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+/* .modal-button {
+  padding: 0.375rem 0.75rem;
+  margin: 10px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 0.25rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  color: #fff;
+  background: linear-gradient(45deg, #504bff, #4cfa63);
+  outline: none;
+} */
+
+.modal-button {
+  font-weight: 400;
+  text-align: center;
+  vertical-align: middle;
+  user-select: none;
+  border: 1px solid transparent;
+  padding: 0.375rem 0.75rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  border-radius: 0.25rem;
+  transition:
+    color 0.15s ease-in-out,
+    background-color 0.15s ease-in-out,
+    border-color 0.15s ease-in-out,
+    box-shadow 0.15s ease-in-out;
+}
+
+.modal-button:hover {
+  box-shadow:
+    0 0 10px #504bff,
+    0 0 15px #4cfa63;
+  background: linear-gradient(45deg, #4cfa63, #504bff);
+}
+.modal-form {
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* Стили для элементов формы */
+.form-control {
+  background-color: #fff; /* Фоновый цвет */
+  border: 1px solid #ced4da; /* Граница */
+  border-radius: 0.25rem; /* Скругление углов */
+  font-size: 1rem; /* Размер шрифта */
+  line-height: 1.5; /* Высота строки */
+  padding: 0.375rem 0.75rem; /* Внутренние отступы */
+  color: #495057; /* Цвет текста */
+  transition:
+    border-color 0.15s ease-in-out,
+    box-shadow 0.15s ease-in-out; /* Плавность перехода */
+
+  width: 100%;
+  box-shadow: none; /* Убираем тень */
+}
+
+/* Стиль для элементов формы при фокусе */
+.form-control:focus {
+  border-color: #80bdff; /* Цвет границы при фокусе */
+  outline: 0; /* Убираем стандартный outline */
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25); /* Тень вокруг элемента */
+}
+
+/* Стилизация кнопок внутри модального окна */
+
+/* Стиль для кнопки "Регистрация" */
+.btn-success {
+  color: #fff;
+  background-color: #28a745;
+  border-color: #28a745;
+}
+
+.btn-success:hover {
+  color: #fff;
+  background-color: #218838;
+  border-color: #1e7e34;
+}
+
+/* Стиль для кнопки "Закрыть" */
+.btn-secondary {
+  color: #fff;
+  background-color: #6c757d;
+  border-color: #6c757d;
+}
+
+.btn-secondary:hover {
+  color: #fff;
+  background-color: #5a6268;
+  border-color: #545b62;
+}
+
+.animate__animated.animate__heartBeat {
+  --animate-duration: 2s;
+}

@@ -38,11 +38,9 @@ export const fetchSignIn = async (user: UserSignIn): Promise<User> => {
       method: 'POST',
       headers: { 'content-type': 'application/json' },
       body: JSON.stringify(user),
-      // credentials: 'include', // Добавляем для отправки и приема кук
     });
 
     // if (!res) {
-    //   // Проверка успешности HTTP-запроса
     //   throw new Error(`Server responded with ${res.status}: ${res.statusText}`);
     // }
 
@@ -51,7 +49,6 @@ export const fetchSignIn = async (user: UserSignIn): Promise<User> => {
       user: User;
     };
 
-    // Дополнительная проверка на наличие пользователя в ответе
     if (!data || !data.user) {
       throw new Error('No user data returned from the server');
     }
@@ -59,7 +56,7 @@ export const fetchSignIn = async (user: UserSignIn): Promise<User> => {
     return data.user;
   } catch (error) {
     console.error('Error during sign in:', error);
-    throw error; // Переброс ошибки для дальнейшей обработки
+    throw error;
   }
 };
 

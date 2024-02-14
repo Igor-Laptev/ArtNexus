@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import './navbar.css';
 import { Link, NavLink, Outlet, useNavigate } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import type { RootState } from '../../redux/store';
+import { useSelector } from 'react-redux';
+import { useAppDispatch, type RootState } from '../../redux/store';
 import { logOut } from '../auth/authSlice';
 import SignUp from '../auth/SignUp';
 import { setEquel } from '../posts/postsSlice';
@@ -12,7 +12,7 @@ function NavBar(): JSX.Element {
   const user = useSelector((store: RootState) => store.auth.auth);
 
   const navigate = useNavigate();
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const [showReg, setShowReg] = useState(false);
   const [showLog, setShowLog] = useState(false);
@@ -30,11 +30,14 @@ function NavBar(): JSX.Element {
       <nav className="navbar">
         <div className="links">
           <div className="left-buttons">
-            <li className="nav__item">
-              <NavLink className="nav__link" to="/moderator">
-                Модерация
-              </NavLink>
-            </li>
+            {user && user.isAdmin && (
+              <li className="nav__item">
+                <NavLink className="nav__link" to="/moderator">
+                  Модерация
+                </NavLink>
+              </li>
+            )}
+
             <li className="nav__item">
               <NavLink className="nav__link" to="/" onClick={() => dispatch(setEquel())}>
                 Explore

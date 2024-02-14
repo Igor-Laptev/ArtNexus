@@ -33,14 +33,20 @@ function AddPostForm( {setAddpost}:{setAddpost: (access: boolean) => void }): JS
   }
 
   return (
+
     <div className="addPostForm">
 
 <div> <button onClick={() => setAddpost(false)} type='button'>✖</button></div>
      
-<div><form onSubmit={handleSubmit}>
 
-<div> 
+
+
+    <div>
+      <form className="add-form" onSubmit={handleSubmit}>
+        <label htmlFor="title">Title</label>
+
         <input
+          className="form-control"
           type="text"
           id="title"
           value={title}
@@ -51,6 +57,7 @@ function AddPostForm( {setAddpost}:{setAddpost: (access: boolean) => void }): JS
 
 <div> 
         <input
+          className="form-control"
           type="text"
           id="description"
           value={description}
@@ -61,6 +68,7 @@ function AddPostForm( {setAddpost}:{setAddpost: (access: boolean) => void }): JS
 
 <div> 
         <input
+          className="form-control"
           type="text"
           list="categories"
           id="category"
@@ -74,19 +82,13 @@ function AddPostForm( {setAddpost}:{setAddpost: (access: boolean) => void }): JS
           {categories.map((category) => (
             <option key={category.id} value={category.title} />
           ))}
-        </datalist></div>
-        
 
+        </datalist>
+        <label htmlFor="src">img</label>
+        <input className='modal-button' multiple type="file" id="src" name="src" onChange={(e) => setImg(e.target.files)} />
+        <button className='modal-button' type="submit">Submit</button>
+      </form>
 
-        <div>  
-        <input multiple type="file" id="src" name="src" onChange={(e) => setImg(e.target.files)} /></div>
-    
-
-        <div>  <button type="submit">Submit</button></div>
-      
-      </form></div>
-
-      
     </div>
   );
 }

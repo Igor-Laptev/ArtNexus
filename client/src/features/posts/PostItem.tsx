@@ -1,10 +1,12 @@
+/* eslint-disable @typescript-eslint/no-misused-promises */
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import React, { useState } from 'react';
 import type { Post } from './types';
 import './styles.css';
 import './tooltipStyles.css';
-import { likePost, moderatePost, removePost } from './postsSlice';
+import { moderatePost, removePost } from './postsSlice';
 import { type RootState, useAppDispatch } from '../../redux/store';
 import Access from './Access';
 // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
@@ -32,14 +34,13 @@ function PostItem({ post }: { post: Post }): JSX.Element {
   };
   const onMouseLeaveHandler = (): void => {
     setShowToolTip(false);
-};
-    const[access, setAccess] = useState(false)
-   
-  
+  };
+  const [access, setAccess] = useState(false);
+
   return (
     <>
-    {access && <Access setAccess={setAccess}/>}
-       <Link to={!post.isAdult ? `posts/${post.id}` : undefined} onClick={() => setAccess(true)}>
+      {access && <Access setAccess={setAccess} />}
+      <Link to={!post.isAdult ? `posts/${post.id}` : '/'} onClick={() => setAccess(true)}>
         <div
           className="post-container"
           onMouseEnter={onMouseEnterHandler}
@@ -58,24 +59,27 @@ function PostItem({ post }: { post: Post }): JSX.Element {
                   height: '100%',
                 }}
               >
-                <div className="post-text"><p>{post.title}</p></div>
-                <div className="post-text"><p>{post.description}</p></div>
+                <div className="post-text">
+                  <p>{post.title}</p>
+                </div>
+                <div className="post-text">
+                  <p>{post.description}</p>
+                </div>
               </div>
             )}
-           {!showToolTip && (
-  <div
-    className={`cover ${post.isAdult ? 'blur-image' : ''}`}
-    style={{
-      backgroundImage: `url(${firstArt})`,
-      backgroundRepeat: 'no-repeat',
-     //   backgroundSize: 'contain',
-     //   backgroundSize: 'cover',
-      width: '100%',
-      height: '100%',
-    }}
-  />
-)}
-
+            {!showToolTip && (
+              <div
+                className={`cover ${post.isAdult ? 'blur-image' : ''}`}
+                style={{
+                  backgroundImage: `url(${firstArt})`,
+                  backgroundRepeat: 'no-repeat',
+                  //   backgroundSize: 'contain',
+                  //   backgroundSize: 'cover',
+                  width: '100%',
+                  height: '100%',
+                }}
+              />
+            )}
           </div>
         </div>
       </Link>
