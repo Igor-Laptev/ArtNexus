@@ -37,7 +37,7 @@
 /* Теперь стили для анимации наведения изменены, чтобы показывать анимированный фон */
 .button-primary:hover {
   color: #fff; /* Убедитесь, что текст остается видимым */
-  background-color: transparent; /* Показать анимированный фон */
+  background-color: transparent;
   border-color: #007bff; /* Сохраняем цвет границы */
 }
 
@@ -56,7 +56,8 @@ button {
 }
 
 .modalback {
-  background-color: #49505797;
+  background-color: rgba(54, 54, 54, 0.679);
+
   /* z-index: 1100 !important; */
 }
 
@@ -141,7 +142,6 @@ button {
 
 /* Стили для элементов формы */
 .form-control {
-
   background-color: #fff; /* Фоновый цвет */
   border: 1px solid #ced4da; /* Граница */
   border-radius: 0.25rem; /* Скругление углов */
@@ -165,7 +165,6 @@ button {
 }
 
 /* Стилизация кнопок внутри модального окна */
-
 
 /* Стиль для кнопки "Регистрация" */
 .btn-success {
@@ -194,5 +193,5 @@ button {
 }
 
 .animate__animated.animate__heartBeat {
-  --animate-duration: 4s;
+  --animate-duration: 2s;
 }

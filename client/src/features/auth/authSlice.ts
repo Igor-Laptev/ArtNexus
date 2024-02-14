@@ -12,18 +12,17 @@ export const signUp = createAsyncThunk('auth/sign-up', (user: UserSignUp) => fet
 
 export const signIn = createAsyncThunk(
   'api/sign-in',
-  (user: UserSignIn) => fetchSignIn(user),
 
-  // async (user: UserSignIn, { rejectWithValue }) => {
-  //   try {
-  //     const response = await fetchSignIn(user);
-  //     console.log('signIn response:', response); // Логирование успешного ответа
-  //     return response;
-  //   } catch (error) {
-  //     console.error('signIn error:', error); // Логирование ошибки
-  //     return rejectWithValue(error instanceof Error ? error.message : 'An unknown error occurred');
-  //   }
-  // }
+  async (user: UserSignIn, { rejectWithValue }) => {
+    try {
+      const response = await fetchSignIn(user);
+      console.log('signIn response:', response); // Логирование успешного ответа
+      return response;
+    } catch (error) {
+      console.error('signIn error:', error); // Логирование ошибки
+      return rejectWithValue(error instanceof Error ? error.message : 'An unknown error occurred');
+    }
+  },
 );
 
 export const logOut = createAsyncThunk('auth/logout', () => fetchLogOut());
