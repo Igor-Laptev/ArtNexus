@@ -44,7 +44,6 @@ function SignUp({
       <div className="modal-dialog animate__animated animate__fadeInDownBig">
         <div className="modal-content">
           <div className="modal-body">
-            
             <form
               className="modal-form"
               onSubmit={(e) => {

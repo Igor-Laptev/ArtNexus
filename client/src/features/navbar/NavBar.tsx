@@ -30,11 +30,14 @@ function NavBar(): JSX.Element {
       <nav className="navbar">
         <div className="links">
           <div className="left-buttons">
-            <li className="nav__item">
-              <NavLink className="nav__link" to="/moderator">
-                Модерация
-              </NavLink>
-            </li>
+            {user && user.isAdmin && (
+              <li className="nav__item">
+                <NavLink className="nav__link" to="/moderator">
+                  Модерация
+                </NavLink>
+              </li>
+            )}
+
             <li className="nav__item">
               <NavLink className="nav__link" to="/" onClick={() => dispatch(setEquel())}>
                 Explore

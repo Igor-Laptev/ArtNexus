@@ -5,7 +5,6 @@ const generateTokens = require('../../utils/authUtils');
 const cookieConfig = require('../../middleware/cookiesConfig');
 const jwtConfig = require('../../middleware/configJWT');
 
-
 router.post('/registration', async (req, res) => {
   try {
     const { name, email, avatar, password, rpassword } = req.body;
@@ -50,6 +49,7 @@ router.post('/login', async (req, res) => {
       // console.log('user:', user);
       if (user) {
         const validate = await bcrypt.compare(password, user.password);
+        // await bcrypt.compare(password, user.password);
         // console.log('validate:', validate);
 
         if (validate) {
