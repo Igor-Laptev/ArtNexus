@@ -11,7 +11,9 @@ import fetchCreateComment from '../../App/api.comment';
 
 const initialState: PostsState = {
   posts: [],
+  copyPosts: [],
   error: undefined,
+  // categories:undefined
   //   loading: true,
 };
 
@@ -31,49 +33,72 @@ export const addComment = createAsyncThunk(
     fetchCreateComment({ text, post_id }),
 );
 
-export const moderatePost = createAsyncThunk('posts/moderate', (postId: PostId) =>
-  fetchModeratePost(postId),
+export const moderatePost = createAsyncThunk('posts/moderate', (id: PostId) =>
+  fetchModeratePost(id),
 );
+
 
 const postsSlice = createSlice({
   name: 'posts',
   initialState,
-  reducers: {},
+  reducers: {
+    filterPosts: (state, action) => {
+      state.posts=state.copyPosts;
+      state.posts = state.posts.filter((post) => post.category_id === action.payload);
+    },
+filterIsAdult: (state, action) => {
+  state.posts=state.copyPosts;
+  state.posts = state.posts.filter((post) => post.isAdult === action.payload);
+},
+filterToModerate: (state, action) => {
+  state.posts=state.copyPosts;
+  state.posts = state.posts.filter((post) => post.isModerated === action.payload);
+},
+setEquel: (state) => {
+  state.posts=state.copyPosts;
+}
+
+
+  },
   extraReducers: (builder) => {
     builder
       .addCase(loadPosts.fulfilled, (state, action) => {
         state.posts = action.payload;
+        state.copyPosts = action.payload;
       })
       .addCase(loadPosts.rejected, (state, action) => {
         state.error = action.error.message;
       })
       .addCase(addPost.fulfilled, (state, action) => {
         state.posts.push(action.payload);
+        state.copyPosts.push(action.payload);
       })
       .addCase(addPost.rejected, (state, action) => {
         state.error = action.error.message;
       })
       .addCase(removePost.fulfilled, (state, action) => {
         state.posts = state.posts.filter((post) => post.id !== +action.payload);
+        state.copyPosts = state.copyPosts.filter((post) => post.id !== +action.payload);
       })
       .addCase(removePost.rejected, (state, action) => {
         state.error = action.error.message;
       })
       .addCase(moderatePost.fulfilled, (state, action) => {
-        console.log(state);
-
-        if (action.payload.message === 'success') {
-          state.posts = state.posts.map(
-            (post) => post.id === action.payload.id && { ...post, isModerated: true },
-          );
-        }
-        console.log(state.posts);
+        state.posts = state.posts.map((post) =>
+          post.id === action.payload ? { ...post, isModerated: true } : post
+        );
+        state.copyPosts = state.copyPosts.map((post) =>
+          post.id === action.payload ? { ...post, isModerated: true } : post
+        );
       })
       .addCase(moderatePost.rejected, (state, action) => {
         state.error = action.error.message;
       })
       .addCase(addComment.fulfilled, (state, action) => {
         state.posts
+          .find((post) => post.id === action.payload.post_id)
+          .Comments.push(action.payload);
+        state.copyPosts
           .find((post) => post.id === action.payload.post_id)
           .Comments.push(action.payload);
       })
@@ -84,3 +109,4 @@ const postsSlice = createSlice({
 });
 
 export default postsSlice.reducer;
+export const{filterPosts, filterIsAdult, filterToModerate, setEquel} = postsSlice.actions

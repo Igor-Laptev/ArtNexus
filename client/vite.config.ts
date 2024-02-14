@@ -14,6 +14,14 @@ export default defineConfig({
         target: 'http://localhost:4000/',
         changeOrigin: true,
       },
+      '/avatars': {
+        target: 'http://localhost:4000/',
+        changeOrigin: true,
+      },
+      '/categories': {
+        target: 'http://localhost:4000/',
+        changeOrigin: true,
+      },
     },
   },
 });

@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import type{ RootState } from '../../redux/store';
 import { logOut } from '../auth/authSlice';
 import SignUp from '../auth/SignUp';
+import { setEquel } from '../posts/postsSlice';
 
 function NavBar(): JSX.Element {
   const user = useSelector((store: RootState) => store.auth.auth);
@@ -26,7 +27,7 @@ function NavBar(): JSX.Element {
               </NavLink>
             </li>
             <li className="nav__item">
-              <NavLink className="nav__link" to="/">
+              <NavLink className="nav__link" to="/" onClick={(dispatch(setEquel()))}>
                 Explore
               </NavLink>
             </li>

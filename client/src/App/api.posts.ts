@@ -37,15 +37,14 @@ export const fetchPostRemove = async (id: PostId): Promise<PostId> => {
 
 export const fetchModeratePost = async (
   id: PostId,
-): Promise<{ message: string; id: PostId; post: Post }> => {
+): Promise<PostId> => {
   const res = await fetch(`/api/posts/${id}`, {
     method: 'PUT',
   });
-  const data: { id: PostId; post: Post; message: string } = (await res.json()) as {
+  const data: { id: PostId, message: string } = (await res.json()) as {
     id: PostId;
-    post: Post;
     message: string;
   };
 
-  return data.post;
+  return data.id;
 };
