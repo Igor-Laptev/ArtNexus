@@ -8,6 +8,7 @@ import {
 } from '../../App/api/api.posts';
 import type { PostId, PostWithoutId, Post } from './types';
 import fetchCreateComment from '../../App/api/api.comment';
+import { fetchLike } from '../../App/api/api.likes';
 
 const initialState: PostsState = {
   posts: [],
@@ -25,6 +26,7 @@ export const removePost = createAsyncThunk('posts/remove', (postId: PostId) =>
   fetchPostRemove(postId),
 );
 
+export const likePost = createAsyncThunk('posts/like', (postId: PostId) => fetchLike(postId));
 
 export const addComment = createAsyncThunk(
   'comment/add',
@@ -64,8 +66,8 @@ const postsSlice = createSlice({
         console.log(state);
 
         if (action.payload.message === 'success') {
-          state.posts = state.posts.map(
-            (post) => post.id === +action.payload.id ? { ...post, isModerated: true } : post,
+          state.posts = state.posts.map((post) =>
+            post.id === +action.payload.id ? { ...post, isModerated: true } : post,
           );
         }
         console.log(state.posts);
@@ -79,6 +81,16 @@ const postsSlice = createSlice({
           .Comments.push(action.payload);
       })
       .addCase(addComment.rejected, (state, action) => {
+        state.error = action.error.message;
+      })
+      .addCase(likePost.fulfilled, (state, action) => {
+        console.log(action.payload);
+
+        state.posts.map((post) =>
+          post.id === action.payload.post_id ? post.Likes.push(action.payload) : post,
+        );
+      })
+      .addCase(likePost.rejected, (state, action) => {
         state.error = action.error.message;
       });
   },

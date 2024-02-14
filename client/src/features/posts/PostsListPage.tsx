@@ -7,6 +7,8 @@ import PostItem from './PostItem';
 function PostsList(): JSX.Element {
   // const [showThreeD, setShowThreeD] = useState()
   const posts = useSelector((store: RootState) => store.posts.posts);
+  console.log(posts);
+
   const Moderated = posts.filter((post) => post.isModerated === true);
   const threeD = posts.filter((post) => post.category_id === 1);
   return (
