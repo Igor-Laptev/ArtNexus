@@ -43,9 +43,13 @@ module.exports = (sequelize, DataTypes) => {
       },
       isModerated: {
         type: DataTypes.BOOLEAN,
+        allowNull: false,
+        defaultValue: false,
       },
       isAdult: {
         type: DataTypes.BOOLEAN,
+        allowNull: false,
+        defaultValue: false,
       },
       createdAt: {
         allowNull: false,

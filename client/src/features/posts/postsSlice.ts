@@ -5,9 +5,10 @@ import {
   fetchLoadPosts,
   fetchModeratePost,
   fetchPostRemove,
-} from '../../App/api.posts';
+} from '../../App/api/api.posts';
 import type { PostId, PostWithoutId, Post } from './types';
-import fetchCreateComment from '../../App/api.comment';
+import fetchCreateComment from '../../App/api/api.comment';
+import { fetchLike } from '../../App/api/api.likes';
 
 const initialState: PostsState = {
   posts: [],
@@ -26,6 +27,8 @@ export const addPost = createAsyncThunk('posts/add', (formData: FormData) =>
 export const removePost = createAsyncThunk('posts/remove', (postId: PostId) =>
   fetchPostRemove(postId),
 );
+
+export const likePost = createAsyncThunk('posts/like', (postId: PostId) => fetchLike(postId));
 
 export const addComment = createAsyncThunk(
   'comment/add',
@@ -84,12 +87,13 @@ setEquel: (state) => {
         state.error = action.error.message;
       })
       .addCase(moderatePost.fulfilled, (state, action) => {
-        state.posts = state.posts.map((post) =>
-          post.id === action.payload ? { ...post, isModerated: true } : post
-        );
-        state.copyPosts = state.copyPosts.map((post) =>
-          post.id === action.payload ? { ...post, isModerated: true } : post
-        );
+         if (action.payload.message === 'success') {
+          state.posts = state.posts.map((post) =>
+            post.id === +action.payload.id ? { ...post, isModerated: true } : post,
+          );
+        }
+      
+
       })
       .addCase(moderatePost.rejected, (state, action) => {
         state.error = action.error.message;
@@ -103,6 +107,16 @@ setEquel: (state) => {
           .Comments.push(action.payload);
       })
       .addCase(addComment.rejected, (state, action) => {
+        state.error = action.error.message;
+      })
+      .addCase(likePost.fulfilled, (state, action) => {
+        console.log(action.payload);
+
+        state.posts.map((post) =>
+          post.id === action.payload.post_id ? post.Likes.push(action.payload) : post,
+        );
+      })
+      .addCase(likePost.rejected, (state, action) => {
         state.error = action.error.message;
       });
   },

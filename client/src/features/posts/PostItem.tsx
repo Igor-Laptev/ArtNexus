@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import type { Post } from './types';
 import './styles.css';
 import './tooltipStyles.css';
-import { moderatePost, removePost } from './postsSlice';
+import { likePost, moderatePost, removePost } from './postsSlice';
 import { type RootState, useAppDispatch } from '../../redux/store';
 // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
 function PostItem({ post }: { post: Post }): JSX.Element {
@@ -74,6 +74,9 @@ function PostItem({ post }: { post: Post }): JSX.Element {
           </div>
         </div>
       </Link>
+      <button onClick={() => dispatch(likePost(post.id)).catch(console.log)} type="button">
+        Нравится
+      </button>
       {user && user.isAdmin && (
         <div className="adminisration">
          

@@ -1,14 +1,11 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { useAppDispatch, type RootState } from '../../redux/store';
 import PostItem from '../posts/PostItem';
-import { moderatePost, removePost } from '../posts/postsSlice';
 
-function ModeratorPage (): JSX.Element {
-  const dispatch = useAppDispatch();
-  const posts = useSelector((store: RootState) => store.posts.posts).filter(post => post.isModerated);
-  const user = useSelector((store: RootState) => store.auth.auth);
-  
+function ModeratorPage(): JSX.Element {
+  const posts = useSelector((store: RootState) => store.posts.posts);
+  const notModerated = posts.filter((post) => post.isModerated !== true);
 
   return (
     <div>
@@ -29,6 +26,6 @@ function ModeratorPage (): JSX.Element {
       ))}
     </div>
   );
-};
+}
 
 export default ModeratorPage;

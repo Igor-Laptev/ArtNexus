@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
+
 import './navbar.css';
 import { Link, NavLink, Outlet, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import type{ RootState } from '../../redux/store';
+import type { RootState } from '../../redux/store';
 import { logOut } from '../auth/authSlice';
 import SignUp from '../auth/SignUp';
 import { setEquel } from '../posts/postsSlice';
+import SignIn from '../auth/SignIn';
+
 
 function NavBar(): JSX.Element {
   const user = useSelector((store: RootState) => store.auth.auth);
@@ -15,6 +18,14 @@ function NavBar(): JSX.Element {
 
   const [showReg, setShowReg] = useState(false);
   const [showLog, setShowLog] = useState(false);
+
+  const handleModalReg = (value: boolean) => {
+    setShowReg(value);
+  };
+
+  const handleModalLog = (value: boolean) => {
+    setShowLog(value);
+  };
 
   return (
     <>
@@ -32,38 +43,41 @@ function NavBar(): JSX.Element {
               </NavLink>
             </li>
           </div>
-          <li style={{ color: 'white' }}>Hello, <Link to={`/users/${user?.id}`}>{user?.name}</Link>!</li>
+          <li style={{ color: 'white' }}>
+            {user ? (
+              <>
+                Hello, <Link to={`/users/${user?.id}`}>{user?.name}</Link>!
+              </>
+            ) : (
+              'Гость'
+            )}
+          </li>
           <div className="right-buttons">
             <nav>
               {!user ? (
-                <>
-                  <button onClick={() => setShowReg(true)} className="nav__link">
-                    {' '}
-                    {showReg && <SignUp />}
+                <div>
+                  <button onClick={() => handleModalReg(!showReg)} className="nav__link">
                     Зарегистрироваться
                   </button>
-                  <NavLink className="nav__link" to="/sign-in">
+                  <button onClick={() => handleModalLog(!showLog)} className="nav__link">
                     Войти
-                  </NavLink>
-                </>
+                  </button>
+                </div>
               ) : (
                 user && (
                   <>
                     <li>Hello, {user?.name}!</li>
-
-                    <NavLink className="nav__link" to="/">
+                    <NavLink className="nav__link" to="/likes">
                       Избранное
                     </NavLink>
-                    <NavLink className="nav__link" to="/">
+                    <NavLink className="nav__link" to={`/users/${user?.id}`}>
                       Профиль
                     </NavLink>
-                    <li className="nav__item"></li>
                     <NavLink
                       onClick={() => {
                         dispatch(logOut()).catch(console.log);
                         navigate('/');
                       }}
-
                       className="nav__link"
                       to="/"
                     >
@@ -77,6 +91,11 @@ function NavBar(): JSX.Element {
         </div>
       </nav>
       <Outlet />
+
+      {showReg && (
+        <SignUp show={showReg} handleModalReg={handleModalReg} handleModalLog={handleModalLog} />
+      )}
+      {showLog && <SignIn show={showLog} handleModalLog={handleModalLog} />}
     </>
   );
 }

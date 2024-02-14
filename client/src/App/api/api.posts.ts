@@ -1,6 +1,6 @@
 // fetch-запросы
 /* eslint-disable import/prefer-default-export */
-import type { Post, PostId, PostWithoutId } from '../features/posts/types';
+import type { Post, PostId, PostWithoutId } from '../../features/posts/types';
 
 export const fetchLoadPosts = async (): Promise<Post[]> => {
   const res = await fetch('/api/posts');
@@ -37,14 +37,15 @@ export const fetchPostRemove = async (id: PostId): Promise<PostId> => {
 
 export const fetchModeratePost = async (
   id: PostId,
-): Promise<PostId> => {
+): Promise<{ message: string; id: PostId; post: Post }> => {
   const res = await fetch(`/api/posts/${id}`, {
     method: 'PUT',
   });
-  const data: { id: PostId, message: string } = (await res.json()) as {
+  const data: { id: PostId; post: Post; message: string } = (await res.json()) as {
     id: PostId;
+    post: Post;
     message: string;
   };
 
-  return data.id;
+  return data;
 };

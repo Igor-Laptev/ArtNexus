@@ -33,7 +33,7 @@ function App(): JSX.Element {
           <Route path="/sign-up" element={<SignUp />} />
           <Route path="/sign-in" element={<SignIn />} />
           {/* <Route path="/:postId" element={<PostPage />} /> */}
-          <Route path="/favorites" element={<LikePage />} />
+          <Route path="/likes" element={<LikePage />} />
           <Route path="/posts/:postId" element={<OnePostPage />} />
           <Route path="/users/:userId" element={<UserPage />} />
         </Route>
