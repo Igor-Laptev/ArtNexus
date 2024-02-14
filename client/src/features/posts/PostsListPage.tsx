@@ -8,6 +8,7 @@ import PostItem from './PostItem';
 function PostsList(): JSX.Element {
   const admin = useSelector((store: RootState) => store.auth.auth)?.isAdmin
   const posts = useSelector((store: RootState) => store.posts.posts)
+  
 
   return (
     <>

@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { useAppDispatch } from '../../redux/store';
 import type { Post } from '../posts/types';
 import CommentEl from './CommentEl';
-import { addComment } from '../posts/postsSlice';
+import { addComment, likePost } from '../posts/postsSlice';
 
 function Comments({ post }: { post: Post }): JSX.Element {
   const dispatch = useAppDispatch();
@@ -23,7 +23,7 @@ function Comments({ post }: { post: Post }): JSX.Element {
             <p>{post.description}</p>
           </div>
           <div className="like">
-            <button type="button">
+            <button type="button" onClick={() => dispatch(likePost(post.id)).catch(console.log)}>
               ❤️{post.Likes.length}💬 {post.Comments.length}
             </button>
           </div>
