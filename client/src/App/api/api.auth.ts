@@ -40,10 +40,10 @@ export const fetchSignIn = async (user: UserSignIn): Promise<User> => {
       // credentials: 'include', // Добавляем для отправки и приема кук
     });
 
-    if (!res) {
-      // Проверка успешности HTTP-запроса
-      throw new Error(`Server responded with ${res.status}: ${res.statusText}`);
-    }
+    // if (!res) {
+    //   // Проверка успешности HTTP-запроса
+    //   throw new Error(`Server responded with ${res.status}: ${res.statusText}`);
+    // }
 
     const data: { message: string; user: User } = (await res.json()) as {
       message: string;

@@ -3,27 +3,25 @@ import { useSelector } from 'react-redux';
 import { useAppDispatch, type RootState } from '../../redux/store';
 import { addPost } from './postsSlice';
 
-
-
 function AddPostForm(): JSX.Element {
   const categories = useSelector((store: RootState) => store.categories.categories);
-const dispatch = useAppDispatch();
+  const dispatch = useAppDispatch();
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [category, setCategory] = useState('');
   const [img, setImg] = useState<FileList | null>(null);
 
-  const categoryId = (categories.map((cat) => cat.title).indexOf(category) + 1);
+  const categoryId = categories.map((cat) => cat.title).indexOf(category) + 1;
 
-  function handleSubmit (e: React.FormEvent) : void {
+  function handleSubmit(e: React.FormEvent): void {
     e.preventDefault();
-if(!title || !description || !category || !img) return;
+    if (!title || !description || !category || !img) return;
     const formData = new FormData();
     formData.append('title', title);
     formData.append('description', description);
-    formData.append('category_id', categoryId);
+    formData.append('category_id', String(categoryId));
     if (img) {
-      for (let i = 0; i < img.length; i+=1) {
+      for (let i = 0; i < img.length; i += 1) {
         formData.append('files', img[i]);
       }
     }
@@ -32,8 +30,7 @@ if(!title || !description || !category || !img) return;
     setDescription('');
     setCategory('');
     setImg(null);
-
-  };
+  }
 
   return (
     <div>
@@ -76,6 +73,4 @@ if(!title || !description || !category || !img) return;
   );
 }
 
-
 export default AddPostForm;
-
