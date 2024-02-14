@@ -59,6 +59,11 @@ const postsSlice = createSlice({
     setEquel: (state) => {
       state.posts = state.copyPosts;
     },
+    adultPost: (state) => {
+      state.posts = state.posts.map((post) => post.isAdult === true ? {...post, isAdult: false} : post);
+      state.copyPosts = state.posts;
+    },
+
   },
   extraReducers: (builder) => {
     builder
@@ -88,28 +93,34 @@ const postsSlice = createSlice({
           state.posts = state.posts.map((post) =>
             post.id === +action.payload.id ? { ...post, isModerated: true } : post,
           );
+          state.copyPosts = state.copyPosts.map((post) =>
+            post.id === +action.payload.id ? { ...post, isModerated: true } : post,
+          );
         }
       })
       .addCase(moderatePost.rejected, (state, action) => {
         state.error = action.error.message;
       })
-      .addCase(addComment.fulfilled, (state, action) => {
-        const targetPost = state.posts.find((post) => post.id === action.payload.post_id);
-        const copyPost = state.posts.find((post) => post.id === action.payload.post_id);
-        if (targetPost) {
-          targetPost.Comments.push(action.payload);
-        }
-        if (copyPost) {
-          copyPost.Comments.push(action.payload);
-        }
-      })
+    .addCase(addComment.fulfilled, (state, action) => {
+  const targetPost = state.posts.find((post) => post.id === action.payload.post_id);
+  const targetCopyPost = state.copyPosts.find((post) => post.id === action.payload.post_id);
+
+  if (targetPost) {
+    targetPost.Comments.push(action.payload);
+  }
+
+  if (targetCopyPost) {
+    targetCopyPost.Comments.push(action.payload);
+  }
+})
       .addCase(addComment.rejected, (state, action) => {
         state.error = action.error.message;
       })
       .addCase(likePost.fulfilled, (state, action) => {
-        console.log(action.payload);
-
         state.posts.map((post) =>
+          post.id === action.payload.post_id ? post.Likes.push(action.payload) : post,
+        );
+        state.copyPosts.map((post) =>
           post.id === action.payload.post_id ? post.Likes.push(action.payload) : post,
         );
       })
@@ -120,4 +131,7 @@ const postsSlice = createSlice({
 });
 
 export default postsSlice.reducer;
-export const { filterPosts, filterIsAdult, filterToModerate, setEquel } = postsSlice.actions;
+
+export const { filterPosts, filterIsAdult, filterToModerate, setEquel, adultPost } =
+  postsSlice.actions;
+

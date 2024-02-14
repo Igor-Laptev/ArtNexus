@@ -6,6 +6,7 @@ import './styles.css';
 import './tooltipStyles.css';
 import { likePost, moderatePost, removePost } from './postsSlice';
 import { type RootState, useAppDispatch } from '../../redux/store';
+import Access from './Access';
 // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
 function PostItem({ post }: { post: Post }): JSX.Element {
   // const dispatch = useAppDispatch();
@@ -29,13 +30,16 @@ function PostItem({ post }: { post: Post }): JSX.Element {
   const onMouseEnterHandler = (): void => {
     setShowToolTip(true);
   };
-
   const onMouseLeaveHandler = (): void => {
     setShowToolTip(false);
-  };
+};
+    const[access, setAccess] = useState(false)
+   
+  
   return (
     <>
-      <Link to={`posts/${post.id}`}>
+    {access && <Access setAccess={setAccess}/>}
+       <Link to={!post.isAdult ? `posts/${post.id}` : undefined} onClick={() => setAccess(true)}>
         <div
           className="post-container"
           onMouseEnter={onMouseEnterHandler}
@@ -44,7 +48,7 @@ function PostItem({ post }: { post: Post }): JSX.Element {
           <div className="post-content item-box">
             {showToolTip && (
               <div
-                className="tooltip"
+                className={`tooltip ${post.isAdult ? 'blur-image' : ''}`}
                 style={{
                   backgroundImage: `url(${firstArt})`,
                   backgroundRepeat: 'no-repeat',
@@ -54,29 +58,30 @@ function PostItem({ post }: { post: Post }): JSX.Element {
                   height: '100%',
                 }}
               >
-                <div className="post-text">{post.title}</div>
-                <div className="post-text">{post.description}</div>
+                <div className="post-text"><p>{post.title}</p></div>
+                <div className="post-text"><p>{post.description}</p></div>
               </div>
             )}
-            {!showToolTip && (
-              <div
-                className="cover"
-                style={{
-                  backgroundImage: `url(${firstArt})`,
-                  backgroundRepeat: 'no-repeat',
-                  // backgroundSize: 'contain',
-                  // backgroundSize: 'cover',
-                  width: '100%',
-                  height: '100%',
-                }}
-              />
-            )}
+           {!showToolTip && (
+  <div
+    className={`cover ${post.isAdult ? 'blur-image' : ''}`}
+    style={{
+      backgroundImage: `url(${firstArt})`,
+      backgroundRepeat: 'no-repeat',
+     //   backgroundSize: 'contain',
+     //   backgroundSize: 'cover',
+      width: '100%',
+      height: '100%',
+    }}
+  />
+)}
+
           </div>
         </div>
       </Link>
-      <button onClick={() => dispatch(likePost(post.id)).catch(console.log)} type="button">
+      {/* <button onClick={() => dispatch(likePost(post.id)).catch(console.log)} type="button">
         Нравится
-      </button>
+      </button> */}
       {user && user.isAdmin && (
         <div className="adminisration">
           <button onClick={() => dispatch(moderatePost(post.id)).catch(console.log)} type="button">
