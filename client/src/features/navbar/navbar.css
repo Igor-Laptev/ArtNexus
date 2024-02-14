@@ -10,7 +10,7 @@
 .navbar {
     position: absolute;
     margin-top: 20px;
-    z-index: 2; /* Убедитесь, что навбар находится над анимированными элементами */
+    z-index: 2; 
 }
 
 .links {
@@ -22,7 +22,8 @@
 .nav__link {
     text-decoration: none;
     font-family: 'inter', sans-serif;
-    color: #96969a;
+    color: #c361b3bc;
+    background: linear-gradient(to right, #504bff, #4cfa63);
     line-height: 1.2;
     letter-spacing: 0px;
     text-align: center;
@@ -36,10 +37,10 @@
     font-size: 15px;
     border-radius: 0px;
     transition: all 0.5s ease;
-    overflow: hidden; /* Добавлено для анимированных фонов */
+    overflow: hidden; 
 }
 
-/* Анимации, аналогичные анимациям кнопок из вашего первого фрагмента кода */
+
 .nav__link::after {
     content: '';
     position: absolute;

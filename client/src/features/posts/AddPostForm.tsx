@@ -34,9 +34,10 @@ function AddPostForm(): JSX.Element {
 
   return (
     <div>
-      <form onSubmit={handleSubmit}>
+      <form className="add-form" onSubmit={handleSubmit}>
         <label htmlFor="title">Title</label>
         <input
+          className="form-control"
           type="text"
           id="title"
           value={title}
@@ -45,6 +46,7 @@ function AddPostForm(): JSX.Element {
         />
         <label htmlFor="description">Description</label>
         <input
+          className="form-control"
           type="text"
           id="description"
           value={description}
@@ -53,6 +55,7 @@ function AddPostForm(): JSX.Element {
         />
         <label htmlFor="category">Category</label>
         <input
+          className="form-control"
           type="text"
           list="categories"
           id="category"
@@ -66,8 +69,8 @@ function AddPostForm(): JSX.Element {
           ))}
         </datalist>
         <label htmlFor="src">img</label>
-        <input multiple type="file" id="src" name="src" onChange={(e) => setImg(e.target.files)} />
-        <button type="submit">Submit</button>
+        <input className='modal-button' multiple type="file" id="src" name="src" onChange={(e) => setImg(e.target.files)} />
+        <button className='modal-button' type="submit">Submit</button>
       </form>
     </div>
   );

@@ -3,8 +3,10 @@ import ReactModal from 'react-modal';
 import './auth.css';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+
 import { type RootState, useAppDispatch } from '../../redux/store';
 import { signIn } from './authSlice';
+
 
 function SignIn({
   handleModalLog,
@@ -17,7 +19,6 @@ function SignIn({
   const [password, setPassword] = useState('');
 
   const error = useSelector((store: RootState) => store.auth.error);
-  console.log('error:', typeof error);
 
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
@@ -37,9 +38,9 @@ function SignIn({
       <div className="modal-dialog animate__animated animate__fadeInDownBig">
         <div className="modal-content">
           <div className="modal-body">
-            {error && (
-              <h1 style={{ color: 'red', textTransform: 'uppercase' }}>Пользователь не найден!</h1>
-            )}
+
+            {error && <h1 style={{ color: 'red', textTransform: 'uppercase' }}>{error}</h1>}
+
             <form
               className="modal-form"
               onSubmit={(e) => {
@@ -51,9 +52,11 @@ function SignIn({
                   }),
                 )
                   .then(() => {
-                    if (error === undefined) {
+                    if (error) {
                       handleModalLog(true);
-                      navigate('/'); // ask Tolya
+
+                      navigate('/');
+
                     } else {
                       handleModalLog(false);
                       navigate('/');
@@ -93,9 +96,8 @@ function SignIn({
               <button
                 type="button"
                 className="btn btn-secondary modal-button"
-                onClick={() => {
-                  handleModalLog(false);
-                }}
+                onClick={() => handleModalLog(false)}
+
               >
                 Close
               </button>
