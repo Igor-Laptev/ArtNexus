@@ -9,6 +9,7 @@ import {
 import type { PostId } from './types';
 import fetchCreateComment from '../../App/api/api.comment';
 import { fetchLike } from '../../App/api/api.likes';
+import { fetchLoadAvatar } from '../../App/api/api.auth';
 
 const initialState: PostsState = {
   posts: [],
@@ -39,6 +40,8 @@ export const addComment = createAsyncThunk(
 export const moderatePost = createAsyncThunk('posts/moderate', (id: PostId) =>
   fetchModeratePost(id),
 );
+export const addUserAvatar = createAsyncThunk('posts/addAvatar', (formData: FormData) =>
+fetchLoadAvatar(formData),);
 
 const postsSlice = createSlice({
   name: 'posts',
@@ -126,7 +129,14 @@ const postsSlice = createSlice({
       })
       .addCase(likePost.rejected, (state, action) => {
         state.error = action.error.message;
-      });
+      })
+      .addCase(addUserAvatar.fulfilled, (state, action) => {console.log(typeof(action.payload));
+        state.posts = state.posts.map((post) => post.User.id===action.payload.id ? {...post, User: {...post.User, avatar: action.payload.avatar}} : post)
+        state.copyPosts = state.copyPosts.map((post) => post.User.id===action.payload.id ? {...post, User: {...post.User, avatar: action.payload.avatar}} : post)
+      })
+      .addCase(addUserAvatar.rejected, (state, action) => {
+        state.error = action.error.message;
+      })
   },
 });
 

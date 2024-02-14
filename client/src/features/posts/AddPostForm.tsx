@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import { useAppDispatch, type RootState } from '../../redux/store';
 import { addPost } from './postsSlice';
 
-function AddPostForm(): JSX.Element {
+function AddPostForm( {setAddpost}:{setAddpost: (access: boolean) => void }): JSX.Element {
   const categories = useSelector((store: RootState) => store.categories.categories);
   const dispatch = useAppDispatch();
   const [title, setTitle] = useState('');
@@ -33,25 +33,33 @@ function AddPostForm(): JSX.Element {
   }
 
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="title">Title</label>
+    <div className="addPostForm">
+
+<div> <button onClick={() => setAddpost(false)} type='button'>✖</button></div>
+     
+<div><form onSubmit={handleSubmit}>
+
+<div> 
         <input
           type="text"
           id="title"
           value={title}
           placeholder="Title"
           onChange={(e) => setTitle(e.target.value)}
-        />
-        <label htmlFor="description">Description</label>
+        /></div>
+       
+
+<div> 
         <input
           type="text"
           id="description"
           value={description}
           placeholder="Description"
           onChange={(e) => setDescription(e.target.value)}
-        />
-        <label htmlFor="category">Category</label>
+        /></div>
+       
+
+<div> 
         <input
           type="text"
           list="categories"
@@ -59,16 +67,26 @@ function AddPostForm(): JSX.Element {
           name="category"
           placeholder="Category"
           onChange={(e) => setCategory(e.target.value)}
-        />
-        <datalist id="categories">
+        /></div>
+       
+
+<div><datalist id="categories">
           {categories.map((category) => (
             <option key={category.id} value={category.title} />
           ))}
-        </datalist>
-        <label htmlFor="src">img</label>
-        <input multiple type="file" id="src" name="src" onChange={(e) => setImg(e.target.files)} />
-        <button type="submit">Submit</button>
-      </form>
+        </datalist></div>
+        
+
+
+        <div>  
+        <input multiple type="file" id="src" name="src" onChange={(e) => setImg(e.target.files)} /></div>
+    
+
+        <div>  <button type="submit">Submit</button></div>
+      
+      </form></div>
+
+      
     </div>
   );
 }

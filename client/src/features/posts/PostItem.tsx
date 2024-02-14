@@ -85,7 +85,7 @@ function PostItem({ post }: { post: Post }): JSX.Element {
       {user && user.isAdmin && (
         <div className="adminisration">
           <button onClick={() => dispatch(moderatePost(post.id)).catch(console.log)} type="button">
-            post✅
+           {!post.isModerated ? 'post✅': '?post'}
           </button>
           <button onClick={() => dispatch(moderatePost(post.id)).catch(console.log)} type="button">
             18+🔞

@@ -7,8 +7,9 @@
     src: url('../../../public/Inter-Bold.ttf');
 }
 .navbar {
-    position: absolute;
+    /* position: absolute; */
     margin-top: 20px;
+    margin-bottom: 20px;
 }
 .links {
     display: flex;

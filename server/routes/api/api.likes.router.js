@@ -4,7 +4,7 @@ const { Like } = require('../../db/models');
 router.post('/', async (req, res) => {
   try {
     const { postId } = req.body;
-    console.log(postId);
+   
     const like = await Like.create({
       user_id: res.locals.user.id,
       post_id: postId,
