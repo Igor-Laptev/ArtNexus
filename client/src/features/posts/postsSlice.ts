@@ -6,7 +6,7 @@ import {
   fetchModeratePost,
   fetchPostRemove,
 } from '../../App/api/api.posts';
-import type { PostId, PostWithoutId, Post } from './types';
+import type { PostId } from './types';
 import fetchCreateComment from '../../App/api/api.comment';
 import { fetchLike } from '../../App/api/api.likes';
 
@@ -63,6 +63,7 @@ const postsSlice = createSlice({
       state.posts = state.posts.map((post) => post.isAdult === true ? {...post, isAdult: false} : post);
       state.copyPosts = state.posts;
     },
+
   },
   extraReducers: (builder) => {
     builder
@@ -130,5 +131,7 @@ const postsSlice = createSlice({
 });
 
 export default postsSlice.reducer;
+
 export const { filterPosts, filterIsAdult, filterToModerate, setEquel, adultPost } =
   postsSlice.actions;
+

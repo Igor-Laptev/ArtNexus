@@ -52,8 +52,8 @@ function PostItem({ post }: { post: Post }): JSX.Element {
                 style={{
                   backgroundImage: `url(${firstArt})`,
                   backgroundRepeat: 'no-repeat',
-                  backgroundSize: 'contain',
-                  backgroundSize: 'cover',
+                  // backgroundSize: 'contain',
+                  // backgroundSize: 'cover',
                   width: '100%',
                   height: '100%',
                 }}
@@ -68,13 +68,14 @@ function PostItem({ post }: { post: Post }): JSX.Element {
     style={{
       backgroundImage: `url(${firstArt})`,
       backgroundRepeat: 'no-repeat',
-      backgroundSize: 'contain',
-      backgroundSize: 'cover',
+     //   backgroundSize: 'contain',
+     //   backgroundSize: 'cover',
       width: '100%',
       height: '100%',
     }}
   />
 )}
+
           </div>
         </div>
       </Link>
@@ -83,13 +84,12 @@ function PostItem({ post }: { post: Post }): JSX.Element {
       </button> */}
       {user && user.isAdmin && (
         <div className="adminisration">
-         
           <button onClick={() => dispatch(moderatePost(post.id)).catch(console.log)} type="button">
             post✅
           </button>
           <button onClick={() => dispatch(moderatePost(post.id)).catch(console.log)} type="button">
             18+🔞
-          </button> 
+          </button>
           <button onClick={() => dispatch(removePost(post.id)).catch(console.log)} type="button">
             REMOVE❌
           </button>
