@@ -1,5 +1,5 @@
-import { Art } from '../arts/type';
-import { Category } from '../categories/types';
+import type { Category } from '../categories/types';
+import type { Comment } from '../comments/type';
 import type { User, UserId } from '../users/types';
 
 export type Post = {
@@ -13,13 +13,22 @@ export type Post = {
   Likes: Like[];
   Comments: Comment[];
   Gallery: Gallery;
-  Category: Category
+  Category: Category;
   createdAt: string;
-  User: User
+  User: User;
 };
 export type PostId = Post['id'];
+export type PostIsAdult = Post['isAdult'];
+export type PostIsModerated = Post['isModerated'];
 
 export type PostWithoutId = Omit<Post, 'id'>;
+
+export type Art = {
+  id: number;
+  gallery_id: number;
+  title: string;
+  src: string;
+};
 
 export type Gallery = {
   id: number;
@@ -33,11 +42,4 @@ export type Like = {
   id: number;
   user_id: UserId;
   post_id: PostId;
-};
-
-export type Comment = {
-  id: number;
-  user_id: UserId;
-  post_id: PostId;
-  text: string;
 };

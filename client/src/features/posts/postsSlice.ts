@@ -6,12 +6,15 @@ import {
   fetchModeratePost,
   fetchPostRemove,
 } from '../../App/api/api.posts';
-import type { PostId, PostWithoutId, Post } from './types';
+import type { PostId } from './types';
 import fetchCreateComment from '../../App/api/api.comment';
+import { fetchLike } from '../../App/api/api.likes';
 
 const initialState: PostsState = {
   posts: [],
+  copyPosts: [],
   error: undefined,
+  // categories:undefined
   //   loading: true,
 };
 
@@ -25,6 +28,7 @@ export const removePost = createAsyncThunk('posts/remove', (postId: PostId) =>
   fetchPostRemove(postId),
 );
 
+export const likePost = createAsyncThunk('posts/like', (postId: PostId) => fetchLike(postId));
 
 export const addComment = createAsyncThunk(
   'comment/add',
@@ -32,56 +36,102 @@ export const addComment = createAsyncThunk(
     fetchCreateComment({ text, post_id }),
 );
 
-export const moderatePost = createAsyncThunk('posts/moderate', (postId: PostId) =>
-  fetchModeratePost(postId),
+export const moderatePost = createAsyncThunk('posts/moderate', (id: PostId) =>
+  fetchModeratePost(id),
 );
 
 const postsSlice = createSlice({
   name: 'posts',
   initialState,
-  reducers: {},
+  reducers: {
+    filterPosts: (state, action) => {
+      state.posts = state.copyPosts;
+      state.posts = state.posts.filter((post) => post.category_id === action.payload);
+    },
+    filterIsAdult: (state, action) => {
+      state.posts = state.copyPosts;
+      state.posts = state.posts.filter((post) => post.isAdult === action.payload);
+    },
+    filterToModerate: (state, action) => {
+      state.posts = state.copyPosts;
+      state.posts = state.posts.filter((post) => post.isModerated === action.payload);
+    },
+    setEquel: (state) => {
+      state.posts = state.copyPosts;
+    },
+    adultPost: (state) => {
+      state.posts = state.posts.map((post) => post.isAdult === true ? {...post, isAdult: false} : post);
+      state.copyPosts = state.posts;
+    },
+
+  },
   extraReducers: (builder) => {
     builder
       .addCase(loadPosts.fulfilled, (state, action) => {
         state.posts = action.payload;
+        state.copyPosts = action.payload;
       })
       .addCase(loadPosts.rejected, (state, action) => {
         state.error = action.error.message;
       })
       .addCase(addPost.fulfilled, (state, action) => {
         state.posts.push(action.payload);
+        state.copyPosts.push(action.payload);
       })
       .addCase(addPost.rejected, (state, action) => {
         state.error = action.error.message;
       })
       .addCase(removePost.fulfilled, (state, action) => {
         state.posts = state.posts.filter((post) => post.id !== +action.payload);
+        state.copyPosts = state.copyPosts.filter((post) => post.id !== +action.payload);
       })
       .addCase(removePost.rejected, (state, action) => {
         state.error = action.error.message;
       })
       .addCase(moderatePost.fulfilled, (state, action) => {
-        console.log(state);
-
         if (action.payload.message === 'success') {
-          state.posts = state.posts.map(
-            (post) => post.id === +action.payload.id ? { ...post, isModerated: true } : post,
+          state.posts = state.posts.map((post) =>
+            post.id === +action.payload.id ? { ...post, isModerated: true } : post,
+          );
+          state.copyPosts = state.copyPosts.map((post) =>
+            post.id === +action.payload.id ? { ...post, isModerated: true } : post,
           );
         }
-        console.log(state.posts);
       })
       .addCase(moderatePost.rejected, (state, action) => {
         state.error = action.error.message;
       })
-      .addCase(addComment.fulfilled, (state, action) => {
-        state.posts
-          .find((post) => post.id === action.payload.post_id)
-          .Comments.push(action.payload);
-      })
+    .addCase(addComment.fulfilled, (state, action) => {
+  const targetPost = state.posts.find((post) => post.id === action.payload.post_id);
+  const targetCopyPost = state.copyPosts.find((post) => post.id === action.payload.post_id);
+
+  if (targetPost) {
+    targetPost.Comments.push(action.payload);
+  }
+
+  if (targetCopyPost) {
+    targetCopyPost.Comments.push(action.payload);
+  }
+})
       .addCase(addComment.rejected, (state, action) => {
+        state.error = action.error.message;
+      })
+      .addCase(likePost.fulfilled, (state, action) => {
+        state.posts.map((post) =>
+          post.id === action.payload.post_id ? post.Likes.push(action.payload) : post,
+        );
+        state.copyPosts.map((post) =>
+          post.id === action.payload.post_id ? post.Likes.push(action.payload) : post,
+        );
+      })
+      .addCase(likePost.rejected, (state, action) => {
         state.error = action.error.message;
       });
   },
 });
 
 export default postsSlice.reducer;
+
+export const { filterPosts, filterIsAdult, filterToModerate, setEquel, adultPost } =
+  postsSlice.actions;
+

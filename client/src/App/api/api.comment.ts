@@ -1,6 +1,13 @@
 import type { Comment } from '../../features/comments/type';
+import type { PostId } from '../../features/posts/types';
 
-const fetchCreateComment = async ({ text, post_id }): Promise<Comment> => {
+const fetchCreateComment = async ({
+  text,
+  post_id,
+}: {
+  text: string;
+  post_id: PostId;
+}): Promise<Comment> => {
   const res = await fetch('/api/comments', {
     method: 'POST',
     headers: {

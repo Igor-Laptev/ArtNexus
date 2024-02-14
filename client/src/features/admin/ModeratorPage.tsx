@@ -1,21 +1,42 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useSelector } from 'react-redux';
 import { useAppDispatch, type RootState } from '../../redux/store';
 import PostItem from '../posts/PostItem';
-import { loadPosts } from '../posts/postsSlice';
+import { moderatePost, removePost } from '../posts/postsSlice';
 
 function ModeratorPage(): JSX.Element {
   const posts = useSelector((store: RootState) => store.posts.posts);
-  const notModerated = posts.filter((post) => post.isModerated !== true);
+  const user = useSelector((store: RootState) => store.auth.auth);
   const dispatch = useAppDispatch();
 
-  // useEffect(() => {
-  //   dispatch(loadPosts()).catch(console.log);
-  // }, [notModerated]);
   return (
     <div>
-      {notModerated.map((post) => (
-        <PostItem key={post.id} post={post} />
+      {posts.map((post) => (
+        <>
+          <PostItem key={post.id} post={post} />{' '}
+          {user && user.isAdmin && (
+            <div className="adminisration">
+              <button
+                onClick={() => dispatch(removePost(post.id)).catch(console.log)}
+                type="button"
+              >
+                удалить
+              </button>
+              <button
+                onClick={() => dispatch(moderatePost(post.id)).catch(console.log)}
+                type="button"
+              >
+                post
+              </button>
+              <button
+                onClick={() => dispatch(moderatePost(post.id)).catch(console.log)}
+                type="button"
+              >
+                18+
+              </button>
+            </div>
+          )}
+        </>
       ))}
     </div>
   );

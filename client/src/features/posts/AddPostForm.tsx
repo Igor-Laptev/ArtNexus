@@ -19,7 +19,7 @@ function AddPostForm(): JSX.Element {
     const formData = new FormData();
     formData.append('title', title);
     formData.append('description', description);
-    formData.append('category_id', categoryId);
+    formData.append('category_id', String(categoryId));
     if (img) {
       for (let i = 0; i < img.length; i += 1) {
         formData.append('files', img[i]);

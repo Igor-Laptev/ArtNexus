@@ -2,10 +2,11 @@ import React, { useState } from 'react';
 import ReactModal from 'react-modal';
 
 import 'animate.css';
+
 import './auth.css';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { RootState, useAppDispatch } from '../../redux/store';
+import { type RootState, useAppDispatch } from '../../redux/store';
 import { clearError, signUp } from './authSlice';
 
 function SignUp({

@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-misused-promises */
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import React, { useState } from 'react';
@@ -6,6 +8,7 @@ import './styles.css';
 import './tooltipStyles.css';
 import { moderatePost, removePost } from './postsSlice';
 import { type RootState, useAppDispatch } from '../../redux/store';
+import Access from './Access';
 // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
 function PostItem({ post }: { post: Post }): JSX.Element {
   // const dispatch = useAppDispatch();
@@ -26,16 +29,18 @@ function PostItem({ post }: { post: Post }): JSX.Element {
   const user = useSelector((store: RootState) => store.auth.auth);
   const dispatch = useAppDispatch();
   const [showToolTip, setShowToolTip] = useState(false);
-  const onMouseEnterHandler = () => {
+  const onMouseEnterHandler = (): void => {
     setShowToolTip(true);
   };
-
-  const onMouseLeaveHandler = () => {
+  const onMouseLeaveHandler = (): void => {
     setShowToolTip(false);
   };
+  const [access, setAccess] = useState(false);
+
   return (
     <>
-      <Link to={`posts/${post.id}`}>
+      {access && <Access setAccess={setAccess} />}
+      <Link to={!post.isAdult ? `posts/${post.id}` : '/'} onClick={() => setAccess(true)}>
         <div
           className="post-container"
           onMouseEnter={onMouseEnterHandler}
@@ -44,28 +49,32 @@ function PostItem({ post }: { post: Post }): JSX.Element {
           <div className="post-content item-box">
             {showToolTip && (
               <div
-                className="tooltip"
+                className={`tooltip ${post.isAdult ? 'blur-image' : ''}`}
                 style={{
                   backgroundImage: `url(${firstArt})`,
                   backgroundRepeat: 'no-repeat',
-                  backgroundSize: 'contain',
-                  backgroundSize: 'cover',
+                  // backgroundSize: 'contain',
+                  // backgroundSize: 'cover',
                   width: '100%',
                   height: '100%',
                 }}
               >
-                <div className="post-text">{post.title}</div>
-                <div className="post-text">{post.description}</div>
+                <div className="post-text">
+                  <p>{post.title}</p>
+                </div>
+                <div className="post-text">
+                  <p>{post.description}</p>
+                </div>
               </div>
             )}
             {!showToolTip && (
               <div
-                className="cover"
+                className={`cover ${post.isAdult ? 'blur-image' : ''}`}
                 style={{
                   backgroundImage: `url(${firstArt})`,
                   backgroundRepeat: 'no-repeat',
-                  backgroundSize: 'contain',
-                  backgroundSize: 'cover',
+                  //   backgroundSize: 'contain',
+                  //   backgroundSize: 'cover',
                   width: '100%',
                   height: '100%',
                 }}
@@ -74,15 +83,21 @@ function PostItem({ post }: { post: Post }): JSX.Element {
           </div>
         </div>
       </Link>
+      {/* <button onClick={() => dispatch(likePost(post.id)).catch(console.log)} type="button">
+        Нравится
+      </button> */}
       {user && user.isAdmin && (
-        <>
-          <button onClick={() => dispatch(removePost(post.id)).catch(console.log)} type="button">
-            удалить
+        <div className="adminisration">
+          <button onClick={() => dispatch(moderatePost(post.id)).catch(console.log)} type="button">
+            post✅
           </button>
           <button onClick={() => dispatch(moderatePost(post.id)).catch(console.log)} type="button">
-            Ok
+            18+🔞
           </button>
-        </>
+          <button onClick={() => dispatch(removePost(post.id)).catch(console.log)} type="button">
+            REMOVE❌
+          </button>
+        </div>
       )}
     </>
   );

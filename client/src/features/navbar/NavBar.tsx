@@ -1,27 +1,27 @@
 import React, { useState } from 'react';
-
 import './navbar.css';
 import { Link, NavLink, Outlet, useNavigate } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import type { RootState } from '../../redux/store';
+import { useSelector } from 'react-redux';
+import { useAppDispatch, type RootState } from '../../redux/store';
 import { logOut } from '../auth/authSlice';
 import SignUp from '../auth/SignUp';
+import { setEquel } from '../posts/postsSlice';
 import SignIn from '../auth/SignIn';
 
 function NavBar(): JSX.Element {
   const user = useSelector((store: RootState) => store.auth.auth);
 
   const navigate = useNavigate();
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const [showReg, setShowReg] = useState(false);
   const [showLog, setShowLog] = useState(false);
 
-  const handleModalReg = (value: boolean) => {
+  const handleModalReg = (value: boolean): void => {
     setShowReg(value);
   };
 
-  const handleModalLog = (value: boolean) => {
+  const handleModalLog = (value: boolean): void => {
     setShowLog(value);
   };
 
@@ -30,13 +30,16 @@ function NavBar(): JSX.Element {
       <nav className="navbar">
         <div className="links">
           <div className="left-buttons">
+            {user && user.isAdmin && (
+              <li className="nav__item">
+                <NavLink className="nav__link" to="/moderator">
+                  Модерация
+                </NavLink>
+              </li>
+            )}
+
             <li className="nav__item">
-              <NavLink className="nav__link" to="/moderator">
-                Модерация
-              </NavLink>
-            </li>
-            <li className="nav__item">
-              <NavLink className="nav__link" to="/">
+              <NavLink className="nav__link" to="/" onClick={() => dispatch(setEquel())}>
                 Explore
               </NavLink>
             </li>
@@ -54,10 +57,18 @@ function NavBar(): JSX.Element {
             <nav>
               {!user ? (
                 <div>
-                  <button onClick={() => handleModalReg(!showReg)} className="nav__link">
+                  <button
+                    type="button"
+                    onClick={() => handleModalReg(!showReg)}
+                    className="nav__link"
+                  >
                     Зарегистрироваться
                   </button>
-                  <button onClick={() => handleModalLog(!showLog)} className="nav__link">
+                  <button
+                    type="button"
+                    onClick={() => handleModalLog(!showLog)}
+                    className="nav__link"
+                  >
                     Войти
                   </button>
                 </div>
@@ -65,22 +76,24 @@ function NavBar(): JSX.Element {
                 user && (
                   <>
                     <li>Hello, {user?.name}!</li>
-                    <NavLink className="nav__link" to="/">
+                    <NavLink className="nav__link" to="/likes">
                       Избранное
                     </NavLink>
-                    <NavLink className="nav__link" to="/">
+                    <NavLink className="nav__link" to={`/users/${user?.id}`}>
                       Профиль
                     </NavLink>
-                    <NavLink
-                      onClick={() => {
-                        dispatch(logOut()).catch(console.log);
-                        navigate('/');
-                      }}
-                      className="nav__link"
-                      to="/"
-                    >
-                      Выйти
-                    </NavLink>
+                    <li>
+                      <NavLink
+                        onClick={() => {
+                          dispatch(logOut()).catch(console.log);
+                          navigate('/');
+                        }}
+                        className="nav__link"
+                        to="/"
+                      >
+                        Выйти
+                      </NavLink>
+                    </li>
                   </>
                 )
               )}
@@ -90,8 +103,9 @@ function NavBar(): JSX.Element {
       </nav>
       <Outlet />
 
-      {showReg && <SignUp show={showReg} handleModalReg={handleModalReg} handleModalLog={handleModalLog} />
-}
+      {showReg && (
+        <SignUp show={showReg} handleModalReg={handleModalReg} handleModalLog={handleModalLog} />
+      )}
       {showLog && <SignIn show={showLog} handleModalLog={handleModalLog} />}
     </>
   );

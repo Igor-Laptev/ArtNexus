@@ -5,7 +5,9 @@ import type { Comment } from '../../features/comments/type';
 
 export type PostsState = {
   posts: Post[];
+  copyPosts: Post[];
   error: string | undefined;
+  // categories:string|undefined
   //   loading: boolean;
 };
 
@@ -17,6 +19,7 @@ export type Action =
   | { type: 'posts/load'; payload: Post[] }
   | { type: 'posts/add'; payload: Post }
   | { type: 'posts/remove'; payload: PostId }
+  | { type: 'posts/moderate'; payload: PostId }
   | { type: 'comment/add'; payload: Comment }
   | { type: 'categories/load'; payload: Category[] }
   | { type: 'auth/sign-up'; payload: User }
