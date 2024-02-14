@@ -25,14 +25,15 @@ function SignIn({
 
   return (
     <ReactModal
+      className="modalback"
       isOpen={show}
       onRequestClose={() => handleModalLog(false)}
       contentLabel="Sign In Modal"
     >
-      <div className="modal-dialog">
+      <div className="modal-dialog animate__animated animate__fadeInDownBig">
         <div className="modal-content">
           <div className="modal-body">
-            <form
+            <form className='modal-form'
               onSubmit={(e) => {
                 e.preventDefault();
                 dispatch(
@@ -73,15 +74,15 @@ function SignIn({
                   }}
                 />
               </div>
-              <button type="submit" className="btn btn-success">
-                Sign In
-              </button>
             </form>
           </div>
           <div className="modal-footer">
+            <button type="submit" className="btn btn-success modal-button">
+              Sign In
+            </button>
             <button
               type="button"
-              className="btn btn-secondary"
+              className="btn btn-secondary modal-button"
               onClick={() => handleModalLog(false)}
             >
               Close

@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import ReactModal from 'react-modal';
 
+import 'animate.css';
 import './auth.css';
-
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { RootState, useAppDispatch } from '../../redux/store';
@@ -30,14 +30,16 @@ function SignUp({
 
   return (
     <ReactModal
+      className="modalback"
       isOpen={show}
       onRequestClose={() => handleModalReg(false)}
       contentLabel="Sign Up Modal"
     >
-      <div className="modal-dialog">
+      <div className="modal-dialog animate__animated animate__fadeInDownBig">
         <div className="modal-content">
           <div className="modal-body">
             <form
+              className="modal-form"
               onSubmit={(e) => {
                 e.preventDefault();
                 dispatch(
@@ -124,15 +126,15 @@ function SignUp({
                   }}
                 />
               </div>
-              <button type="submit" className="btn btn-success">
-                Register
-              </button>
             </form>
           </div>
-          <div className="modal-footer">
+          <div className="modal-footer animate__animated animate__heartBeat ">
+            <button type="submit" className="btn btn-success modal-button ">
+              Register
+            </button>
             <button
               type="button"
-              className="btn btn-secondary"
+              className="btn btn-secondary modal-button "
               onClick={() => handleModalReg(false)}
             >
               Close
