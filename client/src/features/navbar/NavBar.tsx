@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import './navbar.css';
 import { Link, NavLink, Outlet, useNavigate } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import type { RootState } from '../../redux/store';
+import { useSelector } from 'react-redux';
+import { useAppDispatch, type RootState } from '../../redux/store';
 import { logOut } from '../auth/authSlice';
 import SignUp from '../auth/SignUp';
 import { setEquel } from '../posts/postsSlice';
@@ -12,7 +12,7 @@ function NavBar(): JSX.Element {
   const user = useSelector((store: RootState) => store.auth.auth);
 
   const navigate = useNavigate();
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const [showReg, setShowReg] = useState(false);
   const [showLog, setShowLog] = useState(false);
