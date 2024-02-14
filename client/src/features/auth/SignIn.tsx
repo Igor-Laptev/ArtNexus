@@ -16,7 +16,7 @@ function SignIn({
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  let error = useSelector((store: RootState) => store.auth.error);
+  const error = useSelector((store: RootState) => store.auth.error);
   console.log('error:', typeof error);
 
   const dispatch = useAppDispatch();
@@ -37,7 +37,9 @@ function SignIn({
       <div className="modal-dialog animate__animated animate__fadeInDownBig">
         <div className="modal-content">
           <div className="modal-body">
-            {error && <h1 style={{ color: 'red', textTransform: 'uppercase' }}>Пользователь не найден!</h1>}
+            {error && (
+              <h1 style={{ color: 'red', textTransform: 'uppercase' }}>Пользователь не найден!</h1>
+            )}
             <form
               className="modal-form"
               onSubmit={(e) => {
@@ -51,7 +53,7 @@ function SignIn({
                   .then(() => {
                     if (error === undefined) {
                       handleModalLog(true);
-                      clearError(error) // ask Tolya
+                      navigate('/'); // ask Tolya
                     } else {
                       handleModalLog(false);
                       navigate('/');
@@ -92,7 +94,7 @@ function SignIn({
                 type="button"
                 className="btn btn-secondary modal-button"
                 onClick={() => {
-                  handleModalLog(false) ;
+                  handleModalLog(false);
                 }}
               >
                 Close
