@@ -122,11 +122,10 @@ router.post('/', upload.array('files'), async (req, res) => {
 router.put('/:id', async (req, res) => {
   try {
     const { id } = req.params;
-    
-    const changed = await Post.update({ isModerated: true }, { where: { id } });
-    const post = await Post.findOne({ where: { id } });
+    const { isModerated } = req.body;
+    const changed = await Post.update({ isModerated }, { where: { id } });
     if (changed > 0) {
-      res.status(200).json({ message: 'success', id});
+      res.status(200).json({ message: 'success', id, isModerated });
     } else {
       res.status(500).json({ message: 'произошла ошибка при изменении' });
     }
@@ -143,7 +142,7 @@ router.put('/:id/isAdult', async (req, res) => {
     const { isAdult } = req.body;
     const changed = await Post.update({ isAdult }, { where: { id } });
     if (changed > 0) {
-      res.status(200).json({ message: 'success' });
+      res.status(200).json({ message: 'success', id, isAdult });
     } else {
       res.status(500).json({ message: 'произошла ошибка при изменении' });
     }

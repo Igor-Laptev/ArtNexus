@@ -2,6 +2,7 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import type { PostsState } from '../../redux/reducers/types';
 import {
   fetchAddPost,
+  fetchIsAdult,
   fetchLoadPosts,
   fetchModeratePost,
   fetchPostRemove,
@@ -37,11 +38,14 @@ export const addComment = createAsyncThunk(
     fetchCreateComment({ text, post_id }),
 );
 
-export const moderatePost = createAsyncThunk('posts/moderate', (id: PostId) =>
-  fetchModeratePost(id),
+export const moderatePost = createAsyncThunk('posts/moderate', ({id, isModerated}: {id: PostId, isModerated: boolean}) =>
+  fetchModeratePost( id, isModerated ),
 );
 export const addUserAvatar = createAsyncThunk('posts/addAvatar', (formData: FormData) =>
-fetchLoadAvatar(formData),);
+fetchLoadAvatar(formData));
+
+export const isAdultPost = createAsyncThunk('posts/isAdult', ({id, isAdult}: {id: PostId, isAdult: boolean}) =>
+  fetchIsAdult( id, isAdult ));
 
 const postsSlice = createSlice({
   name: 'posts',
@@ -66,6 +70,7 @@ const postsSlice = createSlice({
       state.posts = state.posts.map((post) => post.isAdult === true ? {...post, isAdult: false} : post);
       state.copyPosts = state.posts;
     },
+
 
   },
   extraReducers: (builder) => {
@@ -94,7 +99,7 @@ const postsSlice = createSlice({
       .addCase(moderatePost.fulfilled, (state, action) => {
         if (action.payload.message === 'success') {
           state.posts = state.posts.map((post) =>
-            post.id === +action.payload.id ? { ...post, isModerated: true } : post,
+            post.id === +action.payload.id ? { ...post, isModerated: action.payload.isModerated } : post,
           );
           state.copyPosts = state.copyPosts.map((post) =>
             post.id === +action.payload.id ? { ...post, isModerated: true } : post,
@@ -119,22 +124,33 @@ const postsSlice = createSlice({
       .addCase(addComment.rejected, (state, action) => {
         state.error = action.error.message;
       })
-      .addCase(likePost.fulfilled, (state, action) => {
-        state.posts.map((post) =>
-          post.id === action.payload.post_id ? post.Likes.push(action.payload) : post,
-        );
-        state.copyPosts.map((post) =>
-          post.id === action.payload.post_id ? post.Likes.push(action.payload) : post,
-        );
+      .addCase(likePost.fulfilled, (state, action) => {console.log(action.payload);
+      
+const targetPost = state.posts.find((post) => post.id === action.payload.post_id);
+const target = targetPost?.Likes.find((like) => like.user_id === action.payload.user_id);
+if (target) {
+  targetPost?.Likes.splice(targetPost?.Likes.indexOf(target), 1);
+}else{
+  targetPost?.Likes.push(action.payload)
+}
+state.copyPosts=state.posts
       })
+      
       .addCase(likePost.rejected, (state, action) => {
         state.error = action.error.message;
       })
-      .addCase(addUserAvatar.fulfilled, (state, action) => {console.log(typeof(action.payload));
+      .addCase(addUserAvatar.fulfilled, (state, action) => {
         state.posts = state.posts.map((post) => post.User.id===action.payload.id ? {...post, User: {...post.User, avatar: action.payload.avatar}} : post)
         state.copyPosts = state.copyPosts.map((post) => post.User.id===action.payload.id ? {...post, User: {...post.User, avatar: action.payload.avatar}} : post)
       })
       .addCase(addUserAvatar.rejected, (state, action) => {
+        state.error = action.error.message;
+      })
+      .addCase(isAdultPost.fulfilled, (state,action)=>{
+        state.posts = state.posts.map((post)=>post.id===+action.payload.id ? {...post, isAdult: action.payload.isAdult} : post);
+        state.copyPosts = state.copyPosts.map((post)=>post.id===+action.payload.id ? {...post, isAdult: action.payload.isAdult} : post);
+      })
+      .addCase(isAdultPost.rejected, (state, action) => {
         state.error = action.error.message;
       })
   },

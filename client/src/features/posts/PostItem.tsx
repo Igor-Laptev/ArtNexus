@@ -6,7 +6,7 @@ import React, { useState } from 'react';
 import type { Post } from './types';
 import './styles.css';
 import './tooltipStyles.css';
-import { moderatePost, removePost } from './postsSlice';
+import { isAdultPost, moderatePost, removePost } from './postsSlice';
 import { type RootState, useAppDispatch } from '../../redux/store';
 import Access from './Access';
 // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
@@ -38,7 +38,7 @@ function PostItem({ post }: { post: Post }): JSX.Element {
   const [access, setAccess] = useState(false);
 
   return (
-    <>
+    <div>
       {access && <Access setAccess={setAccess} />}
       <Link to={!post.isAdult ? `posts/${post.id}` : '/'} onClick={() => setAccess(true)}>
         <div
@@ -88,18 +88,18 @@ function PostItem({ post }: { post: Post }): JSX.Element {
       </button> */}
       {user && user.isAdmin && (
         <div className="adminisration">
-          <button onClick={() => dispatch(moderatePost(post.id)).catch(console.log)} type="button">
+          <button onClick={() => dispatch(moderatePost({id:post.id, isModerated: !post.isModerated})).catch(console.log)} type="button">
            {!post.isModerated ? 'post✅': '?post'}
           </button>
-          <button onClick={() => dispatch(moderatePost(post.id)).catch(console.log)} type="button">
-            18+🔞
+          <button onClick={() => dispatch(isAdultPost({id:post.id, isAdult: !post.isAdult})).catch(console.log)} type="button">
+            {post.isAdult ? '🔞' : '👶🏻'}
           </button>
           <button onClick={() => dispatch(removePost(post.id)).catch(console.log)} type="button">
             REMOVE❌
           </button>
         </div>
       )}
-    </>
+    </div>
   );
 }
 

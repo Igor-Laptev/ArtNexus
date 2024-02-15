@@ -36,16 +36,34 @@ export const fetchPostRemove = async (id: PostId): Promise<PostId> => {
 };
 
 export const fetchModeratePost = async (
-  id: PostId,
-): Promise<{ message: string; id: PostId; post: Post }> => {
+  id: PostId, isModerated: boolean
+): Promise<{ message: string; id: PostId; isModerated: boolean }> => {
   const res = await fetch(`/api/posts/${id}`, {
     method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+    }
+    , body: JSON.stringify({ isModerated,  }),
   });
-  const data: { id: PostId; post: Post; message: string } = (await res.json()) as {
+  const data: { id: PostId;  message: string ; isModerated: boolean} = (await res.json()) as {
     id: PostId;
-    post: Post;
     message: string;
+    isModerated: boolean
   };
-
   return data;
 };
+
+export const fetchIsAdult = async (id: PostId, isAdult: boolean): Promise<{ message: string; id: PostId; isAdult: boolean }> => {const res = await fetch(`/api/posts/${id}/isAdult`, {
+  method: 'PUT',
+  headers: {
+    'Content-Type': 'application/json',
+  },
+   body: JSON.stringify({ isAdult,  }),
+})
+  const data: { id: PostId;  message: string ; isAdult: boolean} = (await res.json()) as {
+    id: PostId;
+    message: string;
+    isAdult: boolean
+  }
+  return data
+}

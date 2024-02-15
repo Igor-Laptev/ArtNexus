@@ -4,12 +4,19 @@ const { Like } = require('../../db/models');
 router.post('/', async (req, res) => {
   try {
     const { postId } = req.body;
-   
-    const like = await Like.create({
-      user_id: res.locals.user.id,
-      post_id: postId,
-    });
-    res.json(like);
+    const userId = res.locals.user.id;
+    let like;
+    const existingLike = await Like.findOne({ where: { post_id: postId, user_id: userId } });
+    if (existingLike) {
+      await Like.destroy({ where: { post_id: postId, user_id: userId } });
+      like = existingLike;
+      console.log(like, '1');
+      res.json(like);
+    } else {
+      like = await Like.create({ post_id: postId, user_id: userId });
+      console.log(like, '2');
+      res.json(like);
+    }
   } catch ({ message }) {
     res.json({ message: 'unable to like' });
   }
