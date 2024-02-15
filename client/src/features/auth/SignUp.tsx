@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import ReactModal from 'react-modal';
-
 import 'animate.css';
-
 import './auth.css';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
@@ -24,6 +22,7 @@ function SignUp({
   const [password, setPassword] = useState('');
   const [rpassword, setRpassword] = useState('');
   const [isEmailValid, setIsEmailValid] = useState(true);
+  const [isAnimatingOut, setIsAnimatingOut] = useState(false);
 
   const error = useSelector((store: RootState) => store.auth.error);
 
@@ -31,8 +30,28 @@ function SignUp({
   const navigate = useNavigate();
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
+  const handleRegistrationSuccess = () => {
+    setIsAnimatingOut(true);
+
+    setTimeout(() => {
+      handleModalReg(false);
+      handleModalLog(true);
+      navigate('/');
+    }, 750);
+  };
+
+  const handleCloseWithAnimation = () => {
+    setIsAnimatingOut(true); // Активируем анимацию выхода
+    setTimeout(() => {
+      handleModalReg(false); // Закрываем модальное окно после завершения анимации
+    }, 750); // Задержка должна соответствовать длительности анимации
+  };
+
   return (
     <ReactModal
+      isOpen={show}
+      onRequestClose={() => handleModalReg(false)}
+      contentLabel="Sign Up Modal"
       style={{
         overlay: {
           position: 'absolute',
@@ -40,12 +59,9 @@ function SignUp({
           backgroundColor: 'rgba(54, 54, 54, 0.679)',
         },
       }}
-      className="modalback"
-      isOpen={show}
-      onRequestClose={() => handleModalReg(false)}
-      contentLabel="Sign Up Modal"
+      className={`modalback ${isAnimatingOut ? 'animate__animated animate__backOutDown' : 'animate__animated animate__fadeInDownBig'}`}
     >
-      <div className="modal-dialog animate__animated animate__fadeInDownBig">
+      <div className="modal-dialog ">
         <div className="modal-content">
           <div className="modal-body">
             <form
@@ -63,12 +79,9 @@ function SignUp({
                   }),
                 )
                   .then(() => {
-                    handleModalReg(false);
-                    handleModalLog(true);
-                    navigate('/');
+                    handleRegistrationSuccess();
                   })
-                  .catch(console.log),
-                  navigate('/');
+                  .catch(console.log);
               }}
             >
               <div className="form-group">
@@ -109,7 +122,7 @@ function SignUp({
                   className="form-control"
                   value={avatar}
                   placeholder="Your Avatar"
-                  type="text"
+                  type="file"
                   required
                   onChange={(e) => {
                     setAvatar(e.target.value);
@@ -144,17 +157,21 @@ function SignUp({
                   }}
                 />
               </div>
-              <button type="submit" className="btn btn-success modal-button" disabled={!isEmailValid}>
+              <button
+                type="submit"
+                className="btn btn-success modal-button"
+                disabled={!isEmailValid}
+              >
                 Register
               </button>
               <button
                 type="button"
                 className="btn btn-secondary modal-button"
-                onClick={() => handleModalReg(false)}
+                onClick={handleCloseWithAnimation}
               >
                 Close
               </button>
-              </form>
+            </form>
           </div>
           <div className="modal-footer animate__animated animate__heartBeat "></div>
         </div>

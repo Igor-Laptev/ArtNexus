@@ -10,6 +10,7 @@
   width: 100%;
   height: 100%;
   cursor: pointer;
+  transition: filter 0.3s ease;
 }
 
 .swiper {
@@ -35,10 +36,10 @@
   text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
   font-size: 20px;
   text-align: center;
-  /* Начальное состояние стилей текста */
   transition:
     transform 0.5s,
-    color 0.5s; /* Плавный переход для трансформации и цвета */
+    color 0.5s,
+    font-weight 0.3s ease;
 }
 .swiper-slide img {
   display: block;
@@ -50,7 +51,7 @@
   filter: blur(7px);
 }
 .blur-image .post-text p {
-  filter: blur(0px) !;
+  filter: blur(0px) !important;
   z-index: 5;
 }
 .userAvatar {
@@ -69,20 +70,42 @@
   color: #ffd700; /* Изменение цвета текста при наведении */
   text-shadow: 0 0 10px rgba(255, 215, 0, 0.7); /* Увеличенная тень для создания глубины */
 }
+
+/* Интерактивность и динамические эффекты при наведении */
+.swiper-slide button:hover .slide-img {
+  filter: brightness(50%);
+}
+
+.swiper-slide button:hover .slide-title {
+  transform: scale(2);
+  font-weight: bold;
+}
+
 /* Стили для стрелок навигации */
-.swiper-button-next, .swiper-button-prev {
-  background-color: rgba(0, 0, 0, 0.5); /* Начальный цвет фона */
-  color: #fff; /* Цвет иконки */
-  transition: transform 0.3s ease-in-out, background-color 0.3s ease; /* Плавный переход для анимации */
+.swiper-button-next,
+.swiper-button-prev::after {
+  background-color: none;
+  color: #ed1515;
+  transition:
+    transform 0.3s ease-in-out,
+    background-color 0.3s ease;
+}
+
+/* Стили для стрелок при клике */
+.swiper-button-next:active,
+.swiper-button-prev:active {
+  color: #131212; /* Золотистый цвет для демонстрации */
 }
 
 /* Стили при наведении */
-.swiper-button-next:hover, .swiper-button-prev:hover {
+.swiper-button-next:hover,
+.swiper-button-prev:hover {
   transform: scale(1.1); /* Увеличение размера */
-  background-color: rgba(0, 0, 0, 0.8); /* Затемнение фона */
 }
 
 /* Опционально: добавление тени для создания эффекта "подъема" */
-.swiper-button-next:hover, .swiper-button-prev:hover {
-  box-shadow: 0 4px 8px rgba(0,0,0,0.5); /* Тень */
+.swiper-button-next:hover,
+.swiper-button-prev:hover {
+  transform: scale(1.1);
+  background-color: none;
 }

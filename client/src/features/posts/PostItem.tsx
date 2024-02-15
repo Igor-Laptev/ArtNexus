@@ -38,9 +38,7 @@ function PostItem({ post }: { post: Post }): JSX.Element {
   const [access, setAccess] = useState(false);
 
   return (
-
     <div className="container-pic">
-
       {access && <Access setAccess={setAccess} />}
       <Link to={!post.isAdult ? `posts/${post.id}` : '/'} onClick={() => setAccess(true)}>
         <div
@@ -97,18 +95,21 @@ function PostItem({ post }: { post: Post }): JSX.Element {
           >
             {!post.isModerated ? ' ✅' : ' ❔'}
           </button>
-         <button onClick={() => dispatch(isAdultPost({id:post.id, isAdult: !post.isAdult})).catch(console.log)} type="button">
+          <button
+            onClick={() =>
+              dispatch(isAdultPost({ id: post.id, isAdult: !post.isAdult })).catch(console.log)
+            }
+            type="button"
+          >
             {post.isAdult ? '🔞' : '👶🏻'}
-
           </button>
 
-          </button>
           <button
             onClick={() => dispatch(removePost(post.id)).catch(console.log)}
             type="button"
             className="btn btn-secondary"
           >
-             ❌
+            ❌
           </button>
         </div>
       )}
