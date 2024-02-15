@@ -39,10 +39,10 @@ function SignIn({
     }, 750);
   };
   const handleCloseWithAnimation = () => {
-    setIsAnimatingOut(true); // Активируем анимацию выхода
+    setIsAnimatingOut(true); 
     setTimeout(() => {
-      handleModalLog(false); // Закрываем модальное окно после завершения анимации
-    }, 750); // Задержка должна соответствовать длительности анимации
+      handleModalLog(false);
+    }, 750); 
   };
 
   const handleSubmit = (e: React.FormEvent) => {
