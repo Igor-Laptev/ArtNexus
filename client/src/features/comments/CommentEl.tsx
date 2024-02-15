@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link} from 'react-router-dom';
 import type { Comment } from './type';
 
 function CommentEl({ comment }: { comment: Comment }): JSX.Element {
@@ -18,7 +19,8 @@ function CommentEl({ comment }: { comment: Comment }): JSX.Element {
         <div style={{borderRadius: '50%'}}>
           <img src={comment.User.avatar} style={{ width: '30px' }} alt="" />
         </div>
-        <div>{comment.User.name}</div>  <span className="time">{timeString} /{dateString}/ </span>
+        
+        <div><Link to={`/users/${comment.User.id}`}>{comment.User.name}</Link></div>  <span className="time">{timeString} /{dateString}/ </span>
       </div>
       <p style={{ color: 'black' }}>{comment.text}</p>
     
