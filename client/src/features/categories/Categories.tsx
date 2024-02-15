@@ -32,6 +32,7 @@ function Categories(): JSX.Element {
       navigation
       pagination={{ clickable: true }}
       scrollbar={{ draggable: true }}
+      loop={true}
       cubeEffect={{
         shadow: true,
         slideShadows: true,
@@ -43,17 +44,16 @@ function Categories(): JSX.Element {
         <SwiperSlide key={slide.id}>
           <button type="button" onClick={() => sortFunctions(slide.id)}>
             <img className="slide-img" src={`${slide.img}`} alt={slide.title} />
+            <div className="slide-title">{slide.title}</div>
           </button>
-          <div className="slide-container">{slide.title}</div>
         </SwiperSlide>
       ))}
-      <SwiperSlide>
-        <button type="button" onClick={sortForAdults}>
-          isAdult
-        </button>
-      </SwiperSlide>
+      <SwiperSlide></SwiperSlide>
       {admin && (
         <SwiperSlide>
+          <button type="button" onClick={sortForAdults}>
+            isAdult
+          </button>
           <button type="button" onClick={sortForModerate}>
             Moderate
           </button>

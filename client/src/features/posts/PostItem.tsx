@@ -38,7 +38,9 @@ function PostItem({ post }: { post: Post }): JSX.Element {
   const [access, setAccess] = useState(false);
 
   return (
-    <div>
+
+    <div className="container-pic">
+
       {access && <Access setAccess={setAccess} />}
       <Link to={!post.isAdult ? `posts/${post.id}` : '/'} onClick={() => setAccess(true)}>
         <div
@@ -87,15 +89,26 @@ function PostItem({ post }: { post: Post }): JSX.Element {
         Нравится
       </button> */}
       {user && user.isAdmin && (
-        <div className="adminisration">
-          <button onClick={() => dispatch(moderatePost({id:post.id, isModerated: !post.isModerated})).catch(console.log)} type="button">
-           {!post.isModerated ? 'post✅': '?post'}
+        <div className="adminisration-pic">
+          <button
+            onClick={() => dispatch(moderatePost(post.id)).catch(console.log)}
+            type="button"
+            className="btn btn-secondary"
+          >
+            {!post.isModerated ? ' ✅' : ' ❔'}
           </button>
-          <button onClick={() => dispatch(isAdultPost({id:post.id, isAdult: !post.isAdult})).catch(console.log)} type="button">
+         <button onClick={() => dispatch(isAdultPost({id:post.id, isAdult: !post.isAdult})).catch(console.log)} type="button">
             {post.isAdult ? '🔞' : '👶🏻'}
+
           </button>
-          <button onClick={() => dispatch(removePost(post.id)).catch(console.log)} type="button">
-            REMOVE❌
+
+          </button>
+          <button
+            onClick={() => dispatch(removePost(post.id)).catch(console.log)}
+            type="button"
+            className="btn btn-secondary"
+          >
+             ❌
           </button>
         </div>
       )}

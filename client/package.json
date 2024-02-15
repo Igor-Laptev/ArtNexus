@@ -27,7 +27,8 @@
     "react-router-dom": "^6.21.3",
     "react-transition-group": "^4.4.5",
     "redux": "^5.0.1",
-    "swiper": "^11.0.6"
+    "swiper": "^11.0.6",
+    "twgl.js": "^5.5.3"
   },
   "devDependencies": {
     "@types/react": "^18.2.48",

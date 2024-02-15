@@ -1,5 +1,15 @@
-/* SignUpStyles.css */
+/* Общие стили */
 @import url('https://fonts.googleapis.com/css?family=Raleway');
+
+* {
+  box-sizing: border-box;
+}
+
+button {
+  font-family: 'Raleway', serif;
+}
+
+/* Стили для кнопок */
 .button-primary,
 .button-secondary {
   position: relative;
@@ -34,7 +44,7 @@
   opacity: 1;
 }
 
-/* Теперь стили для анимации наведения изменены, чтобы показывать анимированный фон */
+/* Стили для анимации наведения кнопок */
 .button-primary:hover {
   color: #fff; /* Убедитесь, что текст остается видимым */
   background-color: transparent;
@@ -47,17 +57,9 @@
   border-color: #6c757d; /* Сохраняем цвет границы */
 }
 
-button {
-  font-family: 'Raleway', serif;
-}
-
-* {
-  box-sizing: border-box;
-}
-
+/* Стили для модального окна */
 .modalback {
-  background-color: rgba(54, 54, 54, 0.679);
-
+  background-color: #49505797;
   /* z-index: 1100 !important; */
 }
 
@@ -67,12 +69,8 @@ button {
   left: 35%;
   max-width: 640px;
   background-color: #202024;
-  /* padding: 20px; */
   border-radius: 16px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  /* display: flex; */
-  /* flex-direction: column; */
-  /* transform: translate(-50%, -50%); */
 }
 
 .modal-content {
@@ -97,19 +95,6 @@ button {
   margin-top: 20px;
 }
 
-/* .modal-button {
-  padding: 0.375rem 0.75rem;
-  margin: 10px;
-  font-size: 1rem;
-  border: none;
-  border-radius: 0.25rem;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  color: #fff;
-  background: linear-gradient(45deg, #504bff, #4cfa63);
-  outline: none;
-} */
-
 .modal-button {
   font-weight: 400;
   text-align: center;
@@ -133,6 +118,7 @@ button {
     0 0 15px #4cfa63;
   background: linear-gradient(45deg, #4cfa63, #504bff);
 }
+
 .modal-form {
   width: 300px;
   display: flex;
@@ -142,31 +128,28 @@ button {
 
 /* Стили для элементов формы */
 .form-control {
-  background-color: #fff; /* Фоновый цвет */
-  border: 1px solid #ced4da; /* Граница */
-  border-radius: 0.25rem; /* Скругление углов */
-  font-size: 1rem; /* Размер шрифта */
-  line-height: 1.5; /* Высота строки */
-  padding: 0.375rem 0.75rem; /* Внутренние отступы */
-  color: #495057; /* Цвет текста */
+  background-color: #fff;
+  border: 1px solid #ced4da;
+  border-radius: 0.25rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  padding: 0.375rem 0.75rem;
+  color: #495057;
   transition:
     border-color 0.15s ease-in-out,
-    box-shadow 0.15s ease-in-out; /* Плавность перехода */
-
+    box-shadow 0.15s ease-in-out;
   width: 100%;
-  box-shadow: none; /* Убираем тень */
+  box-shadow: none;
 }
 
 /* Стиль для элементов формы при фокусе */
 .form-control:focus {
-  border-color: #80bdff; /* Цвет границы при фокусе */
-  outline: 0; /* Убираем стандартный outline */
-  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25); /* Тень вокруг элемента */
+  border-color: #80bdff;
+  outline: 0;
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
 }
 
-/* Стилизация кнопок внутри модального окна */
-
-/* Стиль для кнопки "Регистрация" */
+/* Стили для кнопок в модальном окне */
 .btn-success {
   color: #fff;
   background-color: #28a745;
@@ -179,7 +162,6 @@ button {
   border-color: #1e7e34;
 }
 
-/* Стиль для кнопки "Закрыть" */
 .btn-secondary {
   color: #fff;
   background-color: #6c757d;
@@ -192,6 +174,20 @@ button {
   border-color: #545b62;
 }
 
+/* Анимация */
 .animate__animated.animate__heartBeat {
   --animate-duration: 2s;
+}
+@media (max-width: 768px) {
+  .modal-dialog {
+    left: 5%;
+    max-width: 80%;
+  }
+}
+
+@media (max-width: 576px) {
+  .modal-dialog {
+    left: 2%;
+    max-width: 90%;
+  }
 }

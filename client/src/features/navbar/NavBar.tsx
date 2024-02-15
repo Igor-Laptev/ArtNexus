@@ -30,14 +30,6 @@ function NavBar(): JSX.Element {
       <nav className="navbar">
         <div className="links">
           <div className="left-buttons">
-            {user && user.isAdmin && (
-              <li className="nav__item">
-                <NavLink className="nav__link" to="/moderator">
-                  Модерация
-                </NavLink>
-              </li>
-            )}
-
             <li className="nav__item">
               <NavLink className="nav__link" to="/" onClick={() => dispatch(setEquel())}>
                 Explore
@@ -75,7 +67,6 @@ function NavBar(): JSX.Element {
               ) : (
                 user && (
                   <>
-                    <li>Hello, {user?.name}!</li>
                     <NavLink className="nav__link" to="/likes">
                       Избранное
                     </NavLink>
