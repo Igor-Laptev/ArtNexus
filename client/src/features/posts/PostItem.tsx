@@ -57,13 +57,11 @@ function PostItem({ post }: { post: Post }): JSX.Element {
                   // backgroundSize: 'cover',
                   width: '100%',
                   height: '100%',
+                  borderRadius: '10%',
                 }}
               >
                 <div className="post-text">
                   <p>{post.title}</p>
-                </div>
-                <div className="post-text">
-                  <p>{post.description}</p>
                 </div>
               </div>
             )}
@@ -75,6 +73,7 @@ function PostItem({ post }: { post: Post }): JSX.Element {
                   backgroundRepeat: 'no-repeat',
                   //   backgroundSize: 'contain',
                   //   backgroundSize: 'cover',
+                  borderRadius: '10%',
                   width: '100%',
                   height: '100%',
                 }}
