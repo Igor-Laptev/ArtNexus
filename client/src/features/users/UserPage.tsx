@@ -1,10 +1,13 @@
+/* eslint-disable @typescript-eslint/no-misused-promises */
+/* eslint-disable jsx-a11y/anchor-is-valid */
+
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { useAppDispatch, type RootState } from '../../redux/store';
 import PostItem from '../posts/PostItem';
 import AddPostForm from '../posts/AddPostForm';
-import { addUserAvatar } from '../posts/postsSlice';
+import { addUserAvatar, removePost } from '../posts/postsSlice';
 
 function UserPage(): JSX.Element {
   const { userId } = useParams();
@@ -80,8 +83,8 @@ setAddAvatar(false)
             <PostItem post={post} />
             {owner?.id === user.id && (
               <div className="reduct">
-                <button type="button">Delete</button>
-                <button type="button">Edit</button>
+                <button type="button" onClick={() => dispatch(removePost(post.id)).catch(console.log)}>Delete</button>
+                {/* <button type="button">Edit</button> */}
               </div>
             )}
           </div>
