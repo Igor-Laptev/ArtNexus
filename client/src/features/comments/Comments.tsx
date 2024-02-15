@@ -20,7 +20,7 @@ function Comments({ post }: { post: Post }): JSX.Element {
             </Link>
           </div>
           <Link to={`/users/${post.User.id}`}>
-            <p style={{ color: 'white' }}>{post.User.name}</p>
+            <p >{post.User.name}</p>
           </Link>
         </div>
         <div className="info">
