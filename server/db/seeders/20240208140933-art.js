@@ -477,7 +477,7 @@ module.exports = {
         },
         {
           gallery_id: 46,
-          src: 'https://cdnb.artstation.com/p/assets/images/images/068/058/665/4k/ivailo-ivanov-3.jpg?1696893425',
+          src: 'https://cdnb.artstation.com/p/assets/images/images/035/307/569/large/shenpei-wu-2021-03021.jpg?1614636093',
           title: '',
           createdAt: new Date(),
           updatedAt: new Date(),

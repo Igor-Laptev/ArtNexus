@@ -14,7 +14,7 @@ function CommentEl({ comment }: { comment: Comment }): JSX.Element {
     minute: '2-digit',
   });
   return (
-    <div className="author" style={{backgroundColor: 'white', marginBottom: '5px', width: '25%' }}>
+    <div className="author" style={{backgroundColor: 'white', marginBottom: '5px' }}>
       <div className="">
         <div style={{borderRadius: '50%'}}>
           <img src={comment.User.avatar} style={{ width: '30px' }} alt="" />
@@ -22,7 +22,7 @@ function CommentEl({ comment }: { comment: Comment }): JSX.Element {
         
         <div><Link to={`/users/${comment.User.id}`}>{comment.User.name}</Link></div>  <span className="time">{timeString} /{dateString}/ </span>
       </div>
-      <p style={{ color: 'black' }}>{comment.text}</p>
+      <p className='comment-t' style={{ color: 'black' }}>{comment.text}</p>
     
     </div>
   );

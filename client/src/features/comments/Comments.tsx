@@ -12,16 +12,16 @@ function Comments({ post }: { post: Post }): JSX.Element {
   const [text, setText] = useState('');
 
   return (
-    <div>
-      <div className="postInfo" style={{ backgroundColor: 'white' }}>
+    <div className="postInfo">
+      <div className="postInf" style={{ backgroundColor: 'white' }}>
         <div className="user">
-          <div className='user-ava'>
+          <div className="user-ava">
             <Link to={`/users/${post.User.id}`}>
               <img src={post.User.avatar} alt="" style={{ width: '50px' }} />
             </Link>
           </div>
           <Link to={`/users/${post.User.id}`}>
-            <p className='user-named'>{post.User.name}</p>
+            <p className="user-named">{post.User.name}</p>
           </Link>
         </div>
         <div className="info">
@@ -31,6 +31,7 @@ function Comments({ post }: { post: Post }): JSX.Element {
           <div className="like">
             <button type="button" onClick={() => dispatch(likePost(post.id)).catch(console.log)}>
               ❤️{post.Likes.length}💬 {post.Comments.length}
+          <div class="scattering">123</div>
             </button>
           </div>
         </div>
@@ -43,8 +44,15 @@ function Comments({ post }: { post: Post }): JSX.Element {
           setText('');
         }}
       >
-        <input type="text" value={text} onChange={(e) => setText(e.target.value)} />
-        <button type="submit">✎</button>
+        <input
+          className="input-comment"
+          type="text"
+          value={text}
+          onChange={(e) => setText(e.target.value)}
+        />
+        <button className="comment-button" type="submit">
+          ✎
+        </button>
       </form>
       {[...post.Comments].reverse().map((comment: Comment) => (
         <CommentEl key={comment.id} comment={comment} />

@@ -8,56 +8,59 @@ import { useAppDispatch, type RootState } from '../../redux/store';
 import PostItem from '../posts/PostItem';
 import AddPostForm from '../posts/AddPostForm';
 import { addUserAvatar, removePost } from '../posts/postsSlice';
+import './styles.css';
 
 function UserPage(): JSX.Element {
   const { userId } = useParams();
   const user = useSelector((store: RootState) =>
-    store.users.users.find((usr) => usr.id === +userId));
-    console.log(user, 'userrrrrrrr');
-    
+    store.users.users.find((usr) => usr.id === +userId),
+  );
+  console.log(user, 'userrrrrrrr');
+
   const owner = useSelector((store: RootState) => store.auth.auth);
 
   const posts = useSelector((store: RootState) => store.posts.posts).filter(
-    (post) => post.User.id === user?.id
-  )
+    (post) => post.User.id === user?.id,
+  );
   console.log(posts, 'postssssssss');
-  
-const dispatch = useAppDispatch();
-  const[addPost, setAddPost] = useState(false)
-const [addAvatar, setAddAvatar] = useState(false)
-const[avatar, setAvatar] = useState<FileList | null>(null)
-function handleSubmit(e: React.FormEvent):void {
-  e.preventDefault();
-  if(!avatar) return;
-  const formData = new FormData();
-  formData.append('avatar', avatar[0]);
-dispatch(addUserAvatar(formData)).catch(console.log)
-setAddAvatar(false)
-}
 
+  const dispatch = useAppDispatch();
+  const [addPost, setAddPost] = useState(false);
+  const [addAvatar, setAddAvatar] = useState(false);
+  const [avatar, setAvatar] = useState<FileList | null>(null);
+  function handleSubmit(e: React.FormEvent): void {
+    e.preventDefault();
+    if (!avatar) return;
+    const formData = new FormData();
+    formData.append('avatar', avatar[0]);
+    dispatch(addUserAvatar(formData)).catch(console.log);
+    setAddAvatar(false);
+  }
 
   if (!user) {
     return <div>Such user not found</div>;
   }
   return (
-    <div>
+    <div className="container-user-page">
       <div className="userInfo">
-        <div>
+        {/* <div> */}
           <div className="userAvatar">
             <img src={user.avatar} alt="" />
           </div>
+        {/* </div> */}
+        <div className='user-name-btn'>
+          <h1>{user.name}</h1>
           {owner && (
-            <div>
-              <button type="button" onClick={() => setAddAvatar(true)}>
+            <div className="add-post-form">
+              <button className='btn' type="button" onClick={() => setAddAvatar(true)}>
                 ✍🏻
               </button>
-              <button type="button" onClick={() => setAddPost(true)}>
+              <button className='btn-secondary modal-button' type="button" onClick={() => setAddPost(true)}>
                 Add post
               </button>
             </div>
           )}
         </div>
-        <h1>{user.name}</h1>
       </div>
       {addPost && <AddPostForm setAddpost={setAddPost} />}
       {addAvatar && (
@@ -75,24 +78,23 @@ setAddAvatar(false)
         </form>
       )}
       <div className="all-post-container">
-
-
-
-        {posts && posts.map((post) => (
-          <div key={post.id}>
-            <PostItem post={post} />
-            {owner?.id === user.id && (
-              <div className="reduct">
-                <button type="button" onClick={() => dispatch(removePost(post.id)).catch(console.log)}>Delete</button>
-                {/* <button type="button">Edit</button> */}
-              </div>
-            )}
-          </div>
-        ))}
-
-
-
-
+        {posts &&
+          posts.map((post) => (
+            <div key={post.id}>
+              <PostItem post={post} />
+              {owner?.id === user.id && (
+                <div className="reduct">
+                  <button
+                    type="button"
+                    onClick={() => dispatch(removePost(post.id)).catch(console.log)}
+                  >
+                    Delete
+                  </button>
+                  {/* <button type="button">Edit</button> */}
+                </div>
+              )}
+            </div>
+          ))}
       </div>
     </div>
   );
