@@ -1,11 +1,11 @@
 /* Основные стили и шрифты */
-@import url('https://fonts.googleapis.com/css?family=Roboto:400,500,700&display=swap');
+/* @import url('https://fonts.googleapis.com/css?family=Roboto:400,500,700&display=swap'); */
 
 body,
 html {
   margin: 0;
   padding: 0;
-  font-family: 'Roboto', sans-serif;
+  /* font-family: 'Roboto', sans-serif; */
 }
 
 /* Стили для навбара */
@@ -33,7 +33,7 @@ html {
 }
 
 .logo {
-  color: #ea4c89; /* Яркий цвет для части логотипа */
+  color: #8924a8; /* Яркий цвет для части логотипа */
   margin-left: 8px;
 }
 
@@ -52,13 +52,14 @@ html {
 .link {
   color: white;
   text-decoration: none;
+  font-size: 16px;
   font-weight: 500;
   transition: color 0.3s ease;
 }
 
 .link:hover,
 .link:focus {
-  color: #ea4c89; /* Подсветка при наведении */
+  color: #8924a8; /* Подсветка при наведении */
 }
 
 /* Стили для модальных окон регистрации и входа */

@@ -42,3 +42,10 @@
   width: 100px;
   margin-left: 1000px;
 }
+.burron-container {
+  width: 100%;
+  display: flex;
+  justify-content: end;
+  padding-right: 205px;
+  margin-bottom: 20px;
+}

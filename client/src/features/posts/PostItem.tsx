@@ -58,16 +58,15 @@ function PostItem({ post }: { post: Post }): JSX.Element {
               <div
                 className={`tooltip ${post.isAdult ? 'blur-image' : ''}`}
                 style={{
+                  // backgroundImage: 'lin'
                   backgroundImage: `url(${firstArt})`,
                   backgroundRepeat: 'no-repeat',
-                  // backgroundSize: 'contain',
-                  // backgroundSize: 'cover',
                   width: '100%',
                   height: '100%',
                   borderRadius: '10%',
                 }}
               >
-                <div className="animate__animated animate__slideInRight">
+                <div className="animate__animated animate__slideInRight ptext">
                   <p>{post.title}</p>
                 </div>
               </div>
@@ -78,8 +77,6 @@ function PostItem({ post }: { post: Post }): JSX.Element {
                 style={{
                   backgroundImage: `url(${firstArt})`,
                   backgroundRepeat: 'no-repeat',
-                  //   backgroundSize: 'contain',
-                  //   backgroundSize: 'cover',
                   borderRadius: '10%',
                   width: '100%',
                   height: '100%',
