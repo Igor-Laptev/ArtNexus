@@ -6,6 +6,7 @@ import { useAppDispatch, type RootState } from '../../redux/store';
 import { logOut } from '../auth/authSlice';
 import SignUp from '../auth/SignUp';
 import SignIn from '../auth/SignIn';
+import { setEquel } from '../posts/postsSlice';
 
 function NavBar(): JSX.Element {
   const user = useSelector((store: RootState) => store.auth.auth);
@@ -42,11 +43,11 @@ function NavBar(): JSX.Element {
     <>
       <nav className="navigationWrapper">
         <div className="logoWrapper">
-          {/* <img
+          <img
             src="styles/6bc29eb8c2f144d8401ef8303a90cd329fdfa3a2_medium.jpg"
             alt="Logo"
             className="logo"
-          /> */}
+          />
         </div>
         <ul className="navigation">
           {/* Сохраняем логику и навигационные ссылки вашего навбара */}
