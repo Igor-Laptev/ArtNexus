@@ -13,16 +13,20 @@ html {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  
+
   background-color: #222;
   color: white;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   width: 100%; /* Полная ширина */
   box-sizing: border-box;
+  position: fixed; /* Фиксированное положение */
+  top: 0; /* Прикрепляем к верхней части экрана */
+  left: 0; /* Растягиваем на всю ширину */
+  z-index: 1000; /* Убедитесь, что навбар находится поверх других элементов */
 }
 
 .logoWrapper {
-    margin-top: 4px;
+  margin-top: 4px;
   display: block;
   align-items: center;
 }
