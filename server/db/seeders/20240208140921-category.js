@@ -12,7 +12,7 @@ module.exports = {
           updatedAt: new Date(),
         },
         {
-          title: 'Architectural Visualization',
+          title: 'Architectures',
           img: 'https://cdna.artstation.com/p/assets/images/images/058/802/972/4k/mike-kurabi-screen01-4k.jpg?1675018320',
           createdAt: new Date(),
           updatedAt: new Date(),

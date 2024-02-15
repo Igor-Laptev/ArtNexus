@@ -13,7 +13,7 @@ html {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 20px;
+  
   background-color: #222;
   color: white;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -22,7 +22,7 @@ html {
 }
 
 .logoWrapper {
-  
+    margin-top: 4px;
   display: block;
   align-items: center;
 }
