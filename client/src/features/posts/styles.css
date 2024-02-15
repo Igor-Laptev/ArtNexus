@@ -39,6 +39,7 @@ h2 {
   border-radius: 10%;
   background-size: contain;
   background-size: cover;
+  background-position: center;
 }
 .cover-exit {
   opacity: 1;
@@ -137,3 +138,20 @@ h2 {
 .container-tip {
   border-radius: 20px;
 }
+.slide {
+  position: absolute;
+  -webkit-animation: slide 0.5s forwards;
+  -webkit-animation-delay: 2s;
+  animation: slide 0.5s forwards;
+  animation-delay: 2s;
+  color: red
+}
+
+@-webkit-keyframes slide {
+  100% { left: 0; }
+}
+
+@keyframes slide {
+  100% { left: 0; }
+}
+

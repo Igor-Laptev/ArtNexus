@@ -5,11 +5,12 @@ import type { Post } from '../posts/types';
 import type { Comment } from './type';
 import CommentEl from './CommentEl';
 import { addComment, likePost } from '../posts/postsSlice';
+import './styles.css';
 
 function Comments({ post }: { post: Post }): JSX.Element {
   const dispatch = useAppDispatch();
   const [text, setText] = useState('');
- 
+
   return (
     <div>
       <div className="postInfo" style={{ backgroundColor: 'white' }}>
@@ -20,7 +21,7 @@ function Comments({ post }: { post: Post }): JSX.Element {
             </Link>
           </div>
           <Link to={`/users/${post.User.id}`}>
-            <p >{post.User.name}</p>
+            <p>{post.User.name}</p>
           </Link>
         </div>
         <div className="info">
@@ -35,14 +36,14 @@ function Comments({ post }: { post: Post }): JSX.Element {
           </div>
         </div>
       </div>
-      <form
+      <form className='input'
         onSubmit={(e) => {
           e.preventDefault();
           dispatch(addComment({ text, post_id: post.id })).catch(console.log);
           setText('');
         }}
       >
-        <input type="text" value={text} onChange={(e) => setText(e.target.value)} />
+        <input  type="text" value={text} onChange={(e) => setText(e.target.value)} />
         <button type="submit">✎</button>
       </form>
       {[...post.Comments].reverse().map((comment: Comment) => (

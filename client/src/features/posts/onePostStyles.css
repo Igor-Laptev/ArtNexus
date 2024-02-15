@@ -8,8 +8,8 @@
 }
 
 .post-swiper {
-    width: 500px;
-    height: 500px;
+    width: 80%;
+    height: 100%;
   }
   
   .swiper-slide {
@@ -32,4 +32,13 @@
 }
 .swiper-button-prev:after {
     color: white;
+}
+.container { 
+  display: flex;
+  flex-direction: column;
+  /* justify-content: center; */
+}
+.one {
+  width: 100px;
+  margin-left: 1000px;
 }
