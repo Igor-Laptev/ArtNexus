@@ -90,12 +90,12 @@ function NavBar(): JSX.Element {
             <>
               <li className="parent">
                 <button type="button" onClick={() => handleModalReg(!showReg)} className="link">
-                  Зарегистрироваться
+                  Sign-Up
                 </button>
               </li>
               <li className="parent">
                 <button type="button" onClick={() => handleModalLog(!showLog)} className="link">
-                  Войти
+                  Sign-In
                 </button>
               </li>
             </>

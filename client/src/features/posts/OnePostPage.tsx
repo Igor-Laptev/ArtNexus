@@ -20,7 +20,15 @@ function OnePostPage(): JSX.Element {
   return (
     <div className="container">
       <h2>{post?.title}</h2>
-
+      <div className="burron-container">
+        <button
+          type="button"
+          className="btn btn-secondary modal-button one"
+          onClick={() => navigate(-1)}
+        >
+          Back
+        </button>
+      </div>
       <Swiper
         className="post-swiper"
         modules={[Navigation, Pagination, Scrollbar, A11y, EffectCube, Mousewheel]}
@@ -45,13 +53,7 @@ function OnePostPage(): JSX.Element {
             </SwiperSlide>
           ))}
       </Swiper>
-      <button
-        type="button"
-        className="btn btn-secondary modal-button one"
-        onClick={() => navigate(-1)}
-      >
-        Back
-      </button>
+
       {post && <Comments post={post} />}
     </div>
   );

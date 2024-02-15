@@ -11,7 +11,9 @@
   background-size: contain;
   background-size: cover;
   background-position: center;
+  
 }
+
 .tooltip:hover {
     transform: scale(1.1);
     border-radius: 10%;

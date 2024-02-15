@@ -15,18 +15,17 @@ function Comments({ post }: { post: Post }): JSX.Element {
     <div>
       <div className="postInfo" style={{ backgroundColor: 'white' }}>
         <div className="user">
-          <div>
+          <div className='user-ava'>
             <Link to={`/users/${post.User.id}`}>
               <img src={post.User.avatar} alt="" style={{ width: '50px' }} />
             </Link>
           </div>
           <Link to={`/users/${post.User.id}`}>
-            <p>{post.User.name}</p>
+            <p className='user-named'>{post.User.name}</p>
           </Link>
         </div>
         <div className="info">
           <div>
-            <h2>{post.title}</h2>
             <p>{post.description}</p>
           </div>
           <div className="like">
@@ -36,14 +35,15 @@ function Comments({ post }: { post: Post }): JSX.Element {
           </div>
         </div>
       </div>
-      <form className='input'
+      <form
+        className="input"
         onSubmit={(e) => {
           e.preventDefault();
           dispatch(addComment({ text, post_id: post.id })).catch(console.log);
           setText('');
         }}
       >
-        <input  type="text" value={text} onChange={(e) => setText(e.target.value)} />
+        <input type="text" value={text} onChange={(e) => setText(e.target.value)} />
         <button type="submit">✎</button>
       </form>
       {[...post.Comments].reverse().map((comment: Comment) => (

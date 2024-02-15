@@ -6,7 +6,8 @@
 }
 
 button {
-  font-family: 'Raleway', serif;
+  font-family: 'inter', sans-serif;
+  /* font-family: 'Raleway', serif; */
 }
 
 /* Стили для кнопок */
@@ -114,9 +115,9 @@ button {
 
 .modal-button:hover {
   box-shadow:
-    0 0 10px #504bff,
-    0 0 15px #4cfa63;
-  background: linear-gradient(45deg, #4cfa63, #504bff);
+    0 0 10px #8924a8,
+    0 0 15px #222;
+  background: linear-gradient( #8924a8, #222);
 }
 
 .modal-form {
@@ -152,14 +153,14 @@ button {
 /* Стили для кнопок в модальном окне */
 .btn-success {
   color: #fff;
-  background-color: #28a745;
-  border-color: #28a745;
+  background-color: #8924a8;
+  border-color: #0b0c0b;
 }
 
 .btn-success:hover {
   color: #fff;
-  background-color: #218838;
-  border-color: #1e7e34;
+  background-color: #672188;
+  border-color: #000000;
 }
 
 .btn-secondary {
