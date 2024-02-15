@@ -26,9 +26,10 @@ function Categories(): JSX.Element {
   const admin = useSelector((store: RootState) => store.auth.auth)?.isAdmin;
   return (
     <Swiper
+      className="cat-swiper"
       modules={[Navigation, Pagination, Scrollbar, A11y, EffectCube]}
       spaceBetween={20}
-      slidesPerView={2}
+      slidesPerView={3}
       navigation
       pagination={{ clickable: true }}
       scrollbar={{ draggable: true }}

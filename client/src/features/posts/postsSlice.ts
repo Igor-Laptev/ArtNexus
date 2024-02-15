@@ -70,7 +70,14 @@ const postsSlice = createSlice({
       state.posts = state.posts.map((post) => post.isAdult === true ? {...post, isAdult: false} : post);
       state.copyPosts = state.posts;
     },
-
+// setAdult: (state, action) => {
+//   state.posts = state.copyPosts;
+//   state.posts = state.posts.map((post)=>post.id===action.payload ? {...post , isAdult: !post.isAdult}:post)
+// },
+// setModerate: (state, action) => {
+//   state.posts = state.copyPosts;
+//   state.posts = state.posts.map((post)=>post.id===action.payload ? {...post , isModerated: !post.isModerated}:post)
+// }
 
   },
   extraReducers: (builder) => {
@@ -158,6 +165,6 @@ state.copyPosts=state.posts
 
 export default postsSlice.reducer;
 
-export const { filterPosts, filterIsAdult, filterToModerate, setEquel, adultPost } =
+export const { filterPosts, filterIsAdult, filterToModerate, setEquel, adultPost, setAdult, setModerate } =
   postsSlice.actions;
 
