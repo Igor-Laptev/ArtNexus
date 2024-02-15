@@ -9,9 +9,10 @@ import { addComment, likePost } from '../posts/postsSlice';
 function Comments({ post }: { post: Post }): JSX.Element {
   const dispatch = useAppDispatch();
   const [text, setText] = useState('');
+ 
   return (
     <div>
-      <div className="postInfo">
+      <div className="postInfo" style={{ backgroundColor: 'white' }}>
         <div className="user">
           <div>
             <Link to={`/users/${post.User.id}`}>

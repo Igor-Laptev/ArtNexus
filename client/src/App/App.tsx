@@ -36,6 +36,7 @@ function App(): JSX.Element {
           <Route path="/posts/:postId" element={<OnePostPage />} />
           <Route path="/users/:userId" element={<UserPage />} />
           <Route path="*" element={<NotFoundPage />} />
+          <Route path="/users/:userId/posts/:postId" element={<OnePostPage />} />
         </Route>
       </Routes>
       <Footer />

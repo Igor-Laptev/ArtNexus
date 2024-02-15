@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-misused-promises */
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import React, { useState } from 'react';
 import type { Post } from './types';
@@ -40,7 +40,7 @@ function PostItem({ post }: { post: Post }): JSX.Element {
   return (
     <div className="container-pic">
       {access && <Access setAccess={setAccess} />}
-      <Link to={!post.isAdult ? `posts/${post.id}` : '/'} onClick={() => setAccess(true)}>
+      <NavLink to={!post.isAdult ? `posts/${post.id}` : '/'} onClick={() => setAccess(true)}>
         <div
           className="post-container"
           onMouseEnter={onMouseEnterHandler}
@@ -82,14 +82,14 @@ function PostItem({ post }: { post: Post }): JSX.Element {
             )}
           </div>
         </div>
-      </Link>
+      </NavLink>
       {/* <button onClick={() => dispatch(likePost(post.id)).catch(console.log)} type="button">
         Нравится
       </button> */}
       {user && user.isAdmin && (
         <div className="adminisration-pic">
           <button
-            onClick={() => dispatch(moderatePost(post.id)).catch(console.log)}
+            onClick={() => dispatch(moderatePost({id:post.id, isModerated: !post.isModerated})).catch(console.log)}
             type="button"
             className="btn btn-secondary"
           >

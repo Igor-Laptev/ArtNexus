@@ -7,6 +7,7 @@ export type Comment = {
   post_id: PostId;
   text: string;
   User: User;
+  createdAt: string;
 };
 
 export type CommentForm = Omit<Comment, ''>
