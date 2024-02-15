@@ -1,6 +1,7 @@
 .img {
   width: 30px;
   height: 30px;
+  border-radius: 20px;
 }
 .slide-container {
   display: flex;
@@ -9,6 +10,7 @@
 .slide-img {
   width: 100%;
   height: 100%;
+  object-fit: cover;
   cursor: pointer;
   transition: filter 0.3s ease;
 }
@@ -18,20 +20,22 @@
   height: 100px;
 }
 
-.swiper-slide {
+.swiper-slide swiper-slide-active {
   text-align: center;
   font-size: 18px;
   position: relative;
-
+  margin: 0;
   display: block;
   justify-content: center;
   align-items: center;
+  border: 0;
 }
 .slide-title {
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  top: 40%;
+  left: 30%;
+  transform-origin: center center;
+  transform: translate(-50%, -50%, 50%, 50%);
   color: white;
   text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
   font-size: 20px;
@@ -41,11 +45,20 @@
     color 0.5s,
     font-weight 0.3s ease;
 }
+.slide-title:hover {
+  cursor: pointer;
+  transform: translate(-50%, -50%) scale(1); /* Увеличение размера и 3D эффект при наведении */
+  color: #ffd700; /* Изменение цвета текста при наведении */
+  text-shadow: 0 0 10px rgba(255, 215, 0, 0.7); /* Увеличенная тень для создания глубины */
+}
 .swiper-slide img {
   display: block;
   width: 100%;
   height: 100%;
   object-fit: cover;
+  margin: 0;
+  border: 0;
+  border-radius: 15px;
 }
 .blur-image {
   filter: blur(7px);
@@ -64,37 +77,36 @@
   object-fit: cover;
   border-radius: 8px;
 }
-.slide-title:hover {
-  cursor: pointer;
-  transform: translate(-50%, -50%) scale(1.1); /* Увеличение размера и 3D эффект при наведении */
-  color: #ffd700; /* Изменение цвета текста при наведении */
-  text-shadow: 0 0 10px rgba(255, 215, 0, 0.7); /* Увеличенная тень для создания глубины */
-}
 
 /* Интерактивность и динамические эффекты при наведении */
 .swiper-slide button:hover .slide-img {
   filter: brightness(50%);
+  margin: 0;
 }
 
 .swiper-slide button:hover .slide-title {
   transform: scale(2);
   font-weight: bold;
+  margin: 0;
 }
 
 /* Стили для стрелок навигации */
 .swiper-button-next,
-.swiper-button-prev::after {
-  background-color: none;
-  color: #ed1515;
+.swiper-button-prev {
+  background-color: transparent;
+  color: white;
   transition:
     transform 0.3s ease-in-out,
-    background-color 0.3s ease;
+    color 0.3s ease;
 }
 
 /* Стили для стрелок при клике */
 .swiper-button-next:active,
 .swiper-button-prev:active {
-  color: #131212; /* Золотистый цвет для демонстрации */
+  color: #ffd700; /* Золотистый цвет */
+  transition:
+    transform 0.3s ease-in-out,
+    color 0.3s ease;
 }
 
 /* Стили при наведении */
@@ -110,6 +122,18 @@
   background-color: none;
 }
 
-.cat-swiper {
-  width: 90%;
+.swipe-btn {
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  margin-right: 0;
+  border: 0;
+  border-radius: 15px;
 }
+
+.slideSwiperShit {
+  margin: 0px;
+}
+
+
+

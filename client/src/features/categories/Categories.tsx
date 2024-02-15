@@ -42,8 +42,8 @@ function Categories(): JSX.Element {
       }}
     >
       {categories.map((slide) => (
-        <SwiperSlide key={slide.id}>
-          <button type="button" onClick={() => sortFunctions(slide.id)}>
+        <SwiperSlide className="slideSwiperShit" key={slide.id}>
+          <button className="swipe-btn" type="button" onClick={() => sortFunctions(slide.id)}>
             <img className="slide-img" src={`${slide.img}`} alt={slide.title} />
             <div className="slide-title">{slide.title}</div>
           </button>
