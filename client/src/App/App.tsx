@@ -11,6 +11,7 @@ import OnePostPage from '../features/posts/OnePostPage';
 import { checkUser } from '../features/auth/authSlice';
 import ModeratorPage from '../features/admin/ModeratorPage';
 import UserPage from '../features/users/UserPage';
+import { loadUsers } from '../features/users/usersSlice';
 
 function App(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -18,6 +19,7 @@ function App(): JSX.Element {
     dispatch(checkUser()).catch(console.log);
     dispatch(loadPosts()).catch(console.log);
     dispatch(loadCategories()).catch(console.log);
+    dispatch(loadUsers()).catch(console.log);
   }, []);
 
   return (
