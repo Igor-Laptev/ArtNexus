@@ -1,12 +1,12 @@
 /* eslint-disable @typescript-eslint/no-misused-promises */
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import React, { useState } from 'react';
-import type { Post } from './types';
+import type { Post, PostId } from './types';
 import './styles.css';
 import './tooltipStyles.css';
-import { isAdultPost, moderatePost, removePost } from './postsSlice';
+import { isAdultPost, moderatePost, removePost, setAdult, setModerate } from './postsSlice';
 import { type RootState, useAppDispatch } from '../../redux/store';
 import Access from './Access';
 // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
@@ -36,11 +36,17 @@ function PostItem({ post }: { post: Post }): JSX.Element {
     setShowToolTip(false);
   };
   const [access, setAccess] = useState(false);
+const makePostAdult = (postId: PostId): void => {
+  dispatch(setAdult(postId));
+}
+const makePostModerate = (postId: PostId): void => {
+  dispatch(setModerate(postId));
+}
 
   return (
     <div className="container-pic">
       {access && <Access setAccess={setAccess} />}
-      <Link to={!post.isAdult ? `posts/${post.id}` : '/'} onClick={() => setAccess(true)}>
+      <NavLink to={!post.isAdult ? `posts/${post.id}` : '/'} onClick={() => setAccess(true)}>
         <div
           className="post-container"
           onMouseEnter={onMouseEnterHandler}
@@ -81,26 +87,27 @@ function PostItem({ post }: { post: Post }): JSX.Element {
             )}
           </div>
         </div>
-      </Link>
+      </NavLink>
       {/* <button onClick={() => dispatch(likePost(post.id)).catch(console.log)} type="button">
         Нравится
       </button> */}
       {user && user.isAdmin && (
         <div className="adminisration-pic">
           <button
-            onClick={() => dispatch(moderatePost(post.id)).catch(console.log)}
+            onClick={() => {dispatch(moderatePost({id:post.id, isModerated: !post.isModerated})).catch(console.log);makePostModerate(post.id)}}
             type="button"
             className="btn btn-secondary"
           >
             {!post.isModerated ? ' ✅' : ' ❔'}
           </button>
           <button
-            onClick={() =>
-              dispatch(isAdultPost({ id: post.id, isAdult: !post.isAdult })).catch(console.log)
-            }
+           onClick={() =>
+           { dispatch(isAdultPost({ id: post.id, isAdult: !post.isAdult })).catch(console.log);
+            makePostAdult(post.id);}
+          }
             type="button"
           >
-            {post.isAdult ? '🔞' : '👶🏻'}
+            {post.isAdult ? '👶🏻' : '🔞'}
           </button>
 
           <button
