@@ -6,6 +6,7 @@ import { useAppDispatch, type RootState } from '../../redux/store';
 import { logOut } from '../auth/authSlice';
 import SignUp from '../auth/SignUp';
 import SignIn from '../auth/SignIn';
+import { setEquel } from '../posts/postsSlice';
 
 function NavBar(): JSX.Element {
   const user = useSelector((store: RootState) => store.auth.auth);
