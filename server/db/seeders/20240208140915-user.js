@@ -9,8 +9,8 @@ module.exports = {
       [
         {
           name: 'admin',
-          email: 'admin@admin',
-          password: await bcrypt.hash('admin', 10),
+          email: 'admin@mail.ru',
+          password: await bcrypt.hash('adminadmin', 10),
           // await bcrypt.hash('admin', 10),
           avatar: '/avatars/admin.jpg',
           isAdmin: true,
@@ -19,8 +19,8 @@ module.exports = {
         },
         {
           name: 'user',
-          email: 'user@user',
-          password: await bcrypt.hash('user', 10),
+          email: 'user@mail.ru',
+          password: await bcrypt.hash('useruser', 10),
           // await bcrypt.hash('user', 10),
           avatar: '/avatars/user.png',
           isAdmin: false,

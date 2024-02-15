@@ -5,6 +5,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination, Scrollbar, A11y, EffectCube, Mousewheel } from 'swiper/modules';
 import type { RootState } from '../../redux/store';
 import Comments from '../comments/Comments';
+import 'animate.css';
 import './onePostStyles.css';
 import 'swiper/css';
 import 'swiper/css/navigation';
@@ -17,9 +18,8 @@ function OnePostPage(): JSX.Element {
 
   const navigate = useNavigate();
   return (
-    <div className="">
+    <div className="container">
       <h2>{post?.title}</h2>
-      <p>{post?.description}</p>
 
       <Swiper
         className="post-swiper"
@@ -45,7 +45,11 @@ function OnePostPage(): JSX.Element {
             </SwiperSlide>
           ))}
       </Swiper>
-      <button type="button" onClick={() => navigate(-1)}>
+      <button
+        type="button"
+        className="btn btn-secondary modal-button one"
+        onClick={() => navigate(-1)}
+      >
         Back
       </button>
       {post && <Comments post={post} />}
