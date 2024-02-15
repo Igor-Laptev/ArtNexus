@@ -9,24 +9,29 @@ import { addUserAvatar } from '../posts/postsSlice';
 function UserPage(): JSX.Element {
   const { userId } = useParams();
   const user = useSelector((store: RootState) =>
-    store.posts.posts.find((post) => userId && post.user_id === +userId),
-  )?.User;
+    store.users.users.find((usr) => usr.id === +userId));
+    console.log(user, 'userrrrrrrr');
+    
   const owner = useSelector((store: RootState) => store.auth.auth);
-  const posts = useSelector((store: RootState) =>
-    store.posts.posts.filter((post) => userId && post.user_id === +userId),
-  );
-  const dispatch = useAppDispatch();
-  const [addPost, setAddPost] = useState(false);
-  const [addAvatar, setAddAvatar] = useState(false);
-  const [avatar, setAvatar] = useState<FileList | null>(null);
-  function handleSubmit(e: React.FormEvent): void {
-    e.preventDefault();
-    if (!avatar) return;
-    const formData = new FormData();
-    formData.append('avatar', avatar[0]);
-    dispatch(addUserAvatar(formData)).catch(console.log);
-    setAddAvatar(false);
-  }
+
+  const posts = useSelector((store: RootState) => store.posts.posts).filter(
+    (post) => post.User.id === user?.id
+  )
+  console.log(posts, 'postssssssss');
+  
+const dispatch = useAppDispatch();
+  const[addPost, setAddPost] = useState(false)
+const [addAvatar, setAddAvatar] = useState(false)
+const[avatar, setAvatar] = useState<FileList | null>(null)
+function handleSubmit(e: React.FormEvent):void {
+  e.preventDefault();
+  if(!avatar) return;
+  const formData = new FormData();
+  formData.append('avatar', avatar[0]);
+dispatch(addUserAvatar(formData)).catch(console.log)
+setAddAvatar(false)
+}
+
 
   if (!user) {
     return <div>Such user not found</div>;
@@ -67,7 +72,10 @@ function UserPage(): JSX.Element {
         </form>
       )}
       <div className="all-post-container">
-        {posts.map((post) => (
+
+
+
+        {posts && posts.map((post) => (
           <div key={post.id}>
             <PostItem post={post} />
             {owner?.id === user.id && (
@@ -78,6 +86,10 @@ function UserPage(): JSX.Element {
             )}
           </div>
         ))}
+
+
+
+
       </div>
     </div>
   );

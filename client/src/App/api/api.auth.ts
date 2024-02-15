@@ -29,6 +29,7 @@ export const fetchSignUp = async (user: UserSignUp): Promise<User> => {
     user: User;
   };
 
+
   return data.user;
 };
 
