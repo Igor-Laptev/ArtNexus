@@ -5,7 +5,6 @@ const generateTokens = require('../../utils/authUtils');
 const cookieConfig = require('../../middleware/cookiesConfig');
 const jwtConfig = require('../../middleware/configJWT');
 
-
 const multer = require('multer');
 
 const storage = multer.diskStorage({
@@ -27,16 +26,16 @@ router.post('/registration', async (req, res) => {
     }
 
     if (name && email && avatar && password && rpassword) {
-      const user = await User.findOne({ where: { email } });
+      let user = await User.findOne({ where: { email } });
       if (!user) {
-        await User.create({
+        user = await User.create({
           name,
           email,
           avatar,
           isAdmin: false,
           password: await bcrypt.hash(password, 10),
         });
-        res.status(201).json({ reg: true, user });
+        res.status(201).json({ message: 'true', user });
       } else {
         res
           .status(409)
@@ -114,14 +113,16 @@ router.get('/logout', (req, res) => {
   res.json({ message: 'success' });
 });
 
-
 router.put('/avatar', upload.array('avatar'), async (req, res) => {
   try {
     const id = res.locals.user.id;
     console.log('id:', id);
     const avatar = req.files[0];
     console.log(avatar.originalname);
-    const changed = await User.update({ avatar: `/avatars/${avatar.originalname}` }, { where: { id } });
+    const changed = await User.update(
+      { avatar: `/avatars/${avatar.originalname}` },
+      { where: { id } }
+    );
     console.log(`/avatars/${avatar.originalname}`);
     if (changed > 0) {
       res.status(200).json({ id, avatar: `/avatars/${avatar.originalname}` });
@@ -132,8 +133,5 @@ router.put('/avatar', upload.array('avatar'), async (req, res) => {
     res.status(500).json({ message: 'произошла ошибка при изменении' });
   }
 });
-
-
-
 
 module.exports = router;

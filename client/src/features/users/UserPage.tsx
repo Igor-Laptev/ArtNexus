@@ -10,12 +10,17 @@ function UserPage(): JSX.Element {
  
   const { userId } = useParams();
   const user = useSelector((store: RootState) =>
-    store.posts.posts.find((post) => userId && post.user_id === +userId),
-  )?.User;
+    store.users.users.find((usr) => usr.id === +userId));
+    console.log(user, 'userrrrrrrr');
+    
   const owner = useSelector((store: RootState) => store.auth.auth);
-  const posts = useSelector((store: RootState) =>
-    store.posts.posts.filter((post) => userId && post.user_id === +userId),
-  );
+  console.log(owner, 'ownerrrrrrrr');
+  
+  const posts = useSelector((store: RootState) => store.posts.posts).filter(
+    (post) => post.User.id === user?.id
+  )
+  console.log(posts, 'postssssssss');
+  
 const dispatch = useAppDispatch();
   const[addPost, setAddPost] = useState(false)
 const [addAvatar, setAddAvatar] = useState(false)
@@ -49,7 +54,10 @@ setAddAvatar(false)
       {addPost && <AddPostForm setAddpost={setAddPost}/>}
       {addAvatar && <form className='avatarAddForm' onSubmit={handleSubmit}><input type="file" name="avatar" id="avatar" onChange={(e)=> setAvatar(e.target.files)} /><button type="submit">Add</button><button type="button" onClick={() => setAddAvatar(false)}>✖</button></form>}
       <div className="all-post-container">
-        {posts.map((post) => (
+
+
+
+        {posts && posts.map((post) => (
           <div key={post.id}>
             <PostItem post={post} />
             {owner?.id === user.id && (
@@ -60,6 +68,10 @@ setAddAvatar(false)
             )}
           </div>
         ))}
+
+
+
+
       </div>
     </div>
   );
