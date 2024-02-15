@@ -20,7 +20,6 @@ function NavBar(): JSX.Element {
   const handleModalReg = (value: boolean): void => {
     setShowReg(value);
   };
-
   const handleModalLog = (value: boolean): void => {
     setShowLog(value);
   };

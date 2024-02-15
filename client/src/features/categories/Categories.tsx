@@ -48,6 +48,7 @@ function Categories(): JSX.Element {
           </button>
         </SwiperSlide>
       ))}
+
       {admin && (
         <SwiperSlide>
           <button type="button" onClick={sortForAdults}>

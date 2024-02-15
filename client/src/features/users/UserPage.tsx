@@ -7,15 +7,13 @@ import AddPostForm from '../posts/AddPostForm';
 import { addUserAvatar } from '../posts/postsSlice';
 
 function UserPage(): JSX.Element {
- 
   const { userId } = useParams();
   const user = useSelector((store: RootState) =>
     store.users.users.find((usr) => usr.id === +userId));
     console.log(user, 'userrrrrrrr');
     
   const owner = useSelector((store: RootState) => store.auth.auth);
-  console.log(owner, 'ownerrrrrrrr');
-  
+
   const posts = useSelector((store: RootState) => store.posts.posts).filter(
     (post) => post.User.id === user?.id
   )
@@ -34,6 +32,7 @@ dispatch(addUserAvatar(formData)).catch(console.log)
 setAddAvatar(false)
 }
 
+
   if (!user) {
     return <div>Such user not found</div>;
   }
@@ -41,18 +40,37 @@ setAddAvatar(false)
     <div>
       <div className="userInfo">
         <div>
-          <div className="userAvatar"><img src={user.avatar}  alt="" /></div>
+          <div className="userAvatar">
+            <img src={user.avatar} alt="" />
+          </div>
           {owner && (
             <div>
-              <button type="button" onClick={() => setAddAvatar(true)}>✍🏻</button>
-              <button type='button' onClick={() => setAddPost(true)}>Add post</button>
+              <button type="button" onClick={() => setAddAvatar(true)}>
+                ✍🏻
+              </button>
+              <button type="button" onClick={() => setAddPost(true)}>
+                Add post
+              </button>
             </div>
           )}
         </div>
         <h1>{user.name}</h1>
       </div>
-      {addPost && <AddPostForm setAddpost={setAddPost}/>}
-      {addAvatar && <form className='avatarAddForm' onSubmit={handleSubmit}><input type="file" name="avatar" id="avatar" onChange={(e)=> setAvatar(e.target.files)} /><button type="submit">Add</button><button type="button" onClick={() => setAddAvatar(false)}>✖</button></form>}
+      {addPost && <AddPostForm setAddpost={setAddPost} />}
+      {addAvatar && (
+        <form className="avatarAddForm" onSubmit={handleSubmit}>
+          <input
+            type="file"
+            name="avatar"
+            id="avatar"
+            onChange={(e) => setAvatar(e.target.files)}
+          />
+          <button type="submit">Add</button>
+          <button type="button" onClick={() => setAddAvatar(false)}>
+            ✖
+          </button>
+        </form>
+      )}
       <div className="all-post-container">
 
 
