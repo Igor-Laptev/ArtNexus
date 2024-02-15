@@ -19,20 +19,23 @@ function ModeratorPage(): JSX.Element {
               <button
                 onClick={() => dispatch(removePost(post.id)).catch(console.log)}
                 type="button"
+                className="btn btn-success modal-button"
               >
-                удалить
+                REMOVE ❌
               </button>
               <button
                 onClick={() => dispatch(moderatePost(post.id)).catch(console.log)}
                 type="button"
+                className="btn btn-success modal-button"
               >
-                post
+                {!post.isModerated ? 'Moderate Post ✅' : 'Unmoderate Post ❔'}
               </button>
               <button
                 onClick={() => dispatch(moderatePost(post.id)).catch(console.log)}
                 type="button"
+                className="btn btn-success modal-button"
               >
-                18+
+                18+ 🔞
               </button>
             </div>
           )}

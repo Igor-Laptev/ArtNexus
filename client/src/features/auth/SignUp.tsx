@@ -23,11 +23,13 @@ function SignUp({
   const [avatar, setAvatar] = useState('');
   const [password, setPassword] = useState('');
   const [rpassword, setRpassword] = useState('');
+  const [isEmailValid, setIsEmailValid] = useState(true);
 
   const error = useSelector((store: RootState) => store.auth.error);
 
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
   return (
     <ReactModal
@@ -61,9 +63,9 @@ function SignUp({
                   }),
                 )
                   .then(() => {
-                    handleModalReg(false); // Закрыть модальное окно регистрации
+                    handleModalReg(false);
                     handleModalLog(true);
-                    navigate('/'); // Открыть модальное окно авторизации
+                    navigate('/');
                   })
                   .catch(console.log),
                   navigate('/');
@@ -86,15 +88,21 @@ function SignUp({
               </div>
               <div className="form-group">
                 <input
-                  className="form-control"
+                  className={`form-control ${!isEmailValid ? 'is-invalid' : ''}`}
                   value={email}
                   placeholder="Enter email"
                   type="email"
                   required
                   onChange={(e) => {
-                    setEmail(e.target.value);
+                    const emailValue = e.target.value;
+                    setEmail(emailValue);
+                    setIsEmailValid(emailRegex.test(emailValue));
+                    dispatch(clearError());
                   }}
                 />
+                {!isEmailValid && (
+                  <div style={{ color: 'red' }}>Please enter a valid email address.</div>
+                )}
               </div>
               <div className="form-group">
                 <input
@@ -116,6 +124,7 @@ function SignUp({
                   required
                   autoComplete="off"
                   type="password"
+                  minLength={8}
                   onChange={(e) => {
                     setPassword(e.target.value);
                   }}
@@ -129,22 +138,23 @@ function SignUp({
                   required
                   autoComplete="off"
                   type="password"
+                  minLength={8}
                   onChange={(e) => {
                     setRpassword(e.target.value);
                   }}
                 />
               </div>
-              <button type="submit" className="btn btn-success modal-button ">
+              <button type="submit" className="btn btn-success modal-button" disabled={!isEmailValid}>
                 Register
               </button>
               <button
                 type="button"
-                className="btn btn-secondary modal-button "
+                className="btn btn-secondary modal-button"
                 onClick={() => handleModalReg(false)}
               >
                 Close
               </button>
-            </form>
+              </form>
           </div>
           <div className="modal-footer animate__animated animate__heartBeat "></div>
         </div>

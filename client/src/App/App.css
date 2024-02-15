@@ -1,5 +1,5 @@
 body {
-  background-color: black;
+  background-image: url('/styles/ioyrv.gif');
   font-family: 'inter', sans-serif;
 }
 @font-face {
@@ -16,41 +16,38 @@ body {
   display: flex;
 }
 
-
-
 .access {
-   position: absolute;
-    margin: 20px;
- padding: 20px;
-    flex-direction: column;
-background-color: aliceblue;
-z-index: 3;
+  position: absolute;
+  margin: 20px;
+  padding: 20px;
+  flex-direction: column;
+  background-color: aliceblue;
+  z-index: 3;
 }
-
 
 .postInfo {
   display: flex;
 }
 .adminisration {
-    display: flex;
-flex-direction: column;}
-
+  display: flex;
+  flex-direction: column;
+}
 
 .addPostForm {
-    display: flex;
-    flex-direction: column;
-    position: absolute;
-    z-index: 5;
-    left:40%;
-    background-color: aliceblue;
-    padding: 20px;
-  align-items:center;
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  z-index: 5;
+  left: 40%;
+  background-color: aliceblue;
+  padding: 20px;
+  align-items: center;
   justify-content: center;
-  }
-  .avatarAddForm{
-    position: absolute;
-    z-index: 4;
-    left:40%;
-    background-color: aliceblue;
-    padding: 20px;
-  }
+}
+.avatarAddForm {
+  position: absolute;
+  z-index: 4;
+  left: 40%;
+  background-color: aliceblue;
+  padding: 20px;
+}
