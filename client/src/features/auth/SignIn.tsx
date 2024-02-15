@@ -1,12 +1,11 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import ReactModal from 'react-modal';
 import './auth.css';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
 import { type RootState, useAppDispatch } from '../../redux/store';
-import { signIn } from './authSlice';
-
+import { clearError, signIn } from './authSlice';
 
 function SignIn({
   handleModalLog,
@@ -22,11 +21,15 @@ function SignIn({
 
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-
+  useEffect(() => {
+    dispatch(clearError());
+  }, []);
   return (
     <ReactModal
       style={{
         overlay: {
+          position: 'absolute',
+          zIndex: 1000,
           backgroundColor: 'rgba(54, 54, 54, 0.679)',
         },
       }}
@@ -38,8 +41,11 @@ function SignIn({
       <div className="modal-dialog animate__animated animate__fadeInDownBig">
         <div className="modal-content">
           <div className="modal-body">
-
-            {error && <h1 style={{ color: 'red', textTransform: 'uppercase' }}>{error}</h1>}
+            {error && (
+              <h1 style={{ color: 'red', textTransform: 'uppercase' }}>
+                Не правильный логин или пароль!
+              </h1>
+            )}
 
             <form
               className="modal-form"
@@ -50,19 +56,7 @@ function SignIn({
                     email,
                     password,
                   }),
-                )
-                  .then(() => {
-                    if (error) {
-                      handleModalLog(true);
-
-                      navigate('/');
-
-                    } else {
-                      handleModalLog(false);
-                      navigate('/');
-                    }
-                  })
-                  .catch(console.log);
+                ).catch(console.log);
               }}
             >
               <div className="form-group">
@@ -85,6 +79,7 @@ function SignIn({
                   required
                   autoComplete="off"
                   type="password"
+                  minLength={8}
                   onChange={(e) => {
                     setPassword(e.target.value);
                   }}
@@ -97,7 +92,6 @@ function SignIn({
                 type="button"
                 className="btn btn-secondary modal-button"
                 onClick={() => handleModalLog(false)}
-
               >
                 Close
               </button>
