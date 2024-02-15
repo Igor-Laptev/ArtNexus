@@ -56,6 +56,116 @@ module.exports = {
           createdAt: new Date(),
           updatedAt: new Date(),
         },
+        {
+          post_id: 11,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          post_id:12 ,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          post_id:13 ,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          post_id:14 ,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          post_id: 15,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          post_id:16 ,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          post_id:17 ,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          post_id:18 ,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          post_id:19 ,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          post_id: 20,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          post_id: 21,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          post_id: 22,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          post_id: 23,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          post_id:24 ,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          post_id:25 ,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          post_id: 26,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          post_id:27 ,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          post_id: 28,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          post_id: 29,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          post_id: 30,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          post_id: 31,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          post_id: 32,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
       ],
       {}
     );
