@@ -30,7 +30,7 @@ function NavBar(): JSX.Element {
   };
 
   // Функция для переключения видимости подменю (если требуется)
-  const toggleSubMenu = (menu) => {
+  const toggleSubMenu = (menu: string) => {
     if (menu === 'clients') {
       setIsClientsActive(!isClientsActive);
       setIsServicesActive(false);
@@ -49,7 +49,9 @@ function NavBar(): JSX.Element {
             alt="Logo"
             className="logo"
           />
+
           <span className="productionText">Inc.</span>
+
         </div>
         <ul className="navigation">
           <li className="parent">
@@ -59,19 +61,15 @@ function NavBar(): JSX.Element {
           </li>
           {user ? (
             <>
-              <li className="parent">
-                <Link className="link" to={`/users/${user?.id}`}>
-                  Hello, {user?.name}
-                </Link>
-              </li>
+             
               <li className="parent">
                 <NavLink className="link" to="/likes">
-                  Избранное
+                  Favorites
                 </NavLink>
               </li>
               <li className="parent">
                 <NavLink className="link" to={`/users/${user?.id}`}>
-                  Профиль
+                  Profile
                 </NavLink>
               </li>
               <li className="parent">
@@ -83,7 +81,7 @@ function NavBar(): JSX.Element {
                     navigate('/');
                   }}
                 >
-                  Выйти
+                  Logout
                 </NavLink>
               </li>
             </>

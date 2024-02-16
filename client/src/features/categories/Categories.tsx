@@ -29,7 +29,7 @@ function Categories(): JSX.Element {
       className="cat-swiper"
       modules={[Navigation, Pagination, Scrollbar, A11y, EffectCube]}
       spaceBetween={20}
-      slidesPerView={3}
+      slidesPerView={4}
       navigation
       pagination={{ clickable: true }}
       scrollbar={{ draggable: true }}
@@ -52,10 +52,10 @@ function Categories(): JSX.Element {
 
       {admin && (
         <SwiperSlide>
-          <button type="button" onClick={sortForAdults}>
+          <button className="btn btn-secondary adult" type="button" onClick={sortForAdults}>
             isAdult
           </button>
-          <button type="button" onClick={sortForModerate}>
+          <button className="btn btn-secondary adult" type="button" onClick={sortForModerate}>
             Moderate
           </button>
         </SwiperSlide>

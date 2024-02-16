@@ -18,15 +18,14 @@
 
 .imageBackground {
   width: 100%; /* Устанавливаем ширину изображения равной 100% от ширины родительского элемента */
-  /* height: 100%; Устанавливаем высоту автоматически, чтобы сохранить пропорции изображения */
-  /* max-width: 1920px; */
   height: 90vh;
 }
+
+
 
 .overlayText {
   position: absolute;
   top: 50%;
-
   transform: translate(-50%, -50%);
   font-size: 36px;
   color: white;
@@ -38,9 +37,9 @@
   color: white;
   position: absolute;
   top: 20%;
-
   transform: translate(-50%, -20%);
   text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.7);
+
 }
 
 .backButton {
@@ -54,7 +53,6 @@
   transition: background-color 0.3s ease;
   position: absolute;
   top: 60%;
-
   transform: translate(-50%, -60%);
 }
 

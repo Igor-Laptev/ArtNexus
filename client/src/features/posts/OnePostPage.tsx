@@ -19,8 +19,8 @@ function OnePostPage(): JSX.Element {
   const navigate = useNavigate();
   return (
     <div className="container">
-      <h2>{post?.title}</h2>
-      <div className="burron-container">
+      {/* <h2>{post?.title}</h2> */}
+      {/* <div className="burron-container">
         <button
           type="button"
           className="btn btn-secondary modal-button one"
@@ -28,7 +28,7 @@ function OnePostPage(): JSX.Element {
         >
           Back
         </button>
-      </div>
+      </div> */}
       <Swiper
         className="post-swiper"
         modules={[Navigation, Pagination, Scrollbar, A11y, EffectCube, Mousewheel]}
@@ -49,7 +49,7 @@ function OnePostPage(): JSX.Element {
           post.Gallery.Arts &&
           post.Gallery.Arts.map((art) => (
             <SwiperSlide key={art.id}>
-              <img className="slide-img" src={`${art.src}`} alt={art.title} />
+              <img className="slide-img post-swiper-img" src={`${art.src}`} alt={art.title} />
             </SwiperSlide>
           ))}
       </Swiper>

@@ -2,6 +2,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { type RootState } from '../../redux/store';
 import PostItem from '../posts/PostItem';
+import './styles.css'
 
 function LikePage(): JSX.Element {
   const posts = useSelector((store: RootState) => store.posts.posts);
@@ -14,7 +15,7 @@ function LikePage(): JSX.Element {
   );
 
   return (
-    <div>
+    <div className="container-likes">
       {userLikedPosts.map((post) => (
         <PostItem key={post.id} post={post} />
       ))}

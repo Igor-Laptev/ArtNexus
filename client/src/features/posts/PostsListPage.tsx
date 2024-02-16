@@ -13,7 +13,7 @@ function PostsList(): JSX.Element {
 
   return (
     <>
-      <h2>Все публикации</h2>
+      <h2></h2>
       <div className="all-post-container">
         {admin
           ? posts.map((post) => <PostItem key={post.id} post={post} />)

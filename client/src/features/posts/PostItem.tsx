@@ -55,20 +55,21 @@ function PostItem({ post }: { post: Post }): JSX.Element {
         >
           <div className="post-content item-box">
             {showToolTip && (
-              <div
-                className={`tooltip ${post.isAdult ? 'blur-image' : ''}`}
-                style={{
-                  // backgroundImage: 'lin'
-                  backgroundImage: `url(${firstArt})`,
-                  backgroundRepeat: 'no-repeat',
-                  width: '100%',
-                  height: '100%',
-                  borderRadius: '10%',
-                }}
-              >
+              <div className="modalka">
                 <div className="animate__animated animate__slideInRight ptext">
                   <p>{post.title}</p>
                 </div>
+                <div
+                  className={`tooltip ${post.isAdult ? 'blur-image' : ''}`}
+                  style={{
+                    // backgroundImage: 'lin'
+                    backgroundImage: `url(${firstArt})`,
+                    backgroundRepeat: 'no-repeat',
+                    width: '100%',
+                    height: '100%',
+                    borderRadius: '10%',
+                  }}
+                ></div>
               </div>
             )}
             {!showToolTip && (
@@ -99,7 +100,7 @@ function PostItem({ post }: { post: Post }): JSX.Element {
               makePostModerate(post.id);
             }}
             type="button"
-            className="btn btn-secondary"
+            className="btn-secondary modal-button"
           >
             {!post.isModerated ? ' ✅' : ' ❔'}
           </button>
@@ -109,6 +110,7 @@ function PostItem({ post }: { post: Post }): JSX.Element {
               makePostAdult(post.id);
             }}
             type="button"
+            className="btn-secondary modal-button"
           >
             {post.isAdult ? '👶🏻' : '🔞'}
           </button>
@@ -116,7 +118,7 @@ function PostItem({ post }: { post: Post }): JSX.Element {
           <button
             onClick={() => dispatch(removePost(post.id)).catch(console.log)}
             type="button"
-            className="btn btn-secondary"
+            className="btn-secondary modal-button"
           >
             ❌
           </button>
