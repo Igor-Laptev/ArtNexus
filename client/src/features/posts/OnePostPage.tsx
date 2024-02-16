@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import { useNavigate, useParams } from 'react-router-dom';
+import {  useParams } from 'react-router-dom';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination, Scrollbar, A11y, EffectCube, Mousewheel } from 'swiper/modules';
 import { useAppDispatch, type RootState } from '../../redux/store';
@@ -20,7 +20,7 @@ function OnePostPage(): JSX.Element {
   const user = useSelector((store: RootState) => store.auth.auth);
   console.log(user);
 
-  const navigate = useNavigate();
+
 
   useEffect(() => {
     dispatch(checkUser()).catch(console.log);

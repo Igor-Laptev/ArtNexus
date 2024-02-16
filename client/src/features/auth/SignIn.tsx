@@ -30,7 +30,7 @@ function SignIn({
     dispatch(clearError());
   }, [dispatch]);
 
-  const handleLoginSuccess = () => {
+  const handleLoginSuccess = (): void => {
     setIsAnimatingOut(true);
 
     setTimeout(() => {
@@ -38,20 +38,20 @@ function SignIn({
       navigate('/');
     }, 750);
   };
-  const handleCloseWithAnimation = () => {
+  const handleCloseWithAnimation = (): void => {
     setIsAnimatingOut(true); 
     setTimeout(() => {
       handleModalLog(false);
     }, 750); 
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent): void => {
     e.preventDefault();
     dispatch(signIn({ email, password })).then((result) => {
-      if (!result.error) {
+      if (result.payload) {
         handleLoginSuccess();
       }
-    });
+    }).catch(console.log);
   };
 
   return (

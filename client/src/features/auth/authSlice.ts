@@ -44,7 +44,7 @@ const authSlice = createSlice({
       .addCase(checkUser.rejected, (state, action) => {
         state.error = action.error.message;
       })
-      .addCase(signUp.fulfilled, (state, action) => {
+      .addCase(signUp.fulfilled, (state) => {
         state.auth = undefined;
       })
       .addCase(signUp.rejected, (state, action) => {

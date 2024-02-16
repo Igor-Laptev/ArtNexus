@@ -13,17 +13,12 @@ import './styles.css';
 function UserPage(): JSX.Element {
   const { userId } = useParams();
   const user = useSelector((store: RootState) =>
-    store.users.users.find((usr) => usr.id === +userId),
+    store.users.users.find((usr) => userId &&  usr.id === +userId),
   );
-  console.log(user, 'userrrrrrrr');
-
   const owner = useSelector((store: RootState) => store.auth.auth);
-
   const posts = useSelector((store: RootState) => store.posts.posts).filter(
     (post) => post.User.id === user?.id,
   );
-  console.log(posts, 'postssssssss');
-
   const dispatch = useAppDispatch();
   const [addPost, setAddPost] = useState(false);
   const [addAvatar, setAddAvatar] = useState(false);
@@ -36,7 +31,6 @@ function UserPage(): JSX.Element {
     dispatch(addUserAvatar(formData)).catch(console.log);
     setAddAvatar(false);
   }
-
   if (!user) {
     return <div>Such user not found</div>;
   }
