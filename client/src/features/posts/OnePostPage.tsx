@@ -26,9 +26,10 @@ function OnePostPage(): JSX.Element {
     dispatch(checkUser()).catch(console.log);
   }, []);
   return (
-    <div className="container">
-      {/* <h2>{post?.title}</h2> */}
-      {/* <div className="burron-container">
+    
+    <div className="container-one">
+      {/* <h2>{post?.title}</h2>
+      <div className="burron-container">
         <button
           type="button"
           className="btn btn-secondary modal-button one"
@@ -37,6 +38,7 @@ function OnePostPage(): JSX.Element {
           Back
         </button>
       </div> */}
+
       <Swiper
         className="post-swiper"
         modules={[Navigation, Pagination, Scrollbar, A11y, EffectCube, Mousewheel]}
