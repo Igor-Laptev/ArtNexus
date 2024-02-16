@@ -15,7 +15,6 @@ import { loadUsers } from '../features/users/usersSlice';
 import Footer from '../features/footer/Footer';
 import NotFoundPage from '../features/404/404';
 
-
 function App(): JSX.Element {
   const dispatch = useAppDispatch();
 
@@ -39,7 +38,6 @@ function App(): JSX.Element {
           <Route path="/users/:userId/posts/:postId" element={<OnePostPage />} />
         </Route>
       </Routes>
-      <Footer />
     </div>
   );
 }

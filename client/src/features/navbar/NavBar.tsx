@@ -7,6 +7,7 @@ import { logOut } from '../auth/authSlice';
 import SignUp from '../auth/SignUp';
 import SignIn from '../auth/SignIn';
 import { setEquel } from '../posts/postsSlice';
+import Footer from '../footer/Footer';
 
 function NavBar(): JSX.Element {
   const user = useSelector((store: RootState) => store.auth.auth);
@@ -50,7 +51,7 @@ function NavBar(): JSX.Element {
           />
         </div>
         <ul className="navigation">
-          {/* Сохраняем логику и навигационные ссылки вашего навбара */}
+         
           <li className="parent">
             <NavLink className="link" to="/" onClick={() => dispatch(setEquel())}>
               Explore
@@ -102,8 +103,9 @@ function NavBar(): JSX.Element {
           )}
         </ul>
       </nav>
-      <Outlet />
 
+      <Outlet />
+      <Footer />
       {showReg && (
         <SignUp show={showReg} handleModalReg={handleModalReg} handleModalLog={handleModalLog} />
       )}
