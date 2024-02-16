@@ -49,7 +49,7 @@ function OnePostPage(): JSX.Element {
           post.Gallery.Arts &&
           post.Gallery.Arts.map((art) => (
             <SwiperSlide key={art.id}>
-              <img className="slide-img" src={`${art.src}`} alt={art.title} />
+              <img className="slide-img post-swiper-img" src={`${art.src}`} alt={art.title} />
             </SwiperSlide>
           ))}
       </Swiper>

@@ -11,6 +11,7 @@
 .postInf {
     border-radius: 20px;
     margin: 20px;
+    background-color: rgb(175, 172, 175);
 }
 .user {
     display: flex;
@@ -39,6 +40,10 @@
     border-radius: 20px;
     width: 90%;
 }
+.user-name {
+    display: flex;
+    align-items: center;
+}
 .input-comment {
     border-radius: 20px;
 }
@@ -54,6 +59,8 @@
     width: 100px;
     height: 100px;
     position: absolute;
+    margin-top: 10px;
+    margin-left: 20px;
     /* left: 50%;
     top: 50%; */
     transform: translate(-50%, -50%);
@@ -61,10 +68,31 @@
     background-position: 0 0;
     cursor: pointer;
     animation: fave-heart 1s steps(28);
+    
   }
   .scattering:active {
     background-position: -2800px 0;
     transition: background 1s steps(28);
+    color: red;
+  }
+  .like-stoit {
+    width: 100px;
+    height: 100px;
+    position: absolute;
+    margin-top: 10px;
+    margin-left: 20px;
+    /* left: 50%;
+    top: 50%; */
+    transform: translate(-50%, -50%);
+    background: url(https://zornet.ru/ABVUN/Aba/detunis/supasnab/heart.png) no-repeat;
+    background-position: 0 0;
+    cursor: pointer;
+    animation: fave-heart 1s steps(28);
+    background-position: -2800px 0;
+  }
+  .scattering.active {
+    background-position: -2800px 0;
+    /* transition: background 1s steps(28); */
     color: red;
   }
   @keyframes fave-heart {
@@ -74,4 +102,12 @@
     100% {
       background-position: -2800px 0;
     }
+  }
+  .comment-user {
+    display: flex;
+    padding: 5px;
+  }
+  .like button { 
+    width: 200px;
+    height: 50px;
   }

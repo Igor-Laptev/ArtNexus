@@ -44,18 +44,22 @@ function UserPage(): JSX.Element {
     <div className="container-user-page">
       <div className="userInfo">
         {/* <div> */}
-          <div className="userAvatar">
-            <img src={user.avatar} alt="" />
-          </div>
+        <div className="userAvatar">
+          <img src={user.avatar} alt="" />
+        </div>
         {/* </div> */}
-        <div className='user-name-btn'>
+        <div className="user-name-btn">
           <h1>{user.name}</h1>
           {owner && (
             <div className="add-post-form">
-              <button className='btn' type="button" onClick={() => setAddAvatar(true)}>
+              <button className="btn" type="button" onClick={() => setAddAvatar(true)}>
                 ✍🏻
               </button>
-              <button className='btn-secondary modal-button' type="button" onClick={() => setAddPost(true)}>
+              <button
+                className="btn-secondary modal-button"
+                type="button"
+                onClick={() => setAddPost(true)}
+              >
                 Add post
               </button>
             </div>
@@ -85,6 +89,7 @@ function UserPage(): JSX.Element {
               {owner?.id === user.id && (
                 <div className="reduct">
                   <button
+                    className="btn-secondary modal-button"
                     type="button"
                     onClick={() => dispatch(removePost(post.id)).catch(console.log)}
                   >

@@ -58,19 +58,15 @@ function NavBar(): JSX.Element {
           </li>
           {user ? (
             <>
-              <li className="parent">
-                <Link className="link" to={`/users/${user?.id}`}>
-                  Hello, {user?.name}
-                </Link>
-              </li>
+             
               <li className="parent">
                 <NavLink className="link" to="/likes">
-                  Избранное
+                  Favorites
                 </NavLink>
               </li>
               <li className="parent">
                 <NavLink className="link" to={`/users/${user?.id}`}>
-                  Профиль
+                  Profile
                 </NavLink>
               </li>
               <li className="parent">
@@ -82,7 +78,7 @@ function NavBar(): JSX.Element {
                     navigate('/');
                   }}
                 >
-                  Выйти
+                  Logout
                 </NavLink>
               </li>
             </>

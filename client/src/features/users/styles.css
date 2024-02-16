@@ -6,6 +6,7 @@
 .userInfo {
     display: flex;
     margin: 50px;
+    padding-top: 50px;
 }
 /* .userInf {
     min-width: 40%

@@ -5,12 +5,16 @@
 .slide-img {
     width:100%;
     height: 100%;
+    /* max-width: 700px; */
+    /* max-height: 900px; */
+    object-fit:fill;
 }
 
 .post-swiper {
     width: 80%;
     height: 100%;
   }
+  
   
   .swiper-slide {
     text-align: center;
@@ -25,6 +29,7 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
+    /* margin-top: 20px; */
   }
 
   .swiper-button-next:after {
@@ -49,6 +54,15 @@
   padding-right: 205px;
   margin-bottom: 20px;
 }
+.postInfo {
+  margin-top: 20px;
+}
 .postInf {
   min-width: 200px;
+}
+.info {
+  margin: 20px;
+}
+.user {
+  margin: 10px;
 }

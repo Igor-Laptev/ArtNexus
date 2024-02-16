@@ -139,5 +139,17 @@ h2 {
   border-radius: 20px;
 }
 .ptext {
-  margin-left: 10px
+  margin-left: 10px;
+  position: absolute;
+  z-index: 1;
 }
+.ptext p {
+  color: white;
+}
+.modalka {
+  /* position: relative; */
+}
+/* .ptext {
+  position: absolute;
+  opacity: 0.6;
+} */

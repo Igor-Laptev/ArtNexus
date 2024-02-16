@@ -15,14 +15,15 @@ function CommentEl({ comment }: { comment: Comment }): JSX.Element {
   });
   return (
     <div className="author" style={{backgroundColor: 'white', marginBottom: '5px' }}>
-      <div className="">
+      <div className="comment-user">
         <div style={{borderRadius: '50%'}}>
           <img src={comment.User.avatar} style={{ width: '30px' }} alt="" />
         </div>
         
-        <div><Link to={`/users/${comment.User.id}`}>{comment.User.name}</Link></div>  <span className="time">{timeString} /{dateString}/ </span>
+        <div className='user-name'><Link to={`/users/${comment.User.id}`}>{comment.User.name}</Link></div>  
       </div>
       <p className='comment-t' style={{ color: 'black' }}>{comment.text}</p>
+      <span className="time">{timeString} /{dateString}/ </span>
     
     </div>
   );
