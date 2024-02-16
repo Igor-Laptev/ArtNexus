@@ -38,10 +38,13 @@ body, html {
 
 
 .productionText {
+  cursor: pointer;
   margin-left: 2px;
   color: white;
   font-weight: 500;
   font-size: 18px;
+
+}
 
 .logo {
   color: #8924a8; /* Яркий цвет для части логотипа */
