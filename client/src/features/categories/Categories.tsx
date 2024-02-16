@@ -7,7 +7,7 @@ import './styles.css';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import type { CategoryId } from './types';
-import { filterIsAdult, filterPosts, filterToModerate } from '../posts/postsSlice';
+import {  filterPosts, filterToModerate } from '../posts/postsSlice';
 
 function Categories(): JSX.Element {
   const categories = useSelector((store: RootState) => store.categories.categories);
@@ -16,9 +16,9 @@ function Categories(): JSX.Element {
   const sortFunctions = (catId: CategoryId): void => {
     dispatch(filterPosts(catId));
   };
-  const sortForAdults = (): void => {
-    dispatch(filterIsAdult(true));
-  };
+  // const sortForAdults = (): void => {
+  //   dispatch(filterIsAdult(true));
+  // };
   const sortForModerate = (): void => {
     dispatch(filterToModerate(false));
   };
@@ -52,9 +52,9 @@ function Categories(): JSX.Element {
 
       {admin && (
         <SwiperSlide>
-          <button className="btn btn-secondary adult" type="button" onClick={sortForAdults}>
+          {/* <button className="btn btn-secondary adult" type="button" onClick={sortForAdults}>
             isAdult
-          </button>
+          </button> */}
           <button className="btn btn-secondary adult" type="button" onClick={sortForModerate}>
             Moderate
           </button>
