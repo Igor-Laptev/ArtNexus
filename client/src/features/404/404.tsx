@@ -47,6 +47,7 @@ export default function NotFoundPage() {
         404
       </div>
       <div className="overlayText animate__animated animate__rotateInUpLeft">Не повезло...</div>
+
       <button
         onClick={handleBackClick}
         type="button"

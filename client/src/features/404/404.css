@@ -1,0 +1,63 @@
+.container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  /* height: 100vh; */
+  text-align: center;
+}
+.columnContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  /* height: 100%; Используем 100% высоты контейнера, чтобы все элементы были по центру */
+}
+
+.imageBackground {
+  width: 100%; /* Устанавливаем ширину изображения равной 100% от ширины родительского элемента */
+  /* height: 100%; Устанавливаем высоту автоматически, чтобы сохранить пропорции изображения */
+  /* max-width: 1920px; */
+  height: 90vh;
+}
+
+.overlayText {
+  position: absolute;
+  top: 50%;
+
+  transform: translate(-50%, -50%);
+  font-size: 36px;
+  color: white;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.errorCode {
+  font-size: 80px;
+  color: white;
+  position: absolute;
+  top: 20%;
+
+  transform: translate(-50%, -20%);
+  text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.7);
+}
+
+.backButton {
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+  position: absolute;
+  top: 60%;
+
+  transform: translate(-50%, -60%);
+}
+
+.backButton:hover {
+  background-color: #0056b3;
+}
