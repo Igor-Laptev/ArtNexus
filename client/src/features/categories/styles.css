@@ -137,6 +137,13 @@
 .slideSwiperShit {
   margin: 0px;
 }
-
-
+.cat-swiper {
+  width: 90%;
+}
+.adult {
+  /* gap: 20px; */
+  /* padding: 5px; */
+  /* width: 50px; */
+  scale: 110%;
+}
 
