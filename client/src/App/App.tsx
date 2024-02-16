@@ -4,7 +4,7 @@ import { Route, Routes } from 'react-router-dom';
 import MainPage from '../features/main/MainPage';
 import NavBar from '../features/navbar/NavBar';
 import LikePage from '../features/likes/LikesPage';
-import { useAppDispatch } from '../redux/store';
+import { RootState, useAppDispatch } from '../redux/store';
 import { loadCategories } from '../features/categories/categoriesSlice';
 import { loadPosts } from '../features/posts/postsSlice';
 import OnePostPage from '../features/posts/OnePostPage';
@@ -14,10 +14,13 @@ import UserPage from '../features/users/UserPage';
 import { loadUsers } from '../features/users/usersSlice';
 import Footer from '../features/footer/Footer';
 import NotFoundPage from '../features/404/404';
+import { useSelector } from 'react-redux';
 
 function App(): JSX.Element {
   const dispatch = useAppDispatch();
+  const user = useSelector((store: RootState) => store.auth.auth);
 
+  console.log(user);
   useEffect(() => {
     dispatch(checkUser()).catch(console.log);
     dispatch(loadPosts()).catch(console.log);
