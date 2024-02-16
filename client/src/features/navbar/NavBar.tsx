@@ -29,7 +29,7 @@ function NavBar(): JSX.Element {
   };
 
   // Функция для переключения видимости подменю (если требуется)
-  const toggleSubMenu = (menu) => {
+  const toggleSubMenu = (menu: string) => {
     if (menu === 'clients') {
       setIsClientsActive(!isClientsActive);
       setIsServicesActive(false);
@@ -48,6 +48,7 @@ function NavBar(): JSX.Element {
             alt="Logo"
             className="logo"
           />
+          <span className="productionText">Production</span>
         </div>
         <ul className="navigation">
           {/* Сохраняем логику и навигационные ссылки вашего навбара */}
