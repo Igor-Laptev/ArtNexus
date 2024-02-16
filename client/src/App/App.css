@@ -36,18 +36,90 @@ body {
 .addPostForm {
   display: flex;
   flex-direction: column;
-  position: absolute;
-  z-index: 5;
-  left: 40%;
-  background-color: aliceblue;
-  padding: 20px;
   align-items: center;
   justify-content: center;
-}
-.avatarAddForm {
-  position: absolute;
-  z-index: 4;
-  left: 40%;
-  background-color: aliceblue;
+  background-color: #202024; /* Цвет фона */
   padding: 20px;
+  border-radius: 16px; /* Скругление углов */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Тень */
+  color: #e6e6ea; /* Цвет текста */
 }
+
+.add-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px; /* Расстояние между элементами формы */
+}
+
+.add-form label {
+  color: #e6e6ea; /* Цвет текста меток */
+}
+
+.add-form input[type='text'],
+.add-form input[type='file'] {
+  background-color: #fff; /* Фоновый цвет полей */
+  border: 1px solid #ced4da; /* Цвет границ */
+  border-radius: 0.25rem; /* Скругление углов */
+  padding: 0.375rem 0.75rem; /* Внутренние отступы */
+  font-size: 1rem; /* Размер шрифта */
+  line-height: 1.5; /* Высота строки */
+  color: #495057; /* Цвет текста */
+}
+
+.add-form input[type='text']:focus,
+.add-form input[type='file']:focus {
+  border-color: #80bdff; /* Цвет границ при фокусе */
+  outline: 0;
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25); /* Тень при фокусе */
+}
+
+.add-form button[type='submit'] {
+  font-weight: 400;
+  text-align: center;
+  vertical-align: middle;
+  border: 1px solid transparent;
+  padding: 0.375rem 0.75rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  border-radius: 0.25rem;
+  color: #fff; /* Цвет текста кнопки */
+  background-color: #8924a8; /* Фоновый цвет кнопки */
+  border-color: #0b0c0b; /* Цвет границы кнопки */
+  transition:
+    color 0.15s ease-in-out,
+    background-color 0.15s ease-in-out,
+    border-color 0.15s ease-in-out,
+    box-shadow 0.15s ease-in-out;
+}
+
+.add-form button[type='submit']:hover {
+  box-shadow:
+    0 0 10px #8924a8,
+    0 0 15px #222;
+  background: linear-gradient(#8924a8, #222);
+}
+.close-button {
+  font-weight: 400;
+  text-align: center;
+  vertical-align: middle;
+  border: 1px solid transparent;
+  padding: 0.375rem 0.75rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  border-radius: 0.25rem;
+  color: #fff; /* Цвет текста */
+  background-color: #8924a8; /* Фоновый цвет */
+  border-color: #0b0c0b; /* Цвет границы */
+  cursor: pointer; /* Курсор в виде указателя */
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  
+  top: 10px; /* Отступ сверху */
+  right: 10px; /* Отступ справа */
+  margin: 0; /* Убираем внешний отступ */
+}
+
+.close-button:hover {
+  box-shadow: 0 0 10px #8924a8, 0 0 15px #222; /* Тень при наведении */
+  background: linear-gradient(#8924a8, #222); /* Градиентный фон при наведении */
+}
+

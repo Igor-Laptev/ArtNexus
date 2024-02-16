@@ -35,17 +35,8 @@ function AddPostForm({ setAddpost }: { setAddpost: (access: boolean) => void }):
   return (
     <div className="addPostForm">
       <div>
-        {' '}
-        <button onClick={() => setAddpost(false)} type="button">
-          ✖
-        </button>
-      </div>
-
-      <div>
         <form className="add-form" onSubmit={handleSubmit}>
           <div>
-            <label htmlFor="title">Title</label>
-
             <input
               className="form-control"
               type="text"
@@ -97,6 +88,9 @@ function AddPostForm({ setAddpost }: { setAddpost: (access: boolean) => void }):
           />
           <button className="modal-button" type="submit">
             Submit
+          </button>
+          <button onClick={() => setAddpost(false)} type="button" className="close-button">
+            ✖
           </button>
         </form>
       </div>
