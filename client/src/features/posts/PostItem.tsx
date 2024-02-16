@@ -3,11 +3,11 @@
 import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import React, { useState } from 'react';
-import type { Post, PostId } from './types';
+import type { Post } from './types';
 import './styles.css';
 import './tooltipStyles.css';
 import 'animate.css';
-import { isAdultPost, moderatePost, removePost, setAdult, setModerate } from './postsSlice';
+import { isAdultPost, moderatePost, removePost} from './postsSlice';
 import { type RootState, useAppDispatch } from '../../redux/store';
 import Access from './Access';
 // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
@@ -37,12 +37,12 @@ function PostItem({ post }: { post: Post }): JSX.Element {
     setShowToolTip(false);
   };
   const [access, setAccess] = useState(false);
-  const makePostAdult = (postId: PostId): void => {
-    dispatch(setAdult(postId));
-  };
-  const makePostModerate = (postId: PostId): void => {
-    dispatch(setModerate(postId));
-  };
+  // const makePostAdult = (postId: PostId): void => {
+  //   dispatch(setAdult(postId));
+  // };
+  // const makePostModerate = (postId: PostId): void => {
+  //   dispatch(setModerate(postId));
+  // };
 
   return (
     <div className="container-pic">
@@ -69,7 +69,7 @@ function PostItem({ post }: { post: Post }): JSX.Element {
                     height: '100%',
                     borderRadius: '10%',
                   }}
-                ></div>
+                />
               </div>
             )}
             {!showToolTip && (
@@ -97,7 +97,7 @@ function PostItem({ post }: { post: Post }): JSX.Element {
               dispatch(moderatePost({ id: post.id, isModerated: !post.isModerated })).catch(
                 console.log,
               );
-              makePostModerate(post.id);
+              // makePostModerate(post.id);
             }}
             type="button"
             className="btn-secondary modal-button"
@@ -107,7 +107,7 @@ function PostItem({ post }: { post: Post }): JSX.Element {
           <button
             onClick={() => {
               dispatch(isAdultPost({ id: post.id, isAdult: !post.isAdult })).catch(console.log);
-              makePostAdult(post.id);
+              // makePostAdult(post.id);
             }}
             type="button"
             className="btn-secondary modal-button"

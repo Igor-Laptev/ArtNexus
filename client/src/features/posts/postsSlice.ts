@@ -165,6 +165,6 @@ state.copyPosts=state.posts
 
 export default postsSlice.reducer;
 
-export const { filterPosts, filterIsAdult, filterToModerate, setEquel, adultPost, setAdult, setModerate } =
+export const { filterPosts, filterIsAdult, filterToModerate, setEquel, adultPost} =
   postsSlice.actions;
 

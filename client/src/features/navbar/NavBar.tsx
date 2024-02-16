@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './navbar.css'; // Убедитесь, что обновили путь к CSS файлу
-import { Link, NavLink, Outlet, useNavigate } from 'react-router-dom';
+import {  NavLink, Outlet, useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { useAppDispatch, type RootState } from '../../redux/store';
 import { logOut } from '../auth/authSlice';
@@ -18,8 +18,8 @@ function NavBar(): JSX.Element {
   const [showReg, setShowReg] = useState(false);
   const [showLog, setShowLog] = useState(false);
 
-  const [isClientsActive, setIsClientsActive] = useState(false);
-  const [isServicesActive, setIsServicesActive] = useState(false);
+  // const [isClientsActive, setIsClientsActive] = useState(false);
+  // const [isServicesActive, setIsServicesActive] = useState(false);
 
   const handleModalReg = (value: boolean): void => {
     setShowReg(value);
@@ -30,15 +30,15 @@ function NavBar(): JSX.Element {
   };
 
   // Функция для переключения видимости подменю (если требуется)
-  const toggleSubMenu = (menu: string) => {
-    if (menu === 'clients') {
-      setIsClientsActive(!isClientsActive);
-      setIsServicesActive(false);
-    } else if (menu === 'services') {
-      setIsServicesActive(!isServicesActive);
-      setIsClientsActive(false);
-    }
-  };
+  // const toggleSubMenu = (menu: string) => {
+  //   if (menu === 'clients') {
+  //     setIsClientsActive(!isClientsActive);
+  //     setIsServicesActive(false);
+  //   } else if (menu === 'services') {
+  //     setIsServicesActive(!isServicesActive);
+  //     setIsClientsActive(false);
+  //   }
+  // };
 
   return (
     <>

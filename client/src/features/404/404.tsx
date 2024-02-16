@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router';
 import './404.css'; // Импортируем наши стили
 import 'animate.css'; // Убедитесь, что вы импортировали Animate.css
 
-export default function NotFoundPage() {
+export default function NotFoundPage(): JSX.Element {
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -22,9 +22,9 @@ export default function NotFoundPage() {
     return () => clearTimeout(timer);
   }, []);
 
-  const handleBackClick = () => {
-    const button = document.querySelector('.backButton');
-    const overlayText = document.querySelector('.overlayText');
+  const handleBackClick = (): void =>   {
+    const button = document.querySelector('.backButton')!;
+    const overlayText = document.querySelector('.overlayText')!;
 
     button.classList.add('animate__animated', 'animate__rollOut');
     overlayText.classList.add('animate__animated', 'animate__rotateOutUpLeft');

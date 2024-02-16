@@ -1,9 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-
 import type { UsersState } from './types';
 import fetchLoadUsers from '../../App/api/api.users';
-import { fetchLoadAvatar, fetchSignUp } from '../../App/api/api.auth';
-import type { UserSignUp } from '../auth/type';
 import { addUserAvatar } from '../posts/postsSlice';
 import { signUp } from '../auth/authSlice';
 

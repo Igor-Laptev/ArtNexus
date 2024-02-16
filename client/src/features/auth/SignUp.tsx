@@ -18,7 +18,7 @@ function SignUp({
 }): JSX.Element {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
-  const [avatar, setAvatar] = useState('https://chop-1.ru/images/YARcuLmIMo_KQSrF8RAjMN9ghec=/1920x/8c0aaa13c9b30d1879f6089121aaf6d9.jpeg');
+  const avatar ='https://chop-1.ru/images/YARcuLmIMo_KQSrF8RAjMN9ghec=/1920x/8c0aaa13c9b30d1879f6089121aaf6d9.jpeg';
   const [password, setPassword] = useState('');
   const [rpassword, setRpassword] = useState('');
   const [isEmailValid, setIsEmailValid] = useState(true);
@@ -30,7 +30,7 @@ function SignUp({
   const navigate = useNavigate();
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-  const handleRegistrationSuccess = () => {
+  const handleRegistrationSuccess = (): void => {
     setIsAnimatingOut(true);
 
     setTimeout(() => {
@@ -40,7 +40,7 @@ function SignUp({
     }, 750);
   };
 
-  const handleCloseWithAnimation = () => {
+  const handleCloseWithAnimation = (): void => {
     setIsAnimatingOut(true); // Активируем анимацию выхода
     setTimeout(() => {
       handleModalReg(false); // Закрываем модальное окно после завершения анимации
@@ -173,7 +173,7 @@ function SignUp({
               </button>
             </form>
           </div>
-          <div className="modal-footer animate__animated animate__heartBeat "></div>
+          <div className="modal-footer animate__animated animate__heartBeat "/>
         </div>
       </div>
       {error && <h1 style={{ color: 'red', textTransform: 'uppercase' }}>{error}</h1>}
