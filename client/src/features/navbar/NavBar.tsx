@@ -49,9 +49,9 @@ function NavBar(): JSX.Element {
             alt="Logo"
             className="logo"
           />
+          <span className="productionText">Inc.</span>
         </div>
         <ul className="navigation">
-         
           <li className="parent">
             <NavLink className="link" to="/" onClick={() => dispatch(setEquel())}>
               Explore
