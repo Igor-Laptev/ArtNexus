@@ -18,7 +18,9 @@ function SignUp({
 }): JSX.Element {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
+
   const avatar ='https://chop-1.ru/images/YARcuLmIMo_KQSrF8RAjMN9ghec=/1920x/8c0aaa13c9b30d1879f6089121aaf6d9.jpeg';
+
   const [password, setPassword] = useState('');
   const [rpassword, setRpassword] = useState('');
   const [isEmailValid, setIsEmailValid] = useState(true);
@@ -117,18 +119,6 @@ function SignUp({
                   <div style={{ color: 'red' }}>Please enter a valid email address.</div>
                 )}
               </div>
-              {/* <div className="form-group">
-                <input
-                  className="form-control"
-                  value={avatar}
-                  placeholder="Your Avatar"
-                  type="file"
-                  required
-                  onChange={(e) => {
-                    setAvatar(e.target.value);
-                  }}
-                />
-              </div> */}
               <div className="form-group">
                 <input
                   className="form-control"

@@ -69,8 +69,8 @@ function UserPage(): JSX.Element {
             id="avatar"
             onChange={(e) => setAvatar(e.target.files)}
           />
-          <button type="submit">Add</button>
-          <button type="button" onClick={() => setAddAvatar(false)}>
+          <button className="modal-button" type="submit">Add</button>
+          <button className="close-button" type="button" onClick={() => setAddAvatar(false)}>
             ✖
           </button>
         </form>
