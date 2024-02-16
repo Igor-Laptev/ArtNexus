@@ -1,10 +1,10 @@
 // fetch-запросы
 
 import type { User, UserSignIn, UserSignUp } from '../../features/auth/type';
-import type{ UserId } from '../../features/users/types';
+import type { UserId } from '../../features/users/types';
 
 export const fetchCheckUser = async (): Promise<User> => {
-  const res = await fetch('api/auth/check');
+  const res = await fetch('/api/auth/check');
 
   const data: { user: User } = (await res.json()) as {
     user: User;
@@ -13,7 +13,7 @@ export const fetchCheckUser = async (): Promise<User> => {
 };
 
 export const fetchSignUp = async (user: UserSignUp): Promise<User> => {
-  const res = await fetch('api/auth/registration', {
+  const res = await fetch('/api/auth/registration', {
     method: 'POST',
     headers: { 'content-type': 'application/json' },
     body: JSON.stringify(user),
@@ -28,7 +28,6 @@ export const fetchSignUp = async (user: UserSignUp): Promise<User> => {
     message: string;
     user: User;
   };
-
 
   return data.user;
 };
@@ -71,13 +70,13 @@ export const fetchLogOut = async (): Promise<void> => {
   }
 };
 
-
-export const fetchLoadAvatar =async(formData: FormData):Promise<{avatar:string;id:UserId;}> =>{
-
+export const fetchLoadAvatar = async (
+  formData: FormData,
+): Promise<{ avatar: string; id: UserId }> => {
   const res = await fetch('/api/auth/avatar', {
     method: 'PUT',
     body: formData,
-  })
-  const data:{avatar:string;id:UserId;} = (await res.json()) as {avatar:string; id:UserId;}
-  return data
-}
+  });
+  const data: { avatar: string; id: UserId } = (await res.json()) as { avatar: string; id: UserId };
+  return data;
+};

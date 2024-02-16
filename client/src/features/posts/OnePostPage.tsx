@@ -1,22 +1,30 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination, Scrollbar, A11y, EffectCube, Mousewheel } from 'swiper/modules';
-import type { RootState } from '../../redux/store';
+import { useAppDispatch, type RootState } from '../../redux/store';
 import Comments from '../comments/Comments';
 import 'animate.css';
 import './onePostStyles.css';
 import 'swiper/css';
 import 'swiper/css/navigation';
+import { checkUser } from '../auth/authSlice';
 
 function OnePostPage(): JSX.Element {
   const { postId } = useParams();
+  const dispatch = useAppDispatch();
   const post = useSelector((store: RootState) => store.posts.posts).find(
     (pst) => postId && pst.id === +postId,
   );
+  const user = useSelector((store: RootState) => store.auth.auth);
+  console.log(user);
 
   const navigate = useNavigate();
+
+  useEffect(() => {
+    dispatch(checkUser()).catch(console.log);
+  }, []);
   return (
     <div className="container">
       {/* <h2>{post?.title}</h2> */}
